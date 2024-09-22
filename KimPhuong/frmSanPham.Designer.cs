@@ -636,7 +636,7 @@
             this.ClientSize = new System.Drawing.Size(1344, 877);
             this.Controls.Add(this.uiTableLayoutPanel1);
             this.Name = "frmSanPham";
-            this.Text = "Form1";
+            this.Text = "QUẢN LÝ SẢN PHẨM";
             this.uiTableLayoutPanel2.ResumeLayout(false);
             this.uiTableLayoutPanel6.ResumeLayout(false);
             this.uiTableLayoutPanel1.ResumeLayout(false);

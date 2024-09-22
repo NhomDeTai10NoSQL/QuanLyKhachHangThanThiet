@@ -41,10 +41,14 @@
             // 
             // frmTrangChu
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmTrangChu";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ZoomScaleRect = new System.Drawing.Rectangle(22, 22, 800, 450);
             this.ResumeLayout(false);
 
