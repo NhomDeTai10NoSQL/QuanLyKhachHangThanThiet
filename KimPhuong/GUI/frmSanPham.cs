@@ -64,6 +64,10 @@ namespace KimPhuong
                 MaDanhMuc = doc["MaDanhMuc"],
                 TenDanhMuc = doc["TenDanhMuc"],
             }).ToList();
+
+            cbDanhMuc.DataSource = displayList;
+            cbDanhMuc.DisplayMember = "TenDanhMuc";
+            cbDanhMuc.ValueMember = "MaDanhMuc";
         }
     }
 }
