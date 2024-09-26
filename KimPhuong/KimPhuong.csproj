@@ -160,7 +160,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BUS\DanhMucBUS.cs" />
     <Compile Include="BUS\SanPhamBUS.cs" />
+    <Compile Include="DAO\DanhMucDAO.cs" />
     <Compile Include="DAO\SanPhamDAO.cs" />
     <Compile Include="DBC\MongoDBConnect.cs" />
     <Compile Include="frmSanPham.cs">
