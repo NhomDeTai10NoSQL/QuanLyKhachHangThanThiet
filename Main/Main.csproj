@@ -93,5 +93,11 @@
     <Folder Include="DAO\" />
     <Folder Include="DBC\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Danh\Danh.csproj">
+      <Project>{ff9e0083-b3f7-4694-b2ce-0964910177b8}</Project>
+      <Name>Danh</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

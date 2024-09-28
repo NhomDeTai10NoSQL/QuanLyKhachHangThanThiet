@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace Danh.DBC
 {
     public class MongoDBConnect
     {
         private IMongoDatabase _database;
-        public static string ConnectionString = "mongodb://localhost:27017/";
+        public static string ConnectionString = "mongodb+srv://kimphuong8694:123@quanlykhachhang.khsds.mongodb.net/";
         public static string DatabaseName = "QuanLyKhachHangThanThiet";
 
         public IMongoDatabase Database
@@ -48,6 +50,14 @@ namespace Danh.DBC
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
             collection.DeleteOne(filter);
+        }
+
+        //Đếm
+
+        public long CountDocument(string collectionName, FilterDefinition<BsonDocument> filter)
+        {
+            var collection = _database.GetCollection<BsonDocument>(collectionName);
+            return collection.CountDocuments(filter);
         }
     }
 }

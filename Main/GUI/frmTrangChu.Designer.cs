@@ -45,6 +45,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "frmTrangChu";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ZoomScaleRect = new System.Drawing.Rectangle(22, 22, 800, 450);
             this.ResumeLayout(false);
 
