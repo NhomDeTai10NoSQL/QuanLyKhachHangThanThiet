@@ -10,7 +10,7 @@ namespace KimPhuong.DBC
     public class MongoDBConnect
     {
         private IMongoDatabase _database;
-        public static string ConnectionString = "mongodb://localhost:27017/";
+        public static string ConnectionString = "mongodb+srv://kimphuong8694:123@quanlykhachhang.khsds.mongodb.net/test?retryWrites=true&w=majority";
         public static string DatabaseName = "QuanLyKhachHangThanThiet";
 
         public IMongoDatabase Database
@@ -49,6 +49,12 @@ namespace KimPhuong.DBC
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
             collection.DeleteOne(filter);
+        }
+
+        public long CountDocuments(string collectionName, FilterDefinition<BsonDocument> filter)
+        {
+            var collection = _database.GetCollection<BsonDocument>(collectionName);
+            return collection.CountDocuments(filter);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using KimPhuong.BUS;
+using MongoDB.Bson;
 using Sunny.UI;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using KimPhuong.DTO;
 namespace KimPhuong
 {
     public partial class frmSanPham : UIPage
@@ -26,48 +27,61 @@ namespace KimPhuong
         }
         private void LoadSanPham()
         {
-            var sanPhamList = sanPhamBUS.GetAllSanPham();
-
-            var displayList = sanPhamList.Select(doc => new
+            var bsonDoc = sanPhamBUS.GetAllSanPham();
+            var sanPhamList = new List<object>();
+            foreach (var document in bsonDoc)
             {
-                TenSanPham = doc["TenSanPham"],
-                MaVach = doc["MaVach"],
-                MoTa = doc["MoTa"],
-                NgaySanXuat = doc["NgaySanXuat"].ToUniversalTime(),
-                XuatXu = doc["XuatXu"],
-                GiaBan = doc["GiaBan"].ToDouble(),
-                MaBaoHanh = doc["MaBaoHanh"],
-                MaDanhMuc = doc["MaDanhMuc"],
-                MaNhaCungCap = doc["MaNhaCungCap"]
-            }).ToList();
+                var sanPham = new
+                {
+                    MaSanPham = document["maSanPham"].AsString,
+                    TenSanPham = document["tenSanPham"].AsString,
+                    MaVach = document["maVach"].AsString,
+                    GiaBan = document["giaBan"].AsInt32,
+                    NgaySanXuat = document["ngaySanXuat"].ToUniversalTime(),
+                    XuatXu = document["xuatXu"].AsString,
+                    MoTa = document["moTa"].AsString,
+                    MaDanhMuc = document["danhMuc"]["maDanhMuc"].AsInt32,
+                    MaNhaCungCap = document["nhaCungCap"]["maNhaCungCap"].AsInt32,
+                    MaBaoHanh = document["baoHanh"]["maBaoHanh"].AsString,
+                };
 
-            dtgSanPham.DataSource = displayList;
+                sanPhamList.Add(sanPham);
+            }
+            dtgSanPham.DataSource = sanPhamList;
 
+            // Set column headers
+            dtgSanPham.Columns["MaSanPham"].HeaderText = "Mã sản phẩm";
+            dtgSanPham.Columns["TenSanPham"].HeaderText = "Tên sản phẩm";
             dtgSanPham.Columns["MaVach"].HeaderText = "Mã vạch";
-            dtgSanPham.Columns["MoTa"].HeaderText = "Mô tả";
+            dtgSanPham.Columns["GiaBan"].HeaderText = "Giá bán";
             dtgSanPham.Columns["NgaySanXuat"].HeaderText = "Ngày sản xuất";
             dtgSanPham.Columns["XuatXu"].HeaderText = "Xuất xứ";
-            dtgSanPham.Columns["MaBaoHanh"].HeaderText = "Mã bảo hành";
+            dtgSanPham.Columns["MoTa"].HeaderText = "Mô tả";
             dtgSanPham.Columns["MaDanhMuc"].HeaderText = "Mã danh mục";
             dtgSanPham.Columns["MaNhaCungCap"].HeaderText = "Mã nhà cung cấp";
-            dtgSanPham.Columns["TenSanPham"].HeaderText = "Tên sản phẩm";
-            dtgSanPham.Columns["GiaBan"].HeaderText = "Giá bán";
+            dtgSanPham.Columns["MaBaoHanh"].HeaderText = "Mã bảo hành";
 
             dtgSanPham.Columns["GiaBan"].DefaultCellStyle.Format = "N0";
         }
         private void LoadDanhMuc()
         {
-            var danhMucList = danhMucBUS.GetAllDanhMuc();
-
-            var displayList = danhMucList.Select(doc => new
+            var bsonDoc = danhMucBUS.GetAllDanhMuc();
+            var danhMucList = new List<object>();
+            foreach (var document in bsonDoc)
             {
-                MaDanhMuc = doc["MaDanhMuc"],
-                TenDanhMuc = doc["TenDanhMuc"],
-            }).ToList();
+                var danhMuc = new
+                {
+                    MaDanhMuc = document["maDanhMuc"],
+                    TenDanhMuc = document["tenDanhMuc"]
+                };
+                danhMucList.Add(danhMuc);
+            }
 
-            cbDanhMuc.DataSource = displayList;
+            cbDanhMuc.DataSource = danhMucList;
             cbDanhMuc.DisplayMember = "TenDanhMuc";
             cbDanhMuc.ValueMember = "MaDanhMuc";
         }
+
+        
     }
 }

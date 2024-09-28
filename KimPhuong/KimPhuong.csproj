@@ -165,6 +165,7 @@
     <Compile Include="DAO\DanhMucDAO.cs" />
     <Compile Include="DAO\SanPhamDAO.cs" />
     <Compile Include="DBC\MongoDBConnect.cs" />
+    <Compile Include="DTO\KimPhuongDTO.cs" />
     <Compile Include="GUI\frmSanPham.cs">
       <SubType>Form</SubType>
     </Compile>

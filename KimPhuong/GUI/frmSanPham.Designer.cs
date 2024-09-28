@@ -499,6 +499,7 @@
             this.dtgSanPham.Size = new System.Drawing.Size(1338, 428);
             this.dtgSanPham.StripeOddColor = System.Drawing.Color.Silver;
             this.dtgSanPham.TabIndex = 20;
+ 
             // 
             // uiTableLayoutPanel5
             // 
