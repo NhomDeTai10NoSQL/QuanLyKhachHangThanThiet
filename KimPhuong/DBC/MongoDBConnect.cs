@@ -50,7 +50,7 @@ namespace KimPhuong.DBC
             var collection = _database.GetCollection<BsonDocument>(collectionName);
             collection.DeleteOne(filter);
         }
-        
+
         //Đếm
         public long CountDocuments(string collectionName, FilterDefinition<BsonDocument> filter)
         {
@@ -59,7 +59,7 @@ namespace KimPhuong.DBC
         }
 
         //Tìm
-        public List<BsonDocument> SearchDocuments(string collectionName, string searchText, string[] searchFields)
+        public List<BsonDocument> SearchDocuments(string collectionName, string searchText, string[] searchFields, string indexName)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
 
@@ -69,7 +69,7 @@ namespace KimPhuong.DBC
             "$search", new BsonDocument
             {
                 {
-                    "index", "SanPhamSearchIndex"
+                    "index", indexName
                 },
                 {
                     "text", new BsonDocument

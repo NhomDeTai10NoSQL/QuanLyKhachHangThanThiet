@@ -49,8 +49,8 @@ namespace KimPhuong.DAO
         public List<BsonDocument> searchSanPham(string key)
         {
 
-            string[] searchFields = { "tenSanPham", "moTa", "maVach", "xuatXu", "danhMuc.tenDanhMuc", "nhaCungCap.tenNhaCungCap", "baoHanh.maBaoHanh", "baoHanh.ghiChu" };
-            return dBConnect.SearchDocuments("SanPham", key, searchFields);
+            string[] field = { "tenSanPham", "moTa", "maVach", "xuatXu", "danhMuc.tenDanhMuc", "nhaCungCap.tenNhaCungCap", "baoHanh.maBaoHanh", "baoHanh.ghiChu" };
+            return dBConnect.SearchDocuments("SanPham", key, field, "SanPhamSearchIndex");
         }
 
     }
