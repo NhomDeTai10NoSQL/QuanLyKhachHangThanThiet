@@ -149,7 +149,7 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             this.dtgNhaCungCap.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dtgNhaCungCap.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgNhaCungCap.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtgNhaCungCap.BackgroundColor = System.Drawing.Color.White;
             this.dtgNhaCungCap.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -199,6 +199,7 @@
             this.dtgNhaCungCap.Size = new System.Drawing.Size(784, 343);
             this.dtgNhaCungCap.StripeOddColor = System.Drawing.Color.Silver;
             this.dtgNhaCungCap.TabIndex = 3;
+            this.dtgNhaCungCap.SelectionChanged += new System.EventHandler(this.dtgNhaCungCap_SelectionChanged);
             // 
             // uiTableLayoutPanel8
             // 
@@ -770,7 +771,7 @@
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
             this.dtgDanhMuc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.dtgDanhMuc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgDanhMuc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtgDanhMuc.BackgroundColor = System.Drawing.Color.White;
             this.dtgDanhMuc.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;

@@ -162,8 +162,10 @@
   <ItemGroup>
     <Compile Include="BUS\DanhMucBUS.cs" />
     <Compile Include="BUS\GiaoHangBUS.cs" />
+    <Compile Include="BUS\NhaCungCapBUS.cs" />
     <Compile Include="DAO\DanhMucDAO.cs" />
     <Compile Include="DAO\GiaoHangDAO.cs" />
+    <Compile Include="DAO\NhaCungCapDAO.cs" />
     <Compile Include="DBC\MongoDBConnect.cs" />
     <Compile Include="GUI\frmDanhMuc.cs">
       <SubType>Form</SubType>
