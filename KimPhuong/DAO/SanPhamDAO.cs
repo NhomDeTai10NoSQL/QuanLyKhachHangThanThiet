@@ -19,33 +19,7 @@ namespace KimPhuong.DAO
         {
             return dBConnect.GetAllDocuments("SanPham");
         }
-        public bool ThemSanPham(string tenSanPham, string maVach, string moTa, DateTime ngaySanXuat,
-                                string xuatXu, double giaBan, string maBaoHanh, string maDanhMuc, string maNhaCungCap)
-        {
-            try
-            {
-                var sanPham = new BsonDocument
-                {
-                    { "tenSanPham", tenSanPham },
-                    { "maVach", maVach },
-                    { "moTa", moTa },
-                    { "ngaySanXuat", ngaySanXuat },
-                    { "xuatXu", xuatXu },
-                    { "giaBan", giaBan },
-                    { "maBaoHanh", maBaoHanh },
-                    { "maDanhMuc", maDanhMuc },
-                    { "maNhaCungCap", maNhaCungCap }
-                };
-
-                dBConnect.InsertDocument("SanPham", sanPham);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi khi thêm sản phẩm: {ex.Message}");
-                return false;
-            }
-        }
+        
         public List<BsonDocument> searchSanPham(string key)
         {
 

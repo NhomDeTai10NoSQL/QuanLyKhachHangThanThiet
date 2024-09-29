@@ -17,13 +17,19 @@ namespace KimPhuong
     {
         SanPhamBUS sanPhamBUS;
         DanhMucBUS danhMucBUS;
+        NhaCungCapBUS nhaCungCapBUS;
+        BaoHanhBUS baoHanhBUS;
         public frmSanPham()
         {
             InitializeComponent();
             sanPhamBUS = new SanPhamBUS();
             danhMucBUS = new DanhMucBUS();
+            nhaCungCapBUS = new NhaCungCapBUS();
+            baoHanhBUS = new BaoHanhBUS();
             LoadSanPham();
             LoadDanhMuc();
+            LoadNhaCungCap();
+            LoadBaoHanh();
         }
         private void LoadSanPham()
         {
@@ -70,8 +76,8 @@ namespace KimPhuong
             {
                 var danhMuc = new
                 {
-                    MaDanhMuc = document["maDanhMuc"],
-                    TenDanhMuc = document["tenDanhMuc"]
+                    MaDanhMuc = document["maDanhMuc"].AsInt32,
+                    TenDanhMuc = document["tenDanhMuc"].AsString
                 };
                 danhMucList.Add(danhMuc);
             }
@@ -80,6 +86,42 @@ namespace KimPhuong
             cbDanhMuc.DisplayMember = "TenDanhMuc";
             cbDanhMuc.ValueMember = "MaDanhMuc";
         }
+        private void LoadNhaCungCap()
+        {
+            var bsonDoc = nhaCungCapBUS.getAllNhaCungCap();
+            var nhaCungCapList = new List<object>();
+            foreach(var document in bsonDoc)
+            {
+                var nhaCungCap = new
+                {
+                    MaNhaCungCap = document["maNhaCungCap"].AsInt32,
+                    TenNhaCungCap = document["tenNhaCungCap"].AsString
+                };
+                nhaCungCapList.Add(nhaCungCap);
+            }
+            cbNhaCungCap.DataSource = nhaCungCapList;
+            cbNhaCungCap.DisplayMember = "TenNhaCungCap";
+            cbNhaCungCap.ValueMember = "MaNhaCungCap";
+        }
+        private void LoadBaoHanh()
+        {
+            var bsonDoc = baoHanhBUS.getAllBaoHanh();
+            var baoHanhList = new List<object>();
+            foreach (var document in bsonDoc)
+            {
+                var baoHanh = new
+                {
+                    MaBaoHanh = document["MaBaoHanh"].AsString,
+                    ThoiGianBaoHanh = document["ThoiGianBaoHanh"].AsInt32,
+                    TGianText = document["ThoiGianBaoHanh"].AsInt32 + " tháng" 
+                };
+                baoHanhList.Add(baoHanh);
+            }
+            cbBaoHanh.DataSource = baoHanhList;
+            cbBaoHanh.DisplayMember = "TGianText";
+            cbBaoHanh.ValueMember = "MaBaoHanh";
+        }
+
 
         private void btnTimDanhMuc_Click(object sender, EventArgs e)
         {
@@ -118,6 +160,40 @@ namespace KimPhuong
         {
             txtTimSanPham.Text = string.Empty;
             LoadSanPham();
+        }
+
+        private void btnThemSanPham_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtgSanPham_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dtgSanPham.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dtgSanPham.SelectedRows[0];
+                string maSanPham = selectedRow.Cells["maSanPham"].Value.ToString();
+                string maBaoHanh = selectedRow.Cells["maBaoHanh"].Value.ToString();
+                string maVach = selectedRow.Cells["maVach"].Value.ToString();
+                string tenSanPham = selectedRow.Cells["tenSanPham"].Value.ToString();
+                int maDanhMuc = int.Parse(selectedRow.Cells["maDanhMuc"].Value.ToString());
+                int maNhaCungCap = int.Parse(selectedRow.Cells["maNhaCungCap"].Value.ToString());
+                string moTa = selectedRow.Cells["moTa"].Value.ToString();
+                DateTime ngaySanXuat = DateTime.Parse(selectedRow.Cells["ngaySanXuat"].Value.ToString());
+                string xuatXu = selectedRow.Cells["xuatXu"].Value.ToString();
+                int giaBan = int.Parse(selectedRow.Cells["giaBan"].Value.ToString());
+
+                txtGiaBan.Text = giaBan.ToString("N0") + " VND";
+                txtSanPham.Text = tenSanPham;
+                txtMaVach.Text = maVach;
+
+                cbBaoHanh.SelectedValue = maBaoHanh;
+                cbDanhMuc.SelectedValue = maDanhMuc;
+                cbNhaCungCap.SelectedValue = maNhaCungCap;
+                dtpNgaySanXuat.Value = ngaySanXuat;
+                txtXuatXu.Text = xuatXu;
+                rtxtMoTa.Text = moTa;
+            }
         }
     }
 }

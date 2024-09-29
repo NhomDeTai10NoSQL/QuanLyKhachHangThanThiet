@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace KimPhuong.DAO
 {
-    public class DanhMucDAO
+    public class BaoHanhDAO
     {
         MongoDBConnect dBConnect;
-        public DanhMucDAO()
+        public BaoHanhDAO()
         {
             dBConnect = new MongoDBConnect();
         }
-        public List<BsonDocument> getAllDanhMuc()
+        public List<BsonDocument> getAllBaoHanh()
         {
-            return dBConnect.GetAllDocuments("DanhMuc");
+            return dBConnect.GetAllDocuments("BaoHanh");
         }
     }
 }

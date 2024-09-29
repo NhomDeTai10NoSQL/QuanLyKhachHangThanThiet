@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace KimPhuong.BUS
 {
-    public class DanhMucBUS
+    public class BaoHanhBUS
     {
-        DanhMucDAO danhMucDAO;
-        public DanhMucBUS()
+        BaoHanhDAO baoHanhDAO;
+        public BaoHanhBUS()
         {
-            danhMucDAO = new DanhMucDAO();
+            baoHanhDAO = new BaoHanhDAO();
         }
-        public List<BsonDocument> GetAllDanhMuc()
+        public List<BsonDocument> getAllBaoHanh()
         {
-            return danhMucDAO.getAllDanhMuc();
+            return baoHanhDAO.getAllBaoHanh();
         }
     }
 }
