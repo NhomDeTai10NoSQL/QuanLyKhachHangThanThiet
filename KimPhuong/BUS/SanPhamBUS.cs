@@ -15,9 +15,13 @@ namespace KimPhuong.BUS
         {
             sanPhamDAO = new SanPhamDAO();
         }
-        public List<BsonDocument> GetAllSanPham()
+        public List<BsonDocument> getAllSanPham()
         {
-            return sanPhamDAO.GetAllSanPham();
+            return sanPhamDAO.getAllSanPham();
+        }
+        public List<BsonDocument> searchSanPham(string key)
+        {
+            return sanPhamDAO.searchSanPham(key);
         }
     }
 }

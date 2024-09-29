@@ -27,7 +27,7 @@ namespace KimPhuong
         }
         private void LoadSanPham()
         {
-            var bsonDoc = sanPhamBUS.GetAllSanPham();
+            var bsonDoc = sanPhamBUS.getAllSanPham();
             var sanPhamList = new List<object>();
             foreach (var document in bsonDoc)
             {
@@ -42,14 +42,13 @@ namespace KimPhuong
                     MoTa = document["moTa"].AsString,
                     MaDanhMuc = document["danhMuc"]["maDanhMuc"].AsInt32,
                     MaNhaCungCap = document["nhaCungCap"]["maNhaCungCap"].AsInt32,
-                    MaBaoHanh = document["baoHanh"]["maBaoHanh"].AsString,
+                    MaBaoHanh = document["baoHanh"]["maBaoHanh"].AsString
                 };
 
                 sanPhamList.Add(sanPham);
             }
             dtgSanPham.DataSource = sanPhamList;
 
-            // Set column headers
             dtgSanPham.Columns["MaSanPham"].HeaderText = "Mã sản phẩm";
             dtgSanPham.Columns["TenSanPham"].HeaderText = "Tên sản phẩm";
             dtgSanPham.Columns["MaVach"].HeaderText = "Mã vạch";
@@ -82,6 +81,43 @@ namespace KimPhuong
             cbDanhMuc.ValueMember = "MaDanhMuc";
         }
 
-        
+        private void btnTimDanhMuc_Click(object sender, EventArgs e)
+        {
+            string key = txtTimSanPham.Text.Trim();
+            List<BsonDocument> searchResults = sanPhamBUS.searchSanPham(key);
+
+            var sanPhamList = new List<object>();
+            foreach (var document in searchResults)
+            {
+                var sanPham = new
+                {
+                    MaSanPham = document["maSanPham"].AsString,
+                    TenSanPham = document["tenSanPham"].AsString,
+                    MaVach = document["maVach"].AsString,
+                    GiaBan = document["giaBan"].AsInt32,
+                    NgaySanXuat = document["ngaySanXuat"].ToUniversalTime(),
+                    XuatXu = document["xuatXu"].AsString,
+                    MoTa = document["moTa"].AsString,
+                    MaDanhMuc = document["danhMuc"]["maDanhMuc"].AsInt32,
+                    MaNhaCungCap = document["nhaCungCap"]["maNhaCungCap"].AsInt32,
+                    MaBaoHanh = document["baoHanh"]["maBaoHanh"].AsString
+                };
+                sanPhamList.Add(sanPham);
+            }
+
+            dtgSanPham.DataSource = sanPhamList;
+
+            if (sanPhamList.Count == 0)
+            {
+                MessageBox.Show("Không tìm thấy sản phẩm phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadSanPham();
+            }
+        }
+
+        private void btnReloadSanPham_Click(object sender, EventArgs e)
+        {
+            txtTimSanPham.Text = string.Empty;
+            LoadSanPham();
+        }
     }
 }

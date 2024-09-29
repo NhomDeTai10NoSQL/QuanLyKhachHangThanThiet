@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace KimPhuong.DAO
         {
             dBConnect = new MongoDBConnect();
         }
-        public List<BsonDocument> GetAllSanPham()
+        public List<BsonDocument> getAllSanPham()
         {
             return dBConnect.GetAllDocuments("SanPham");
         }
@@ -25,15 +26,15 @@ namespace KimPhuong.DAO
             {
                 var sanPham = new BsonDocument
                 {
-                    { "TenSanPham", tenSanPham },
-                    { "MaVach", maVach },
-                    { "MoTa", moTa },
-                    { "NgaySanXuat", ngaySanXuat },
-                    { "XuatXu", xuatXu },
-                    { "GiaBan", giaBan },
-                    { "MaBaoHanh", maBaoHanh },
-                    { "MaDanhMuc", maDanhMuc },
-                    { "MaNhaCungCap", maNhaCungCap }
+                    { "tenSanPham", tenSanPham },
+                    { "maVach", maVach },
+                    { "moTa", moTa },
+                    { "ngaySanXuat", ngaySanXuat },
+                    { "xuatXu", xuatXu },
+                    { "giaBan", giaBan },
+                    { "maBaoHanh", maBaoHanh },
+                    { "maDanhMuc", maDanhMuc },
+                    { "maNhaCungCap", maNhaCungCap }
                 };
 
                 dBConnect.InsertDocument("SanPham", sanPham);
@@ -44,6 +45,12 @@ namespace KimPhuong.DAO
                 Console.WriteLine($"Lỗi khi thêm sản phẩm: {ex.Message}");
                 return false;
             }
+        }
+        public List<BsonDocument> searchSanPham(string key)
+        {
+
+            string[] searchFields = { "tenSanPham", "moTa", "maVach", "xuatXu", "danhMuc.tenDanhMuc", "nhaCungCap.tenNhaCungCap", "baoHanh.maBaoHanh", "baoHanh.ghiChu" };
+            return dBConnect.SearchDocuments("SanPham", key, searchFields);
         }
 
     }

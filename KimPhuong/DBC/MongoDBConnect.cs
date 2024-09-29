@@ -23,38 +23,67 @@ namespace KimPhuong.DBC
             var client = new MongoClient(ConnectionString);
             Database = client.GetDatabase(DatabaseName);
         }
-        // Lấy tất cả dữ liệu từ một collection
+        // Lấy 
         public List<BsonDocument> GetAllDocuments(string collectionName)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
             return collection.Find(new BsonDocument()).ToList();
         }
 
-        // Chèn một document vào collection
+        // Thêm
         public void InsertDocument(string collectionName, BsonDocument document)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
             collection.InsertOne(document);
         }
 
-        // Cập nhật một document trong collection
+        // Cập nhật
         public void UpdateDocument(string collectionName, FilterDefinition<BsonDocument> filter, UpdateDefinition<BsonDocument> update)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
             collection.UpdateOne(filter, update);
         }
 
-        // Xóa một document trong collection
+        // Xóa 
         public void DeleteDocument(string collectionName, FilterDefinition<BsonDocument> filter)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
             collection.DeleteOne(filter);
         }
-
+        
+        //Đếm
         public long CountDocuments(string collectionName, FilterDefinition<BsonDocument> filter)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
             return collection.CountDocuments(filter);
+        }
+
+        //Tìm
+        public List<BsonDocument> SearchDocuments(string collectionName, string searchText, string[] searchFields)
+        {
+            var collection = _database.GetCollection<BsonDocument>(collectionName);
+
+            var searchStage = new BsonDocument
+    {
+        {
+            "$search", new BsonDocument
+            {
+                {
+                    "index", "SanPhamSearchIndex"
+                },
+                {
+                    "text", new BsonDocument
+                    {
+                        { "query", searchText },
+                        { "path", new BsonArray(searchFields) }
+                    }
+                }
+            }
+        }
+    };
+
+            var pipeline = new[] { searchStage };
+            return collection.Aggregate<BsonDocument>(pipeline).ToList();
         }
     }
 }
