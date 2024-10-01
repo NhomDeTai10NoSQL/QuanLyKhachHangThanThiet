@@ -31,5 +31,13 @@ namespace Khoa.BUS
         {
             return khachHangDAO.hideKhachHang(maKhachHang);
         }
+        public bool showKhachHang(string maKhachHang)
+        {
+            return khachHangDAO.showKhachHang(maKhachHang);
+        }
+        public DataTable SearchKhachHang(string searchValue)
+        {
+            return khachHangDAO.SearchKhachHang(searchValue);
+        }
     }
 }

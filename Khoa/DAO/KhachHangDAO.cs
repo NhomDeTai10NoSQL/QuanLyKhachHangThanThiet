@@ -79,7 +79,7 @@ namespace Khoa.DAO
             }
             catch (Exception e)
             {
-                return false; 
+                return false;
             }
         }
         public bool hideKhachHang(string maKhachHang)
@@ -99,5 +99,58 @@ namespace Khoa.DAO
                 return false;
             }
         }
+        public bool showKhachHang(string maKhachHang)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("MaKhachHang", maKhachHang);
+                var update = Builders<BsonDocument>.Update
+
+                    .Set("TrangThai", "Hoạt động");
+
+                connect.UpdateDocument(collection, filter, update);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+        public DataTable SearchKhachHang(string searchValue)
+        {
+            var collection = connect.Database.GetCollection<BsonDocument>("KhachHang");
+
+            var filter = Builders<BsonDocument>.Filter.Or(
+                Builders<BsonDocument>.Filter.Regex("TenKhachHang", new BsonRegularExpression(searchValue, "i")),
+                Builders<BsonDocument>.Filter.Regex("SoDienThoai", new BsonRegularExpression(searchValue, "i"))
+            );
+
+            var results = collection.Find(filter).ToList();
+
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("MaKhachHang", typeof(string));
+            dataTable.Columns.Add("TenKhachHang", typeof(string));
+            dataTable.Columns.Add("NgaySinh", typeof(DateTime));
+            dataTable.Columns.Add("SoDienThoai", typeof(string));
+            dataTable.Columns.Add("DiemTichLuy", typeof(int));
+            dataTable.Columns.Add("TrangThai", typeof(string));
+            dataTable.Columns.Add("LoaiKhachHang", typeof(string));
+
+            foreach (var customer in results)
+            {
+                dataTable.Rows.Add(
+                    customer["MaKhachHang"].AsString,
+                    customer["TenKhachHang"].AsString,
+                    customer["NgaySinh"].ToUniversalTime(),
+                    customer["SoDienThoai"].AsString,
+                    customer["DiemTichLuy"].AsInt32,
+                    customer["TrangThai"].AsString,
+                    customer["LoaiKhachHang"].AsString
+                );
+            }
+
+            return dataTable; 
+        }
+
     }
 }

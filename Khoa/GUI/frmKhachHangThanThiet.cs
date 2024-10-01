@@ -19,6 +19,11 @@ namespace Khoa
         {
             InitializeComponent();
             loadData();
+            dgvKhachHang.SelectionChanged += dgvKhachHang_SelectionChanged;
+            cboTrangThai.Items.Add("Hoạt động");
+            cboTrangThai.Items.Add("Ẩn");
+            cboLoaiKH.Items.Add("Bình thường");
+            cboLoaiKH.Items.Add("Tiềm năng");
         }
         
         private void frmKhachHangThanThiet_Initialize(object sender, EventArgs e)
@@ -30,7 +35,7 @@ namespace Khoa
             dtKhachHang = khachHangBUS.getAllKhachHang();
             dgvKhachHang.DataSource = dtKhachHang;
         }
-
+        
         private void btnThem_Click(object sender, EventArgs e)
         {
             DialogResult add;
@@ -92,6 +97,96 @@ namespace Khoa
         }
 
         private void btnAn_Click(object sender, EventArgs e)
+        {
+            string makh = dgvKhachHang.CurrentRow.Cells["Column1"].Value.ToString();
+            bool updateKhachHang = khachHangBUS.hideKhachHang(makh);
+            if (updateKhachHang)
+            {
+                MessageBox.Show("Ẩn khách hàng thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                loadData();
+            }
+            else
+            {
+                MessageBox.Show("Ẩn khách hàng không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return;
+            }
+        }
+
+        private void uiSymbolButton1_Click(object sender, EventArgs e)
+        {
+            string makh = dgvKhachHang.CurrentRow.Cells["Column1"].Value.ToString();
+            bool updateKhachHang = khachHangBUS.showKhachHang(makh);
+            if (updateKhachHang)
+            {
+                MessageBox.Show("Hiện khách hàng thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                loadData();
+            }
+            else
+            {
+                MessageBox.Show("Hiện khách hàng không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return;
+            }
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            loadData();
+            txtTenKH.Text = string.Empty;
+            txtSDT.Text = string.Empty;
+            txtDiem.Text = "0";
+            cboLoaiKH.SelectedIndex = 0;
+            cboTrangThai.SelectedIndex = 0;
+        }
+
+        private void dgvKhachHang_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvKhachHang.CurrentRow != null)
+            {
+                txtTenKH.Text = dgvKhachHang.CurrentRow.Cells["TenKhachHang"].Value.ToString();
+                txtSDT.Text = dgvKhachHang.CurrentRow.Cells["SoDienThoai"].Value.ToString();
+                txtDiem.Text = dgvKhachHang.CurrentRow.Cells["DiemTichLuy"].Value.ToString();
+                dtpNgaySinh.Text = dgvKhachHang.CurrentRow.Cells["NgaySinh"].Value.ToString();
+
+                string trangThai = dgvKhachHang.CurrentRow.Cells["TrangThai"].Value.ToString();
+                int indexTrangThai = cboTrangThai.FindStringExact(trangThai);
+                if (indexTrangThai != -1)
+                {
+                    cboTrangThai.SelectedIndex = indexTrangThai;
+                }
+                string loaiKhachHang = dgvKhachHang.CurrentRow.Cells["LoaiKhachHang"].Value.ToString();
+                int indexLoaiKH = cboLoaiKH.FindStringExact(loaiKhachHang);
+                if (indexLoaiKH != -1)
+                {
+                    cboLoaiKH.SelectedIndex = indexLoaiKH;
+                }
+
+            }
+        }
+
+        private void uiTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uiSymbolButton2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string searchValue = txtSearch.Text.Trim();
+                DataTable searchResults = khachHangBUS.SearchKhachHang(searchValue);
+                dgvKhachHang.DataSource = searchResults;
+                if (searchResults.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy khách hàng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    loadData();
+                }
+            }
+            catch {
+                loadData();
+            }
+        }
+
+        private void uiSymbolButton3_Click(object sender, EventArgs e)
         {
 
         }

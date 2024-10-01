@@ -14,7 +14,7 @@ namespace Khoa.DBC
         private IMongoDatabase _database;
         public static string ConnectionString = "mongodb://localhost:27017";
         public static string DatabaseName = "QuanLyKhachHangThanThiet";
-
+        
         public IMongoDatabase Database
         {
             get { return _database; }
@@ -26,36 +26,30 @@ namespace Khoa.DBC
             Database = client.GetDatabase(DatabaseName);
         }
         // Lấy tất cả dữ liệu từ một collection
-        // Lấy tất cả dữ liệu từ một collection và trả về DataTable
-        // Lấy tất cả dữ liệu từ một collection và trả về DataTable, loại bỏ trường _id
         public DataTable GetAllDocuments(string collectionName)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
-            var documents = collection.Find(new BsonDocument()).ToList(); // Lấy tất cả tài liệu
+            var documents = collection.Find(new BsonDocument()).ToList(); 
 
             DataTable dataTable = new DataTable();
 
-            // Kiểm tra nếu có tài liệu
             if (documents.Count > 0)
             {
-                // Lấy danh sách các cột từ tài liệu đầu tiên, loại bỏ trường _id
                 foreach (var key in documents[0].Names)
                 {
-                    if (key != "_id") // Bỏ qua trường _id
+                    if (key != "_id")
                     {
                         dataTable.Columns.Add(new DataColumn(key));
                     }
                 }
-
-                // Thêm các hàng dữ liệu vào DataTable
                 foreach (var doc in documents)
                 {
                     DataRow row = dataTable.NewRow();
                     foreach (var key in doc.Names)
                     {
-                        if (key != "_id") // Bỏ qua trường _id
+                        if (key != "_id") 
                         {
-                            row[key] = doc[key].ToString(); // Chuyển giá trị về string
+                            row[key] = doc[key].ToString(); 
                         }
                     }
                     dataTable.Rows.Add(row);
