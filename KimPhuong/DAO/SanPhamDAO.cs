@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using KimPhuong.DBC;
 using MongoDB.Bson;
+using MongoDB.Driver;
+
 namespace KimPhuong.DAO
 {
     public class SanPhamDAO
@@ -26,12 +28,14 @@ namespace KimPhuong.DAO
             string[] field = { "tenSanPham", "moTa", "maVach", "xuatXu", "danhMuc.tenDanhMuc", "nhaCungCap.tenNhaCungCap", "baoHanh.maBaoHanh", "baoHanh.ghiChu" };
             return dBConnect.SearchDocuments("SanPham", key, field, "SanPhamSearchIndex");
         }
-        public void themSanPham(string maSanPham, string tenSanPham, string maVach,
-        int giaBan, DateTime ngaySanXuat, string xuatXu, string moTa,
-        int maDanhMuc, string tenDanhMuc, int maNhaCungCap,
-        string tenNhaCungCap, string maBaoHanh, int thoiGianBaoHanh)
+        public bool themSanPham(string maSanPham, string tenSanPham, string maVach,
+    int giaBan, DateTime ngaySanXuat, string xuatXu, string moTa,
+    int maDanhMuc, string tenDanhMuc, int maNhaCungCap,
+    string tenNhaCungCap, string maBaoHanh, int thoiGianBaoHanh)
         {
-            var document = new BsonDocument
+            try
+            {
+                var document = new BsonDocument
         {
             { "maSanPham", maSanPham },
             { "tenSanPham", tenSanPham },
@@ -60,8 +64,15 @@ namespace KimPhuong.DAO
             }
         };
 
-            dBConnect.InsertDocument("SanPham", document);
+                dBConnect.InsertDocument("SanPham", document);
+                return true; 
+            }
+            catch
+            {
+                return false; 
+            }
         }
+
 
         public string GetNextMaSanPham()
         {
@@ -75,9 +86,41 @@ namespace KimPhuong.DAO
            
             string numberPart = currentMax.Substring(2); 
             int nextNumber = int.Parse(numberPart) + 1;
-
-            // Format số thành chuỗi 5 chữ số, thêm các số 0 ở đầu nếu cần
             return $"SP{nextNumber:D3}";
         }
+        public bool xoaSanPham(string maSanPham)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("maSanPham", maSanPham);
+            var result = dBConnect.DeleteDocument("SanPham", filter);
+            return result.DeletedCount > 0;
+        }
+
+        public bool updateSanPham(string maSanPham, string tenSanPham, string maVach,
+    int giaBan, DateTime ngaySanXuat, string xuatXu, string moTa,
+    int maDanhMuc, string tenDanhMuc, int maNhaCungCap,
+    string tenNhaCungCap, string maBaoHanh, int thoiGianBaoHanh)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("maSanPham", maSanPham);
+
+            var update = Builders<BsonDocument>.Update
+                .Set("tenSanPham", tenSanPham)
+                .Set("maVach", maVach)
+                .Set("giaBan", giaBan)
+                .Set("ngaySanXuat", ngaySanXuat.Date)
+                .Set("xuatXu", xuatXu)
+                .Set("moTa", moTa)
+                .Set("danhMuc.maDanhMuc", maDanhMuc)
+                .Set("danhMuc.tenDanhMuc", tenDanhMuc)
+                .Set("nhaCungCap.maNhaCungCap", maNhaCungCap)
+                .Set("nhaCungCap.tenNhaCungCap", tenNhaCungCap)
+                .Set("baoHanh.maBaoHanh", maBaoHanh)
+                .Set("baoHanh.thoiGianBaoHanh", thoiGianBaoHanh);
+
+            var result = dBConnect.UpdateDocument("SanPham", filter, update);
+            return result.ModifiedCount > 0; 
+        }
+
+
+
     }
 }

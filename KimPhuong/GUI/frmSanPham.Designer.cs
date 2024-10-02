@@ -62,7 +62,6 @@
             this.btnXoaSanPham = new Sunny.UI.UISymbolButton();
             this.btnReloadSanPham = new Sunny.UI.UISymbolButton();
             this.btnSuaDanhMuc = new Sunny.UI.UISymbolButton();
-            this.btnExportSanPham = new Sunny.UI.UISymbolButton();
             this.uiTableLayoutPanel2.SuspendLayout();
             this.uiTableLayoutPanel6.SuspendLayout();
             this.uiTableLayoutPanel1.SuspendLayout();
@@ -508,17 +507,15 @@
             // 
             // uiTableLayoutPanel5
             // 
-            this.uiTableLayoutPanel5.ColumnCount = 5;
+            this.uiTableLayoutPanel5.ColumnCount = 4;
             this.uiTableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.uiTableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.uiTableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.uiTableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66542F));
-            this.uiTableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.uiTableLayoutPanel5.Controls.Add(this.btnThemSanPham, 0, 0);
             this.uiTableLayoutPanel5.Controls.Add(this.btnXoaSanPham, 1, 0);
             this.uiTableLayoutPanel5.Controls.Add(this.btnReloadSanPham, 3, 0);
             this.uiTableLayoutPanel5.Controls.Add(this.btnSuaDanhMuc, 2, 0);
-            this.uiTableLayoutPanel5.Controls.Add(this.btnExportSanPham, 4, 0);
             this.uiTableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiTableLayoutPanel5.Location = new System.Drawing.Point(3, 390);
             this.uiTableLayoutPanel5.Name = "uiTableLayoutPanel5";
@@ -542,7 +539,7 @@
             this.btnThemSanPham.Location = new System.Drawing.Point(3, 3);
             this.btnThemSanPham.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnThemSanPham.Name = "btnThemSanPham";
-            this.btnThemSanPham.Size = new System.Drawing.Size(261, 43);
+            this.btnThemSanPham.Size = new System.Drawing.Size(328, 43);
             this.btnThemSanPham.Symbol = 61525;
             this.btnThemSanPham.SymbolSize = 30;
             this.btnThemSanPham.TabIndex = 1;
@@ -564,15 +561,16 @@
             this.btnXoaSanPham.FillPressColor = System.Drawing.Color.CornflowerBlue;
             this.btnXoaSanPham.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
             this.btnXoaSanPham.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnXoaSanPham.Location = new System.Drawing.Point(270, 3);
+            this.btnXoaSanPham.Location = new System.Drawing.Point(337, 3);
             this.btnXoaSanPham.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnXoaSanPham.Name = "btnXoaSanPham";
-            this.btnXoaSanPham.Size = new System.Drawing.Size(261, 43);
+            this.btnXoaSanPham.Size = new System.Drawing.Size(328, 43);
             this.btnXoaSanPham.Symbol = 559506;
             this.btnXoaSanPham.SymbolSize = 30;
             this.btnXoaSanPham.TabIndex = 2;
             this.btnXoaSanPham.Text = "Xóa";
             this.btnXoaSanPham.TipsFont = new System.Drawing.Font("Arial", 9F);
+            this.btnXoaSanPham.Click += new System.EventHandler(this.btnXoaSanPham_Click);
             // 
             // btnReloadSanPham
             // 
@@ -585,10 +583,10 @@
             this.btnReloadSanPham.FillPressColor = System.Drawing.Color.CornflowerBlue;
             this.btnReloadSanPham.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
             this.btnReloadSanPham.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnReloadSanPham.Location = new System.Drawing.Point(804, 3);
+            this.btnReloadSanPham.Location = new System.Drawing.Point(1005, 3);
             this.btnReloadSanPham.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnReloadSanPham.Name = "btnReloadSanPham";
-            this.btnReloadSanPham.Size = new System.Drawing.Size(261, 43);
+            this.btnReloadSanPham.Size = new System.Drawing.Size(330, 43);
             this.btnReloadSanPham.Symbol = 61473;
             this.btnReloadSanPham.SymbolSize = 30;
             this.btnReloadSanPham.TabIndex = 5;
@@ -607,36 +605,16 @@
             this.btnSuaDanhMuc.FillPressColor = System.Drawing.Color.CornflowerBlue;
             this.btnSuaDanhMuc.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
             this.btnSuaDanhMuc.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnSuaDanhMuc.Location = new System.Drawing.Point(537, 3);
+            this.btnSuaDanhMuc.Location = new System.Drawing.Point(671, 3);
             this.btnSuaDanhMuc.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSuaDanhMuc.Name = "btnSuaDanhMuc";
-            this.btnSuaDanhMuc.Size = new System.Drawing.Size(261, 43);
+            this.btnSuaDanhMuc.Size = new System.Drawing.Size(328, 43);
             this.btnSuaDanhMuc.Symbol = 557940;
             this.btnSuaDanhMuc.SymbolSize = 30;
             this.btnSuaDanhMuc.TabIndex = 3;
             this.btnSuaDanhMuc.Text = "Sửa";
             this.btnSuaDanhMuc.TipsFont = new System.Drawing.Font("Arial", 9F);
-            // 
-            // btnExportSanPham
-            // 
-            this.btnExportSanPham.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExportSanPham.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnExportSanPham.FillColor = System.Drawing.Color.RoyalBlue;
-            this.btnExportSanPham.FillColor2 = System.Drawing.Color.CornflowerBlue;
-            this.btnExportSanPham.FillColorGradient = true;
-            this.btnExportSanPham.FillHoverColor = System.Drawing.Color.RoyalBlue;
-            this.btnExportSanPham.FillPressColor = System.Drawing.Color.CornflowerBlue;
-            this.btnExportSanPham.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
-            this.btnExportSanPham.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnExportSanPham.Location = new System.Drawing.Point(1071, 3);
-            this.btnExportSanPham.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnExportSanPham.Name = "btnExportSanPham";
-            this.btnExportSanPham.Size = new System.Drawing.Size(264, 43);
-            this.btnExportSanPham.Symbol = 362830;
-            this.btnExportSanPham.SymbolSize = 30;
-            this.btnExportSanPham.TabIndex = 4;
-            this.btnExportSanPham.Text = "Xuất Excel";
-            this.btnExportSanPham.TipsFont = new System.Drawing.Font("Arial", 9F);
+            this.btnSuaDanhMuc.Click += new System.EventHandler(this.btnSuaDanhMuc_Click);
             // 
             // frmSanPham
             // 
@@ -685,7 +663,6 @@
         private Sunny.UI.UISymbolButton btnXoaSanPham;
         private Sunny.UI.UISymbolButton btnReloadSanPham;
         private Sunny.UI.UISymbolButton btnSuaDanhMuc;
-        private Sunny.UI.UISymbolButton btnExportSanPham;
     }
 }
 

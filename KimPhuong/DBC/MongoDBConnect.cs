@@ -38,17 +38,17 @@ namespace KimPhuong.DBC
         }
 
         // Cập nhật
-        public void UpdateDocument(string collectionName, FilterDefinition<BsonDocument> filter, UpdateDefinition<BsonDocument> update)
+        public UpdateResult UpdateDocument(string collectionName, FilterDefinition<BsonDocument> filter, UpdateDefinition<BsonDocument> update)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
-            collection.UpdateOne(filter, update);
+            return collection.UpdateOne(filter, update);
         }
 
         // Xóa 
-        public void DeleteDocument(string collectionName, FilterDefinition<BsonDocument> filter)
+        public DeleteResult DeleteDocument(string collectionName, FilterDefinition<BsonDocument> filter)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
-            collection.DeleteOne(filter);
+            return collection.DeleteOne(filter);
         }
 
         //Đếm

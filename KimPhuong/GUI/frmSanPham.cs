@@ -196,13 +196,20 @@ namespace KimPhuong
                 string maBaoHanh = selectedBaoHanh.MaBaoHanh;
                 int thoiGianBaoHanh = selectedBaoHanh.ThoiGianBaoHanh;
 
-                sanPhamBUS.themSanPham(maSanPham, tenSanPham, maVach, giaBan,
+                if(sanPhamBUS.themSanPham(maSanPham, tenSanPham, maVach, giaBan,
                     ngaySanXuat.Date, xuatXu, moTa, maDanhMuc, tenDanhMuc,
-                    maNhaCungCap, tenNhaCungCap, maBaoHanh, thoiGianBaoHanh);
+                    maNhaCungCap, tenNhaCungCap, maBaoHanh, thoiGianBaoHanh))
+                {
+                    MessageBox.Show($"Thêm sản phẩm {maSanPham} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                MessageBox.Show($"Thêm sản phẩm {maSanPham} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadSanPham();
+                }
+                else
+                {
+                    MessageBox.Show($"Không thể thêm sản phẩm {maSanPham}!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
-                LoadSanPham();
+                
             }
             catch (Exception ex)
             {
@@ -237,6 +244,88 @@ namespace KimPhuong
                 dtpNgaySanXuat.Value = ngaySanXuat;
                 txtXuatXu.Text = xuatXu;
                 rtxtMoTa.Text = moTa;
+            }
+        }
+
+        private void btnXoaSanPham_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dtgSanPham.SelectedRows.Count > 0)
+                {
+                    DataGridViewRow selectedRow = dtgSanPham.SelectedRows[0];
+                    string maSanPham = selectedRow.Cells["maSanPham"].Value.ToString();
+
+                    if (MessageBox.Show($"Bạn chắc chắn xóa sản phẩm {maSanPham} không?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                    {
+                        if (sanPhamBUS.xoaSanPham(maSanPham))
+                        {
+                            MessageBox.Show($"Xóa sản phẩm {maSanPham} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadSanPham();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Xóa sản phẩm {maSanPham} thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Có lỗi xảy ra: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSuaDanhMuc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtSanPham.Text) ||
+                    string.IsNullOrWhiteSpace(txtMaVach.Text) ||
+                    string.IsNullOrWhiteSpace(txtGiaBan.Text) ||
+                    string.IsNullOrWhiteSpace(txtXuatXu.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin sản phẩm!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string maSanPham = dtgSanPham.SelectedRows[0].Cells["MaSanPham"].Value.ToString();
+                string tenSanPham = txtSanPham.Text.Trim();
+                string maVach = txtMaVach.Text.Trim();
+                string giabanText = txtGiaBan.Text.Replace("VND", "").Replace(",", "").Trim();
+                int giaBan = int.Parse(giabanText);
+                DateTime ngaySanXuat = dtpNgaySanXuat.Value.Date;
+                string xuatXu = txtXuatXu.Text.Trim();
+                string moTa = rtxtMoTa.Text.Trim();
+                int maDanhMuc = (int) cbDanhMuc.SelectedValue;
+                string tenDanhMuc = cbDanhMuc.Text;
+
+                int maNhaCungCap = (int) cbNhaCungCap.SelectedValue;
+                string tenNhaCungCap = cbNhaCungCap.Text;
+                var selectedBaoHanh = (dynamic) cbBaoHanh.SelectedItem;
+                string maBaoHanh = selectedBaoHanh.MaBaoHanh;
+                int thoiGianBaoHanh = selectedBaoHanh.ThoiGianBaoHanh;
+
+
+                if (sanPhamBUS.suaSanPham(maSanPham, tenSanPham, maVach, giaBan,
+                    ngaySanXuat.Date, xuatXu, moTa, maDanhMuc, tenDanhMuc,
+                    maNhaCungCap, tenNhaCungCap, maBaoHanh, thoiGianBaoHanh))
+                {
+                    MessageBox.Show($"Sửa sản phẩm {maSanPham} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    LoadSanPham();
+                }
+                else
+                {
+                    MessageBox.Show($"Không thể sửa sản phẩm {maSanPham}!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Có lỗi xảy ra: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
