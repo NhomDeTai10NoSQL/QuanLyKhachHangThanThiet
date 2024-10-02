@@ -85,5 +85,13 @@ namespace KimPhuong.DBC
             var pipeline = new[] { searchStage };
             return collection.Aggregate<BsonDocument>(pipeline).ToList();
         }
+
+        //Lấy lớn nhất
+        public BsonDocument GetMaxDocument(string collectionName, string fieldName)
+        {
+            var collection = _database.GetCollection<BsonDocument>(collectionName);
+            var sort = Builders<BsonDocument>.Sort.Descending(fieldName);
+            return collection.Find(new BsonDocument()).Sort(sort).Limit(1).FirstOrDefault();
+        }
     }
 }

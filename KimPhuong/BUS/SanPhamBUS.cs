@@ -23,5 +23,17 @@ namespace KimPhuong.BUS
         {
             return sanPhamDAO.searchSanPham(key);
         }
+        public void themSanPham(string maSanPham, string tenSanPham, string maVach,
+        int giaBan, DateTime ngaySanXuat, string xuatXu, string moTa,
+        int maDanhMuc, string tenDanhMuc, int maNhaCungCap,
+        string tenNhaCungCap, string maBaoHanh, int thoiGianBaoHanh)
+        {
+            sanPhamDAO.themSanPham(maSanPham, tenSanPham, maVach, giaBan, ngaySanXuat.Date, xuatXu, moTa, maDanhMuc, tenDanhMuc, maNhaCungCap,tenNhaCungCap,maBaoHanh, thoiGianBaoHanh);
+        }
+
+        public string GetNextMaSanPham()
+        {
+            return sanPhamDAO.GetNextMaSanPham();
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace KimPhuong
             LoadDanhMuc();
             LoadNhaCungCap();
             LoadBaoHanh();
+            dtgSanPham.SelectionChanged += dtgSanPham_SelectionChanged;
         }
         private void LoadSanPham()
         {
@@ -43,7 +44,7 @@ namespace KimPhuong
                     TenSanPham = document["tenSanPham"].AsString,
                     MaVach = document["maVach"].AsString,
                     GiaBan = document["giaBan"].AsInt32,
-                    NgaySanXuat = document["ngaySanXuat"].ToUniversalTime(),
+                    NgaySanXuat = document["ngaySanXuat"].ToLocalTime().Date,
                     XuatXu = document["xuatXu"].AsString,
                     MoTa = document["moTa"].AsString,
                     MaDanhMuc = document["danhMuc"]["maDanhMuc"].AsInt32,
@@ -88,6 +89,7 @@ namespace KimPhuong
         }
         private void LoadNhaCungCap()
         {
+            cbNhaCungCap.DataSource = null;
             var bsonDoc = nhaCungCapBUS.getAllNhaCungCap();
             var nhaCungCapList = new List<object>();
             foreach(var document in bsonDoc)
@@ -105,6 +107,7 @@ namespace KimPhuong
         }
         private void LoadBaoHanh()
         {
+            cbBaoHanh.DataSource = null;
             var bsonDoc = baoHanhBUS.getAllBaoHanh();
             var baoHanhList = new List<object>();
             foreach (var document in bsonDoc)
@@ -164,7 +167,48 @@ namespace KimPhuong
 
         private void btnThemSanPham_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtSanPham.Text) ||
+                    string.IsNullOrWhiteSpace(txtMaVach.Text) ||
+                    string.IsNullOrWhiteSpace(txtGiaBan.Text) ||
+                    string.IsNullOrWhiteSpace(txtXuatXu.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin sản phẩm!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                string maSanPham = sanPhamBUS.GetNextMaSanPham();
+                string tenSanPham = txtSanPham.Text.Trim();
+                string maVach = txtMaVach.Text.Trim();
+                string giabanText = txtGiaBan.Text.Replace("VND", "").Replace(",", "").Trim();
+                int giaBan = int.Parse(giabanText);
+                DateTime ngaySanXuat = dtpNgaySanXuat.Value.Date;
+                string xuatXu = txtXuatXu.Text.Trim();
+                string moTa = rtxtMoTa.Text.Trim();
+                int maDanhMuc = (int) cbDanhMuc.SelectedValue;
+                string tenDanhMuc = cbDanhMuc.Text;
+
+                int maNhaCungCap = (int) cbNhaCungCap.SelectedValue;
+                string tenNhaCungCap = cbNhaCungCap.Text;
+                var selectedBaoHanh = (dynamic) cbBaoHanh.SelectedItem;
+                string maBaoHanh = selectedBaoHanh.MaBaoHanh;
+                int thoiGianBaoHanh = selectedBaoHanh.ThoiGianBaoHanh;
+
+                sanPhamBUS.themSanPham(maSanPham, tenSanPham, maVach, giaBan,
+                    ngaySanXuat.Date, xuatXu, moTa, maDanhMuc, tenDanhMuc,
+                    maNhaCungCap, tenNhaCungCap, maBaoHanh, thoiGianBaoHanh);
+
+                MessageBox.Show($"Thêm sản phẩm {maSanPham} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LoadSanPham();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Có lỗi xảy ra: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dtgSanPham_SelectionChanged(object sender, EventArgs e)
