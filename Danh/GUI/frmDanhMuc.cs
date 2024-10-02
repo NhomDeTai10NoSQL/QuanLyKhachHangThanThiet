@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Danh.BUS;
+using MongoDB.Bson;
 using Sunny.UI;
 namespace Danh.GUI
 {
@@ -22,6 +23,7 @@ namespace Danh.GUI
             nhaCungCapBUS = new NhaCungCapBUS();
             LoadDanhMuc();
             LoadNhaCungCap();
+            
         }
 
         private void LoadNhaCungCap()
@@ -112,6 +114,114 @@ namespace Danh.GUI
                 txtEmail.Text = email;
                 txtNguoiLienHe.Text = nguoiDaiDien;
 
+            }
+        }
+
+        private void btnThemDanhMuc_Click(object sender, EventArgs e)
+        {
+            int maDanhMuc = danhMucBUS.GetMaxMaDanhMuc();
+            string tenDanhMuc = txtTenDanhMuc.Text;
+            string moTa = rtxtMoTa.Text;
+
+            if (danhMucBUS.ThemDanhMuc(maDanhMuc, tenDanhMuc, moTa))
+            {
+                MessageBox.Show("Thêm danh mục thành công.");
+                LoadDanhMuc();
+            }
+            else
+            {
+                MessageBox.Show("Thêm danh mục thất bại.");
+            }
+        }
+
+        private void btnXoaDanhMuc_Click(object sender, EventArgs e)
+        {
+            if (dtgDanhMuc.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dtgDanhMuc.SelectedRows[0];
+                int maDanhMuc = int.Parse(selectedRow.Cells["maDanhMuc"].Value.ToString());
+
+                if (danhMucBUS.XoaDanhMuc(maDanhMuc))
+                {
+                    MessageBox.Show("Xóa danh mục thành công.");
+                    LoadDanhMuc();
+                }
+                else
+                {
+                    MessageBox.Show("Xóa danh mục thất bại.");
+                }
+            }
+        }
+
+        private void btnSuaDanhMuc_Click(object sender, EventArgs e)
+        {
+            if (dtgDanhMuc.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dtgDanhMuc.SelectedRows[0];
+                int maDanhMuc = int.Parse(selectedRow.Cells["maDanhMuc"].Value.ToString());
+                string tenDanhMuc = txtTenDanhMuc.Text;
+                string moTa = rtxtMoTa.Text;
+
+                if (danhMucBUS.SuaDanhMuc(maDanhMuc, tenDanhMuc, moTa))
+                {
+                    MessageBox.Show("Sửa danh mục thành công.");
+                    LoadDanhMuc(); 
+                }
+                else
+                {
+                    MessageBox.Show("Sửa danh mục thất bại.");
+                }
+            }
+        }
+
+        private void btnReloadDanhMuc_Click(object sender, EventArgs e)
+        {
+            LoadDanhMuc();
+        }
+
+        private void btnThemNhaCungCap_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXoaNhaCungCap_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSuaNhaCungCap_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReloadNhaCungCap_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTimDanhMuc_Click(object sender, EventArgs e)
+        {
+            string key = txtTimDanhMuc.Text.Trim();
+            List<BsonDocument> searchResults = danhMucBUS.searchDanhMuc(key);
+
+            var dmList = new List<object>();
+            foreach (var document in searchResults)
+            {
+                var danhMuc = new
+                {
+                    MaDanhMuc = document["maDanhMuc"].AsInt32,
+                    TenDanhMuc = document["tenDanhMuc"].AsString,
+                    MoTa = document["moTa"].AsString
+                };
+                dmList.Add(danhMuc);
+            }
+
+            dtgDanhMuc.DataSource = dmList;
+
+            if (dmList.Count == 0)
+            {
+                MessageBox.Show("Không tìm thấy sản phẩm phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadDanhMuc();
             }
         }
     }

@@ -23,5 +23,25 @@ namespace Danh.BUS
         {
             return danhMucDAO.getSoSPTrongDanhMuc(ma);
         }
+        public bool ThemDanhMuc(int maDanhMuc, string tenDanhMuc, string moTa)
+        {
+            return danhMucDAO.ThemDanhMuc(maDanhMuc, tenDanhMuc, moTa);
+        }
+        public bool XoaDanhMuc(int maDanhMuc)
+        {
+            return danhMucDAO.XoaDanhMuc(maDanhMuc);
+        }
+        public bool SuaDanhMuc(int maDanhMuc, string tenDanhMuc, string moTa)
+        {
+            return danhMucDAO.SuaDanhMuc(maDanhMuc , tenDanhMuc, moTa);
+        }
+        public int GetMaxMaDanhMuc()
+        {
+            return danhMucDAO.GetMaxMaDanhMuc();
+        }
+        public List<BsonDocument> searchDanhMuc(string key)
+        {
+            return danhMucDAO.searchDanhMuc(key);
+        }
     }
 }

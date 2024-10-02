@@ -39,25 +39,66 @@ namespace Danh.DBC
         }
 
         // Cập nhật một document trong collection
-        public void UpdateDocument(string collectionName, FilterDefinition<BsonDocument> filter, UpdateDefinition<BsonDocument> update)
+        public UpdateResult UpdateDocument(string collectionName, FilterDefinition<BsonDocument> filter, UpdateDefinition<BsonDocument> update)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
-            collection.UpdateOne(filter, update);
+            return collection.UpdateOne(filter, update);
         }
 
-        // Xóa một document trong collection
-        public void DeleteDocument(string collectionName, FilterDefinition<BsonDocument> filter)
+        // Xóa 
+        public DeleteResult DeleteDocument(string collectionName, FilterDefinition<BsonDocument> filter)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
-            collection.DeleteOne(filter);
+            return collection.DeleteOne(filter);
         }
 
         //Đếm
-
-        public long CountDocument(string collectionName, FilterDefinition<BsonDocument> filter)
+        public long CountDocuments(string collectionName, FilterDefinition<BsonDocument> filter)
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
             return collection.CountDocuments(filter);
         }
+        public List<BsonDocument> SearchDocuments(string collectionName, string searchText, string[] searchFields, string indexName)
+        {
+            var collection = _database.GetCollection<BsonDocument>(collectionName);
+
+            var searchStage = new BsonDocument
+    {
+        {
+            "$search", new BsonDocument
+            {
+                {
+                    "index", indexName
+                },
+                {
+                    "text", new BsonDocument
+                    {
+                        { "query", searchText },
+                        { "path", new BsonArray(searchFields) }
+                    }
+                }
+            }
+        }
+    };
+
+            var pipeline = new[] { searchStage };
+            return collection.Aggregate<BsonDocument>(pipeline).ToList();
+        }
+
+        //Lấy lớn nhất
+        public BsonDocument GetMaxDocument(string collectionName, string fieldName)
+        {
+            var collection = _database.GetCollection<BsonDocument>(collectionName);
+            var sort = Builders<BsonDocument>.Sort.Descending(fieldName);
+            return collection.Find(new BsonDocument()).Sort(sort).Limit(1).FirstOrDefault();
+        }
+
+        public List<BsonDocument> Search(string collectionName, string searchText, string searchField)
+        {
+            var collection = _database.GetCollection<BsonDocument>(collectionName); 
+            var filter = Builders<BsonDocument>.Filter.Regex(searchField, new BsonRegularExpression(searchText, "i"));
+            return collection.Find(filter).ToList();
+        }
+
     }
 }

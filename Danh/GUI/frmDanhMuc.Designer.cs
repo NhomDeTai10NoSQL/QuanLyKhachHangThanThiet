@@ -28,21 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiPanel2 = new Sunny.UI.UIPanel();
             this.uiTableLayoutPanel7 = new Sunny.UI.UITableLayoutPanel();
             this.dtgNhaCungCap = new Sunny.UI.UIDataGridView();
             this.uiTableLayoutPanel8 = new Sunny.UI.UITableLayoutPanel();
-            this.btnExportNhaCungCap = new Sunny.UI.UISymbolButton();
             this.btnReloadNhaCungCap = new Sunny.UI.UISymbolButton();
             this.btnThemNhaCungCap = new Sunny.UI.UISymbolButton();
             this.btnXoaNhaCungCap = new Sunny.UI.UISymbolButton();
@@ -80,7 +79,6 @@
             this.btnXoaDanhMuc = new Sunny.UI.UISymbolButton();
             this.btnReloadDanhMuc = new Sunny.UI.UISymbolButton();
             this.btnSuaDanhMuc = new Sunny.UI.UISymbolButton();
-            this.btnExportDanhMuc = new Sunny.UI.UISymbolButton();
             this.uiTableLayoutPanel6 = new Sunny.UI.UITableLayoutPanel();
             this.btnTimDanhMuc = new Sunny.UI.UISymbolButton();
             this.txtTimDanhMuc = new Sunny.UI.UITextBox();
@@ -142,33 +140,33 @@
             this.dtgNhaCungCap.AllowUserToDeleteRows = false;
             this.dtgNhaCungCap.AllowUserToResizeColumns = false;
             this.dtgNhaCungCap.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.dtgNhaCungCap.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dtgNhaCungCap.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White;
+            this.dtgNhaCungCap.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            this.dtgNhaCungCap.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgNhaCungCap.BackgroundColor = System.Drawing.Color.White;
             this.dtgNhaCungCap.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgNhaCungCap.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgNhaCungCap.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dtgNhaCungCap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgNhaCungCap.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgNhaCungCap.DefaultCellStyle = dataGridViewCellStyle13;
             this.dtgNhaCungCap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtgNhaCungCap.EnableHeadersVisualStyles = false;
             this.dtgNhaCungCap.Font = new System.Drawing.Font("Arial", 12F);
@@ -177,22 +175,22 @@
             this.dtgNhaCungCap.Name = "dtgNhaCungCap";
             this.dtgNhaCungCap.ReadOnly = true;
             this.dtgNhaCungCap.RectColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgNhaCungCap.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgNhaCungCap.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dtgNhaCungCap.RowHeadersWidth = 62;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            this.dtgNhaCungCap.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.White;
+            this.dtgNhaCungCap.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dtgNhaCungCap.RowTemplate.Height = 28;
             this.dtgNhaCungCap.SelectedIndex = -1;
             this.dtgNhaCungCap.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -203,13 +201,11 @@
             // 
             // uiTableLayoutPanel8
             // 
-            this.uiTableLayoutPanel8.ColumnCount = 5;
+            this.uiTableLayoutPanel8.ColumnCount = 4;
             this.uiTableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.uiTableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.uiTableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.uiTableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66542F));
-            this.uiTableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.uiTableLayoutPanel8.Controls.Add(this.btnExportNhaCungCap, 4, 0);
             this.uiTableLayoutPanel8.Controls.Add(this.btnReloadNhaCungCap, 3, 0);
             this.uiTableLayoutPanel8.Controls.Add(this.btnThemNhaCungCap, 0, 0);
             this.uiTableLayoutPanel8.Controls.Add(this.btnXoaNhaCungCap, 1, 0);
@@ -223,27 +219,6 @@
             this.uiTableLayoutPanel8.TabIndex = 1;
             this.uiTableLayoutPanel8.TagString = null;
             // 
-            // btnExportNhaCungCap
-            // 
-            this.btnExportNhaCungCap.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExportNhaCungCap.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnExportNhaCungCap.FillColor = System.Drawing.Color.RoyalBlue;
-            this.btnExportNhaCungCap.FillColor2 = System.Drawing.Color.CornflowerBlue;
-            this.btnExportNhaCungCap.FillColorGradient = true;
-            this.btnExportNhaCungCap.FillHoverColor = System.Drawing.Color.RoyalBlue;
-            this.btnExportNhaCungCap.FillPressColor = System.Drawing.Color.CornflowerBlue;
-            this.btnExportNhaCungCap.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
-            this.btnExportNhaCungCap.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnExportNhaCungCap.Location = new System.Drawing.Point(627, 3);
-            this.btnExportNhaCungCap.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnExportNhaCungCap.Name = "btnExportNhaCungCap";
-            this.btnExportNhaCungCap.Size = new System.Drawing.Size(154, 37);
-            this.btnExportNhaCungCap.Symbol = 362830;
-            this.btnExportNhaCungCap.SymbolSize = 30;
-            this.btnExportNhaCungCap.TabIndex = 5;
-            this.btnExportNhaCungCap.Text = "Xuất Excel";
-            this.btnExportNhaCungCap.TipsFont = new System.Drawing.Font("Arial", 9F);
-            // 
             // btnReloadNhaCungCap
             // 
             this.btnReloadNhaCungCap.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -255,15 +230,16 @@
             this.btnReloadNhaCungCap.FillPressColor = System.Drawing.Color.CornflowerBlue;
             this.btnReloadNhaCungCap.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
             this.btnReloadNhaCungCap.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnReloadNhaCungCap.Location = new System.Drawing.Point(471, 3);
+            this.btnReloadNhaCungCap.Location = new System.Drawing.Point(591, 3);
             this.btnReloadNhaCungCap.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnReloadNhaCungCap.Name = "btnReloadNhaCungCap";
-            this.btnReloadNhaCungCap.Size = new System.Drawing.Size(150, 37);
+            this.btnReloadNhaCungCap.Size = new System.Drawing.Size(190, 37);
             this.btnReloadNhaCungCap.Symbol = 61473;
             this.btnReloadNhaCungCap.SymbolSize = 30;
             this.btnReloadNhaCungCap.TabIndex = 4;
             this.btnReloadNhaCungCap.Text = "Làm mới";
             this.btnReloadNhaCungCap.TipsFont = new System.Drawing.Font("Arial", 9F);
+            this.btnReloadNhaCungCap.Click += new System.EventHandler(this.btnReloadNhaCungCap_Click);
             // 
             // btnThemNhaCungCap
             // 
@@ -279,12 +255,13 @@
             this.btnThemNhaCungCap.Location = new System.Drawing.Point(3, 3);
             this.btnThemNhaCungCap.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnThemNhaCungCap.Name = "btnThemNhaCungCap";
-            this.btnThemNhaCungCap.Size = new System.Drawing.Size(150, 37);
+            this.btnThemNhaCungCap.Size = new System.Drawing.Size(190, 37);
             this.btnThemNhaCungCap.Symbol = 61525;
             this.btnThemNhaCungCap.SymbolSize = 30;
             this.btnThemNhaCungCap.TabIndex = 1;
             this.btnThemNhaCungCap.Text = "Thêm";
             this.btnThemNhaCungCap.TipsFont = new System.Drawing.Font("Arial", 9F);
+            this.btnThemNhaCungCap.Click += new System.EventHandler(this.btnThemNhaCungCap_Click);
             // 
             // btnXoaNhaCungCap
             // 
@@ -297,15 +274,16 @@
             this.btnXoaNhaCungCap.FillPressColor = System.Drawing.Color.CornflowerBlue;
             this.btnXoaNhaCungCap.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
             this.btnXoaNhaCungCap.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnXoaNhaCungCap.Location = new System.Drawing.Point(159, 3);
+            this.btnXoaNhaCungCap.Location = new System.Drawing.Point(199, 3);
             this.btnXoaNhaCungCap.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnXoaNhaCungCap.Name = "btnXoaNhaCungCap";
-            this.btnXoaNhaCungCap.Size = new System.Drawing.Size(150, 37);
+            this.btnXoaNhaCungCap.Size = new System.Drawing.Size(190, 37);
             this.btnXoaNhaCungCap.Symbol = 559506;
             this.btnXoaNhaCungCap.SymbolSize = 30;
             this.btnXoaNhaCungCap.TabIndex = 2;
             this.btnXoaNhaCungCap.Text = "Xóa";
             this.btnXoaNhaCungCap.TipsFont = new System.Drawing.Font("Arial", 9F);
+            this.btnXoaNhaCungCap.Click += new System.EventHandler(this.btnXoaNhaCungCap_Click);
             // 
             // btnSuaNhaCungCap
             // 
@@ -318,15 +296,16 @@
             this.btnSuaNhaCungCap.FillPressColor = System.Drawing.Color.CornflowerBlue;
             this.btnSuaNhaCungCap.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
             this.btnSuaNhaCungCap.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnSuaNhaCungCap.Location = new System.Drawing.Point(315, 3);
+            this.btnSuaNhaCungCap.Location = new System.Drawing.Point(395, 3);
             this.btnSuaNhaCungCap.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSuaNhaCungCap.Name = "btnSuaNhaCungCap";
-            this.btnSuaNhaCungCap.Size = new System.Drawing.Size(150, 37);
+            this.btnSuaNhaCungCap.Size = new System.Drawing.Size(190, 37);
             this.btnSuaNhaCungCap.Symbol = 557940;
             this.btnSuaNhaCungCap.SymbolSize = 30;
             this.btnSuaNhaCungCap.TabIndex = 3;
             this.btnSuaNhaCungCap.Text = "Sửa";
             this.btnSuaNhaCungCap.TipsFont = new System.Drawing.Font("Arial", 9F);
+            this.btnSuaNhaCungCap.Click += new System.EventHandler(this.btnSuaNhaCungCap_Click);
             // 
             // uiTableLayoutPanel9
             // 
@@ -764,33 +743,33 @@
             this.dtgDanhMuc.AllowUserToDeleteRows = false;
             this.dtgDanhMuc.AllowUserToResizeColumns = false;
             this.dtgDanhMuc.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
-            this.dtgDanhMuc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.dtgDanhMuc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.White;
+            this.dtgDanhMuc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            this.dtgDanhMuc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgDanhMuc.BackgroundColor = System.Drawing.Color.White;
             this.dtgDanhMuc.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgDanhMuc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgDanhMuc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dtgDanhMuc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgDanhMuc.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgDanhMuc.DefaultCellStyle = dataGridViewCellStyle18;
             this.dtgDanhMuc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtgDanhMuc.EnableHeadersVisualStyles = false;
             this.dtgDanhMuc.Font = new System.Drawing.Font("Arial", 12F);
@@ -799,22 +778,22 @@
             this.dtgDanhMuc.Name = "dtgDanhMuc";
             this.dtgDanhMuc.ReadOnly = true;
             this.dtgDanhMuc.RectColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgDanhMuc.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgDanhMuc.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dtgDanhMuc.RowHeadersWidth = 62;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
-            this.dtgDanhMuc.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.White;
+            this.dtgDanhMuc.RowsDefaultCellStyle = dataGridViewCellStyle20;
             this.dtgDanhMuc.RowTemplate.Height = 28;
             this.dtgDanhMuc.SelectedIndex = -1;
             this.dtgDanhMuc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -825,17 +804,15 @@
             // 
             // uiTableLayoutPanel5
             // 
-            this.uiTableLayoutPanel5.ColumnCount = 5;
+            this.uiTableLayoutPanel5.ColumnCount = 4;
             this.uiTableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.uiTableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.uiTableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
             this.uiTableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66542F));
-            this.uiTableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.uiTableLayoutPanel5.Controls.Add(this.btnThemDanhMuc, 0, 0);
             this.uiTableLayoutPanel5.Controls.Add(this.btnXoaDanhMuc, 1, 0);
             this.uiTableLayoutPanel5.Controls.Add(this.btnReloadDanhMuc, 3, 0);
             this.uiTableLayoutPanel5.Controls.Add(this.btnSuaDanhMuc, 2, 0);
-            this.uiTableLayoutPanel5.Controls.Add(this.btnExportDanhMuc, 4, 0);
             this.uiTableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiTableLayoutPanel5.Location = new System.Drawing.Point(3, 52);
             this.uiTableLayoutPanel5.Name = "uiTableLayoutPanel5";
@@ -859,7 +836,7 @@
             this.btnThemDanhMuc.Location = new System.Drawing.Point(3, 3);
             this.btnThemDanhMuc.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnThemDanhMuc.Name = "btnThemDanhMuc";
-            this.btnThemDanhMuc.Size = new System.Drawing.Size(150, 37);
+            this.btnThemDanhMuc.Size = new System.Drawing.Size(189, 37);
             this.btnThemDanhMuc.Symbol = 61525;
             this.btnThemDanhMuc.SymbolSize = 30;
             this.btnThemDanhMuc.TabIndex = 1;
@@ -868,6 +845,7 @@
             this.btnThemDanhMuc.Text = "Thêm";
             this.btnThemDanhMuc.TipsFont = new System.Drawing.Font("Arial", 9F);
             this.btnThemDanhMuc.TipsText = "Thêm";
+            this.btnThemDanhMuc.Click += new System.EventHandler(this.btnThemDanhMuc_Click);
             // 
             // btnXoaDanhMuc
             // 
@@ -880,15 +858,16 @@
             this.btnXoaDanhMuc.FillPressColor = System.Drawing.Color.CornflowerBlue;
             this.btnXoaDanhMuc.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
             this.btnXoaDanhMuc.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnXoaDanhMuc.Location = new System.Drawing.Point(159, 3);
+            this.btnXoaDanhMuc.Location = new System.Drawing.Point(198, 3);
             this.btnXoaDanhMuc.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnXoaDanhMuc.Name = "btnXoaDanhMuc";
-            this.btnXoaDanhMuc.Size = new System.Drawing.Size(150, 37);
+            this.btnXoaDanhMuc.Size = new System.Drawing.Size(189, 37);
             this.btnXoaDanhMuc.Symbol = 559506;
             this.btnXoaDanhMuc.SymbolSize = 30;
             this.btnXoaDanhMuc.TabIndex = 2;
             this.btnXoaDanhMuc.Text = "Xóa";
             this.btnXoaDanhMuc.TipsFont = new System.Drawing.Font("Arial", 9F);
+            this.btnXoaDanhMuc.Click += new System.EventHandler(this.btnXoaDanhMuc_Click);
             // 
             // btnReloadDanhMuc
             // 
@@ -901,15 +880,16 @@
             this.btnReloadDanhMuc.FillPressColor = System.Drawing.Color.CornflowerBlue;
             this.btnReloadDanhMuc.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
             this.btnReloadDanhMuc.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnReloadDanhMuc.Location = new System.Drawing.Point(471, 3);
+            this.btnReloadDanhMuc.Location = new System.Drawing.Point(588, 3);
             this.btnReloadDanhMuc.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnReloadDanhMuc.Name = "btnReloadDanhMuc";
-            this.btnReloadDanhMuc.Size = new System.Drawing.Size(150, 37);
+            this.btnReloadDanhMuc.Size = new System.Drawing.Size(192, 37);
             this.btnReloadDanhMuc.Symbol = 61473;
             this.btnReloadDanhMuc.SymbolSize = 30;
             this.btnReloadDanhMuc.TabIndex = 5;
             this.btnReloadDanhMuc.Text = "Làm mới";
             this.btnReloadDanhMuc.TipsFont = new System.Drawing.Font("Arial", 9F);
+            this.btnReloadDanhMuc.Click += new System.EventHandler(this.btnReloadDanhMuc_Click);
             // 
             // btnSuaDanhMuc
             // 
@@ -922,36 +902,16 @@
             this.btnSuaDanhMuc.FillPressColor = System.Drawing.Color.CornflowerBlue;
             this.btnSuaDanhMuc.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
             this.btnSuaDanhMuc.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnSuaDanhMuc.Location = new System.Drawing.Point(315, 3);
+            this.btnSuaDanhMuc.Location = new System.Drawing.Point(393, 3);
             this.btnSuaDanhMuc.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSuaDanhMuc.Name = "btnSuaDanhMuc";
-            this.btnSuaDanhMuc.Size = new System.Drawing.Size(150, 37);
+            this.btnSuaDanhMuc.Size = new System.Drawing.Size(189, 37);
             this.btnSuaDanhMuc.Symbol = 557940;
             this.btnSuaDanhMuc.SymbolSize = 30;
             this.btnSuaDanhMuc.TabIndex = 3;
             this.btnSuaDanhMuc.Text = "Sửa";
             this.btnSuaDanhMuc.TipsFont = new System.Drawing.Font("Arial", 9F);
-            // 
-            // btnExportDanhMuc
-            // 
-            this.btnExportDanhMuc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExportDanhMuc.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnExportDanhMuc.FillColor = System.Drawing.Color.RoyalBlue;
-            this.btnExportDanhMuc.FillColor2 = System.Drawing.Color.CornflowerBlue;
-            this.btnExportDanhMuc.FillColorGradient = true;
-            this.btnExportDanhMuc.FillHoverColor = System.Drawing.Color.RoyalBlue;
-            this.btnExportDanhMuc.FillPressColor = System.Drawing.Color.CornflowerBlue;
-            this.btnExportDanhMuc.FillSelectedColor = System.Drawing.Color.CornflowerBlue;
-            this.btnExportDanhMuc.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnExportDanhMuc.Location = new System.Drawing.Point(627, 3);
-            this.btnExportDanhMuc.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnExportDanhMuc.Name = "btnExportDanhMuc";
-            this.btnExportDanhMuc.Size = new System.Drawing.Size(153, 37);
-            this.btnExportDanhMuc.Symbol = 362830;
-            this.btnExportDanhMuc.SymbolSize = 30;
-            this.btnExportDanhMuc.TabIndex = 4;
-            this.btnExportDanhMuc.Text = "Xuất Excel";
-            this.btnExportDanhMuc.TipsFont = new System.Drawing.Font("Arial", 9F);
+            this.btnSuaDanhMuc.Click += new System.EventHandler(this.btnSuaDanhMuc_Click);
             // 
             // uiTableLayoutPanel6
             // 
@@ -988,6 +948,7 @@
             this.btnTimDanhMuc.SymbolSize = 30;
             this.btnTimDanhMuc.TabIndex = 1;
             this.btnTimDanhMuc.TipsFont = new System.Drawing.Font("Arial", 9F);
+            this.btnTimDanhMuc.Click += new System.EventHandler(this.btnTimDanhMuc_Click);
             // 
             // txtTimDanhMuc
             // 
@@ -1049,7 +1010,6 @@
         private Sunny.UI.UITableLayoutPanel uiTableLayoutPanel7;
         private Sunny.UI.UIDataGridView dtgNhaCungCap;
         private Sunny.UI.UITableLayoutPanel uiTableLayoutPanel8;
-        private Sunny.UI.UISymbolButton btnExportNhaCungCap;
         private Sunny.UI.UISymbolButton btnReloadNhaCungCap;
         private Sunny.UI.UISymbolButton btnThemNhaCungCap;
         private Sunny.UI.UISymbolButton btnXoaNhaCungCap;
@@ -1087,7 +1047,6 @@
         private Sunny.UI.UISymbolButton btnXoaDanhMuc;
         private Sunny.UI.UISymbolButton btnReloadDanhMuc;
         private Sunny.UI.UISymbolButton btnSuaDanhMuc;
-        private Sunny.UI.UISymbolButton btnExportDanhMuc;
         private Sunny.UI.UITableLayoutPanel uiTableLayoutPanel6;
         private Sunny.UI.UISymbolButton btnTimDanhMuc;
         private Sunny.UI.UITextBox txtTimDanhMuc;

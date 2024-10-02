@@ -33,7 +33,7 @@
             // Header
             // 
             this.Header.Location = new System.Drawing.Point(306, 35);
-            this.Header.Size = new System.Drawing.Size(494, 57);
+            this.Header.Size = new System.Drawing.Size(494, 41);
             // 
             // Aside
             // 
