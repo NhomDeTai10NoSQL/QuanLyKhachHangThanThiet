@@ -176,27 +176,78 @@ namespace Danh.GUI
 
         private void btnReloadDanhMuc_Click(object sender, EventArgs e)
         {
+
             LoadDanhMuc();
         }
 
         private void btnThemNhaCungCap_Click(object sender, EventArgs e)
         {
+            int maNhaCungCap = nhaCungCapBUS.GetMaxMaNhaCungCap();
+            string tenNhaCungCap = txtTenNhaCungCap.Text;
+            string sodienthoai = txtSoDienThoai.Text;
+            string diachi = txtDiaChi.Text;
+            string email = txtEmail.Text;
+            string nguoiDaiDien = txtNguoiLienHe.Text;
+            
+
+            if (nhaCungCapBUS.ThemNhaCungCap(maNhaCungCap, tenNhaCungCap, sodienthoai, diachi, email, nguoiDaiDien))
+            {
+                MessageBox.Show("Thêm nhà cung cấp thành công.");
+                LoadNhaCungCap();
+            }
+            else
+            {
+                MessageBox.Show("Thêm  nhà cung cấp  thất bại.");
+            }
 
         }
 
         private void btnXoaNhaCungCap_Click(object sender, EventArgs e)
         {
+            if (dtgNhaCungCap.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dtgNhaCungCap.SelectedRows[0];
+                int maNhaCungCap = int.Parse(selectedRow.Cells["maNhaCungCap"].Value.ToString());
 
+                if (nhaCungCapBUS.XoaNhaCungCap(maNhaCungCap))
+                {
+                    MessageBox.Show("Xóa nhà cung cấp thành công.");
+                    LoadNhaCungCap();
+                }
+                else
+                {
+                    MessageBox.Show("Xóa nhà cung cấp thất bại.");
+                }
+            }
         }
 
         private void btnSuaNhaCungCap_Click(object sender, EventArgs e)
         {
+            if (dtgNhaCungCap.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dtgNhaCungCap.SelectedRows[0];
+                int maNhaCungCap = int.Parse(selectedRow.Cells["maNhaCungCap"].Value.ToString());
+                string tenNhaCungCap = txtTenNhaCungCap.Text;
+                string sodienthoai = txtSoDienThoai.Text;
+                string diachi = txtDiaChi.Text;
+                string email = txtEmail.Text;
+                string nguoiDaiDien = txtNguoiLienHe.Text;
 
+                if (nhaCungCapBUS.SuaNhaCungCap(maNhaCungCap, tenNhaCungCap, sodienthoai, diachi, email, nguoiDaiDien))
+                {
+                    MessageBox.Show("Sửa nhà cung cấp thành công.");
+                    LoadNhaCungCap();
+                }
+                else
+                {
+                    MessageBox.Show("Sửa nhà cung cấp thất bại.");
+                }
+            }
         }
 
         private void btnReloadNhaCungCap_Click(object sender, EventArgs e)
         {
-
+            LoadNhaCungCap();
         }
 
         private void btnTimDanhMuc_Click(object sender, EventArgs e)
@@ -222,6 +273,35 @@ namespace Danh.GUI
             {
                 MessageBox.Show("Không tìm thấy sản phẩm phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadDanhMuc();
+            }
+        }
+
+        private void btnTimNhaCungCap_Click(object sender, EventArgs e)
+        {
+            string key = txtTimNhaCungCap.Text.Trim();
+            List<BsonDocument> searchResults = nhaCungCapBUS.searchNhaCungCap(key);
+
+            var dmList = new List<object>();
+            foreach (var document in searchResults)
+            {
+                var nhaCungCap = new
+                {
+                    MaNhaCungCap = document["maNhaCungCap"].AsInt32,
+                    TenNhaCungCap = document["tenNhaCungCap"].AsString,
+                    SoDienThoai = document["soDienThoai"].AsString,
+                    DiaChi = document["diaChi"].AsString,
+                    Email = document["email"].AsString,
+                    NguoiDaiDien = document["nguoiDaiDien"].AsString,
+            };
+                dmList.Add(nhaCungCap);
+            }
+
+            dtgNhaCungCap.DataSource = dmList;
+
+            if (dmList.Count == 0)
+            {
+                MessageBox.Show("Không tìm thấy sản phẩm phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadNhaCungCap();
             }
         }
     }

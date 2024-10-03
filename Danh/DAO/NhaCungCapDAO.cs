@@ -75,5 +75,9 @@ namespace Danh.DAO
             int nextNumber = currentMax + 1;
             return nextNumber;
         }
+        public List<BsonDocument> searchNhaCungCap(string key)
+        {
+            return dBConnect.Search("NhaCungCap", key, "tenNhaCungCap");
+        }
     }
 }

@@ -160,13 +160,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BUS\DangNhapBUS.cs" />
     <Compile Include="BUS\DanhMucBUS.cs" />
     <Compile Include="BUS\GiaoHangBUS.cs" />
     <Compile Include="BUS\NhaCungCapBUS.cs" />
+    <Compile Include="DAO\DangNhapDAO.cs" />
     <Compile Include="DAO\DanhMucDAO.cs" />
     <Compile Include="DAO\GiaoHangDAO.cs" />
     <Compile Include="DAO\NhaCungCapDAO.cs" />
     <Compile Include="DBC\MongoDBConnect.cs" />
+    <Compile Include="GUI\frmDangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmDangNhap.Designer.cs">
+      <DependentUpon>frmDangNhap.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmDanhMuc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,6 +183,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\frmDangNhap.resx">
+      <DependentUpon>frmDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmDanhMuc.resx">
       <DependentUpon>frmDanhMuc.cs</DependentUpon>
     </EmbeddedResource>
@@ -186,6 +197,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="libmongocrypt.dylib" />
     <None Include="libmongocrypt.so" />
@@ -208,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="mongocrypt.dll" />
+    <None Include="Resources\background_DangNhap.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

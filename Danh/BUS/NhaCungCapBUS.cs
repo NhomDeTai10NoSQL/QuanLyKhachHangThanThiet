@@ -35,5 +35,9 @@ namespace Danh.BUS
         {
             return nhaCungCapDAO.GetMaxMaNhaCungCap();
         }
+        public List<BsonDocument> searchNhaCungCap(string key)
+        {
+            return nhaCungCapDAO.searchNhaCungCap(key);
+        }
     }
 }
