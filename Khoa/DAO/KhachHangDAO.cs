@@ -13,13 +13,16 @@ namespace Khoa.DAO
     public class KhachHangDAO
     {
         MongoDBConnect connect;
-        string collection = "KhachHang";
+        string strcollection = "KhachHang";
         public KhachHangDAO() {
             connect = new MongoDBConnect();
         }
         public DataTable getAllKhachHang()
         {
-            DataTable dt = connect.GetAllDocuments(collection);
+            var filter = Builders<BsonDocument>.Filter.Eq("TrangThai", "Hoạt động");
+
+            DataTable dt = connect.GetDocumentsWithFilter(strcollection, filter);
+
             return dt;
         }
         public string GetNextMaKhachHang()
@@ -52,7 +55,7 @@ namespace Khoa.DAO
                     { "LoaiKhachHang", loaiKhachHang }
                 };
 
-                connect.InsertDocument(collection, newCustomer);
+                connect.InsertDocument(strcollection, newCustomer);
 
                 return true; 
             }
@@ -74,7 +77,7 @@ namespace Khoa.DAO
                     .Set("TrangThai", trangthai)
                     .Set("LoaiKhachHang", loaiKH);
 
-                connect.UpdateDocument(collection, filter, update);
+                connect.UpdateDocument(strcollection, filter, update);
                 return true; 
             }
             catch (Exception e)
@@ -91,7 +94,7 @@ namespace Khoa.DAO
 
                     .Set("TrangThai", "Ẩn");
 
-                connect.UpdateDocument(collection, filter, update);
+                connect.UpdateDocument(strcollection, filter, update);
                 return true;
             }
             catch (Exception e)
@@ -108,7 +111,7 @@ namespace Khoa.DAO
 
                     .Set("TrangThai", "Hoạt động");
 
-                connect.UpdateDocument(collection, filter, update);
+                connect.UpdateDocument(strcollection, filter, update);
                 return true;
             }
             catch (Exception e)
@@ -118,7 +121,7 @@ namespace Khoa.DAO
         }
         public DataTable SearchKhachHang(string searchValue)
         {
-            var collection = connect.Database.GetCollection<BsonDocument>("KhachHang");
+            var collection = connect.Database.GetCollection<BsonDocument>(strcollection);
 
             var filter = Builders<BsonDocument>.Filter.Or(
                 Builders<BsonDocument>.Filter.Regex("TenKhachHang", new BsonRegularExpression(searchValue, "i")),
@@ -151,6 +154,40 @@ namespace Khoa.DAO
 
             return dataTable; 
         }
+        public DataTable locKhachHang(string value)
+        {
+            var collection = connect.Database.GetCollection<BsonDocument>(strcollection);
 
+            var filter = Builders<BsonDocument>.Filter.Or(
+                Builders<BsonDocument>.Filter.Regex("TrangThai", new BsonRegularExpression(value, "i")),
+                Builders<BsonDocument>.Filter.Regex("LoaiKhachHang", new BsonRegularExpression(value, "i"))
+            );
+
+            var results = collection.Find(filter).ToList();
+
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("MaKhachHang", typeof(string));
+            dataTable.Columns.Add("TenKhachHang", typeof(string));
+            dataTable.Columns.Add("NgaySinh", typeof(DateTime));
+            dataTable.Columns.Add("SoDienThoai", typeof(string));
+            dataTable.Columns.Add("DiemTichLuy", typeof(int));
+            dataTable.Columns.Add("TrangThai", typeof(string));
+            dataTable.Columns.Add("LoaiKhachHang", typeof(string));
+
+            foreach (var customer in results)
+            {
+                dataTable.Rows.Add(
+                    customer["MaKhachHang"].AsString,
+                    customer["TenKhachHang"].AsString,
+                    customer["NgaySinh"].ToUniversalTime(),
+                    customer["SoDienThoai"].AsString,
+                    customer["DiemTichLuy"].AsInt32,
+                    customer["TrangThai"].AsString,
+                    customer["LoaiKhachHang"].AsString
+                );
+            }
+
+            return dataTable;
+        }
     }
 }

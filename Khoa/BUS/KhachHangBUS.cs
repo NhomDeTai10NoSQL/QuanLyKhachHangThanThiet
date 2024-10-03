@@ -39,5 +39,9 @@ namespace Khoa.BUS
         {
             return khachHangDAO.SearchKhachHang(searchValue);
         }
+        public DataTable locKhachHang(string searchValue)
+        {
+            return khachHangDAO.locKhachHang(searchValue);
+        }
     }
 }

@@ -112,22 +112,7 @@ namespace Khoa
             }
         }
 
-        private void uiSymbolButton1_Click(object sender, EventArgs e)
-        {
-            string makh = dgvKhachHang.CurrentRow.Cells["Column1"].Value.ToString();
-            bool updateKhachHang = khachHangBUS.showKhachHang(makh);
-            if (updateKhachHang)
-            {
-                MessageBox.Show("Hiện khách hàng thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                loadData();
-            }
-            else
-            {
-                MessageBox.Show("Hiện khách hàng không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                return;
-            }
-        }
-
+      
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             loadData();
@@ -188,7 +173,42 @@ namespace Khoa
 
         private void uiSymbolButton3_Click(object sender, EventArgs e)
         {
+            int index = cboLoc.SelectedIndex;
+            if(index == 0)
+            {
+                loadData();
+            }
+            else if(index == 1)
+            {
+                btnAn.Visible = false;
+                btnHien.Visible = true;
+                string value = "Ẩn";
+                DataTable dtLocKhachHang = khachHangBUS.locKhachHang(value);
+                dgvKhachHang.DataSource = dtLocKhachHang;
 
+            }
+            else if (index == 2)
+            {
+                string value = "Tiềm năng";
+                DataTable dtLocKhachHang = khachHangBUS.locKhachHang(value);
+                dgvKhachHang.DataSource = dtLocKhachHang;
+            }
+        }
+
+        private void btnHien_Click(object sender, EventArgs e)
+        {
+            string makh = dgvKhachHang.CurrentRow.Cells["Column1"].Value.ToString();
+            bool updateKhachHang = khachHangBUS.showKhachHang(makh);
+            if (updateKhachHang)
+            {
+                MessageBox.Show("Hiện khách hàng thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                loadData();
+            }
+            else
+            {
+                MessageBox.Show("Hiện khách hàng không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return;
+            }
         }
     }
 }

@@ -58,6 +58,33 @@ namespace Khoa.DBC
 
             return dataTable;
         }
+        public DataTable GetDocumentsWithFilter(string collectionName, FilterDefinition<BsonDocument> filter)
+        {
+            var collection = _database.GetCollection<BsonDocument>(collectionName);
+
+            var documents = collection.Find(filter).ToList();
+
+            DataTable dt = new DataTable();
+            foreach (var doc in documents)
+            {
+                doc.Remove("_id");
+                if (dt.Columns.Count == 0)
+                {
+                    foreach (var element in doc.Elements)
+                    {
+                        dt.Columns.Add(element.Name);
+                    }
+                }
+                var row = dt.NewRow();
+                foreach (var element in doc.Elements)
+                {
+                    row[element.Name] = element.Value;
+                }
+                dt.Rows.Add(row);
+            }
+
+            return dt;
+        }
 
 
 
