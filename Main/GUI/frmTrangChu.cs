@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Khoa;
 using KimPhuong;
 using Danh;
 using Danh.GUI;
@@ -21,7 +22,7 @@ namespace Main
             InitializeComponent();
             int pageIndex = 1000;
             TreeNode root = Aside.CreateNode("QUẢN LÝ KHÁCH HÀNG", 61451, 24, pageIndex);
-
+            Aside.CreateChildNode(root, AddPage(new frmKhachHangThanThiet(), ++pageIndex));
             pageIndex = 2000;
             root = Aside.CreateNode("QUẢN LÝ GIAO DỊCH", 61451, 24, pageIndex);
             Aside.CreateChildNode(root, AddPage(new frmSanPham(), ++pageIndex));
