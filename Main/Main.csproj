@@ -207,9 +207,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BUS\" />
     <Folder Include="DAO\" />
-    <Folder Include="DBC\" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />

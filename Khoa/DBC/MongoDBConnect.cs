@@ -12,7 +12,7 @@ namespace Khoa.DBC
     public class MongoDBConnect
     {
         private IMongoDatabase _database;
-        public static string ConnectionString = "mongodb://localhost:27017";
+        public static string ConnectionString = "mongodb+srv://kimphuong8694:123@quanlykhachhang.khsds.mongodb.net/?retryWrites=true&w=majority&appName=QuanLyKhachHang";
         public static string DatabaseName = "QuanLyKhachHangThanThiet";
         
         public IMongoDatabase Database
