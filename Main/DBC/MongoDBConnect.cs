@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Bson;
 
-namespace Danh.DBC
+namespace Main.DBC
 {
     public class MongoDBConnect
     {

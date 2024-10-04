@@ -1,4 +1,4 @@
-﻿using Danh.DBC;
+﻿using Main.DBC;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Danh.DAO
+namespace Main.DAO
 {
     internal class NhaCungCapDAO
     {

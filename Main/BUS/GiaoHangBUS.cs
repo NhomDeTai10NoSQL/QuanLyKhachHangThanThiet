@@ -1,4 +1,4 @@
-﻿using Danh.DAO;
+﻿using Main.DAO;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Danh.BUS
+namespace Main.BUS
 {
     internal class GiaoHangBUS
     {

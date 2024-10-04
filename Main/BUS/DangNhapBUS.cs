@@ -1,4 +1,4 @@
-﻿using Danh.DAO;
+﻿using Main.DAO;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Danh.BUS
+namespace Main.BUS
 {
-    internal class DangNhapBUS
+    public class DangNhapBUS
     {
         private DangNhapDAO dangNhapDAO;
 
@@ -20,6 +20,10 @@ namespace Danh.BUS
         public List<BsonDocument> GetAllDangNhap()
         {
             return dangNhapDAO.GetAllDangNhap();
+        }
+        public bool CheckDangNhap(string username, string password)
+        {
+            return dangNhapDAO.CheckDangNhap(username, password);
         }
     }
 }

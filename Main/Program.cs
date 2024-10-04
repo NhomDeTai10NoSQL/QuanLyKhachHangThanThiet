@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Main.GUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace Main
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmTrangChu());
+            Application.Run(new frmDangNhap());
         }
     }
 }

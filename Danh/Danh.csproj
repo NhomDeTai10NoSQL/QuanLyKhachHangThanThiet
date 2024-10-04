@@ -169,12 +169,6 @@
     <Compile Include="DAO\GiaoHangDAO.cs" />
     <Compile Include="DAO\NhaCungCapDAO.cs" />
     <Compile Include="DBC\MongoDBConnect.cs" />
-    <Compile Include="GUI\frmDangNhap.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmDangNhap.Designer.cs">
-      <DependentUpon>frmDangNhap.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\frmDanhMuc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,9 +177,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="GUI\frmDangNhap.resx">
-      <DependentUpon>frmDangNhap.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmDanhMuc.resx">
       <DependentUpon>frmDanhMuc.cs</DependentUpon>
     </EmbeddedResource>
