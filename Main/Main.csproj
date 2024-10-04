@@ -212,6 +212,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\KimPhuong\KimPhuong.csproj">
+      <Project>{a87afb76-da81-4b57-ae4f-39188748b2df}</Project>
+      <Name>KimPhuong</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
+  </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
   </ItemGroup>

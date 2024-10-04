@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KimPhuong;
 using Danh;
 using Danh.GUI;
 using Sunny.UI;
@@ -23,6 +24,7 @@ namespace Main
 
             pageIndex = 2000;
             root = Aside.CreateNode("QUẢN LÝ GIAO DỊCH", 61451, 24, pageIndex);
+            Aside.CreateChildNode(root, AddPage(new frmSanPham(), ++pageIndex));
             Aside.CreateChildNode(root, AddPage(new frmDanhMuc(), ++pageIndex));
 
         }
