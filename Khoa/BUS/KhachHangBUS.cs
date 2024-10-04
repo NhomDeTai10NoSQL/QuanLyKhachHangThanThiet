@@ -43,5 +43,9 @@ namespace Khoa.BUS
         {
             return khachHangDAO.locKhachHang(searchValue);
         }
+        public bool DeleteKhachHang(string maKhachHang)
+        {
+            return khachHangDAO.DeleteKhachHang(maKhachHang);
+        }
     }
 }

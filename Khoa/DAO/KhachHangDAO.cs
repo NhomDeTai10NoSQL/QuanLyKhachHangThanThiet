@@ -189,5 +189,21 @@ namespace Khoa.DAO
 
             return dataTable;
         }
+        public bool DeleteKhachHang(string maKhachHang)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("MaKhachHang", maKhachHang);
+
+                connect.DeleteDocument("KhachHang", filter);
+
+                return true;  
+            }
+            catch (Exception ex)
+            {
+                return false; 
+            }
+        }
+
     }
 }

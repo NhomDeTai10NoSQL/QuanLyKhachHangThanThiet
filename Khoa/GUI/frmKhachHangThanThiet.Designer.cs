@@ -62,15 +62,17 @@
             this.LoaiKhachHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiTableLayoutPanel3 = new Sunny.UI.UITableLayoutPanel();
             this.uiTableLayoutPanel2 = new Sunny.UI.UITableLayoutPanel();
-            this.uiSymbolButton3 = new Sunny.UI.UISymbolButton();
-            this.cboLoc = new Sunny.UI.UIComboBox();
-            this.txtSearch = new Sunny.UI.UITextBox();
             this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
+            this.txtSearch = new Sunny.UI.UITextBox();
+            this.cboLoc = new Sunny.UI.UIComboBox();
+            this.uiSymbolButton3 = new Sunny.UI.UISymbolButton();
+            this.uiTableLayoutPanel4 = new Sunny.UI.UITableLayoutPanel();
             this.uiTableLayoutPanel1.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhachHang)).BeginInit();
             this.uiTableLayoutPanel3.SuspendLayout();
             this.uiTableLayoutPanel2.SuspendLayout();
+            this.uiTableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // uiTableLayoutPanel1
@@ -253,11 +255,7 @@
             // 
             // uiGroupBox1
             // 
-            this.uiGroupBox1.Controls.Add(this.btnHien);
-            this.uiGroupBox1.Controls.Add(this.btnAn);
-            this.uiGroupBox1.Controls.Add(this.btnLamMoi);
-            this.uiGroupBox1.Controls.Add(this.btnThem);
-            this.uiGroupBox1.Controls.Add(this.btnSua);
+            this.uiGroupBox1.Controls.Add(this.uiTableLayoutPanel4);
             this.uiGroupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiGroupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiGroupBox1.Location = new System.Drawing.Point(0, 171);
@@ -273,23 +271,23 @@
             // btnHien
             // 
             this.btnHien.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHien.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnHien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnHien.Location = new System.Drawing.Point(610, 35);
+            this.btnHien.Location = new System.Drawing.Point(661, 3);
             this.btnHien.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnHien.Name = "btnHien";
-            this.btnHien.Size = new System.Drawing.Size(207, 35);
+            this.btnHien.Size = new System.Drawing.Size(323, 34);
             this.btnHien.Symbol = 361550;
             this.btnHien.TabIndex = 4;
-            this.btnHien.Text = "Hiện khách hàng";
+            this.btnHien.Text = "Xóa khách hàng";
             this.btnHien.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnHien.Visible = false;
             this.btnHien.Click += new System.EventHandler(this.btnHien_Click);
             // 
             // btnAn
             // 
             this.btnAn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnAn.Location = new System.Drawing.Point(610, 35);
+            this.btnAn.Location = new System.Drawing.Point(579, 614);
             this.btnAn.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnAn.Name = "btnAn";
             this.btnAn.Size = new System.Drawing.Size(207, 35);
@@ -302,11 +300,12 @@
             // btnLamMoi
             // 
             this.btnLamMoi.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLamMoi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLamMoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnLamMoi.Location = new System.Drawing.Point(839, 35);
+            this.btnLamMoi.Location = new System.Drawing.Point(990, 3);
             this.btnLamMoi.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(207, 35);
+            this.btnLamMoi.Size = new System.Drawing.Size(325, 34);
             this.btnLamMoi.Symbol = 61473;
             this.btnLamMoi.TabIndex = 4;
             this.btnLamMoi.Text = "Làm mới";
@@ -316,11 +315,12 @@
             // btnThem
             // 
             this.btnThem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnThem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnThem.Location = new System.Drawing.Point(144, 35);
+            this.btnThem.Location = new System.Drawing.Point(3, 3);
             this.btnThem.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(207, 35);
+            this.btnThem.Size = new System.Drawing.Size(323, 34);
             this.btnThem.Symbol = 61525;
             this.btnThem.TabIndex = 2;
             this.btnThem.Text = "Thêm khách hàng";
@@ -330,11 +330,12 @@
             // btnSua
             // 
             this.btnSua.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSua.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnSua.Location = new System.Drawing.Point(376, 35);
+            this.btnSua.Location = new System.Drawing.Point(332, 3);
             this.btnSua.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(207, 35);
+            this.btnSua.Size = new System.Drawing.Size(323, 34);
             this.btnSua.Symbol = 61508;
             this.btnSua.TabIndex = 2;
             this.btnSua.Text = "Sửa khách hàng";
@@ -489,20 +490,37 @@
             this.uiTableLayoutPanel2.TabIndex = 3;
             this.uiTableLayoutPanel2.TagString = null;
             // 
-            // uiSymbolButton3
+            // uiSymbolButton2
             // 
-            this.uiSymbolButton3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiSymbolButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiSymbolButton3.Location = new System.Drawing.Point(1182, 3);
-            this.uiSymbolButton3.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolButton3.Name = "uiSymbolButton3";
-            this.uiSymbolButton3.Size = new System.Drawing.Size(127, 52);
-            this.uiSymbolButton3.Symbol = 362800;
-            this.uiSymbolButton3.TabIndex = 10;
-            this.uiSymbolButton3.Text = "Lọc";
-            this.uiSymbolButton3.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.uiSymbolButton3.Click += new System.EventHandler(this.uiSymbolButton3_Click);
+            this.uiSymbolButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButton2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiSymbolButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButton2.Location = new System.Drawing.Point(527, 3);
+            this.uiSymbolButton2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButton2.Name = "uiSymbolButton2";
+            this.uiSymbolButton2.Size = new System.Drawing.Size(256, 52);
+            this.uiSymbolButton2.Symbol = 61442;
+            this.uiSymbolButton2.TabIndex = 9;
+            this.uiSymbolButton2.Text = "Tìm kiếm";
+            this.uiSymbolButton2.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButton2.Click += new System.EventHandler(this.uiSymbolButton2_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtSearch.Location = new System.Drawing.Point(4, 5);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtSearch.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Padding = new System.Windows.Forms.Padding(5);
+            this.txtSearch.ShowText = false;
+            this.txtSearch.Size = new System.Drawing.Size(516, 48);
+            this.txtSearch.TabIndex = 0;
+            this.txtSearch.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtSearch.Watermark = "";
+            this.txtSearch.TextChanged += new System.EventHandler(this.uiTextBox1_TextChanged);
             // 
             // cboLoc
             // 
@@ -527,42 +545,46 @@
             this.cboLoc.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cboLoc.Watermark = "";
             // 
-            // txtSearch
+            // uiSymbolButton3
             // 
-            this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtSearch.Location = new System.Drawing.Point(4, 5);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtSearch.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Padding = new System.Windows.Forms.Padding(5);
-            this.txtSearch.ShowText = false;
-            this.txtSearch.Size = new System.Drawing.Size(516, 48);
-            this.txtSearch.TabIndex = 0;
-            this.txtSearch.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtSearch.Watermark = "";
-            this.txtSearch.TextChanged += new System.EventHandler(this.uiTextBox1_TextChanged);
+            this.uiSymbolButton3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButton3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiSymbolButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiSymbolButton3.Location = new System.Drawing.Point(1182, 3);
+            this.uiSymbolButton3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButton3.Name = "uiSymbolButton3";
+            this.uiSymbolButton3.Size = new System.Drawing.Size(127, 52);
+            this.uiSymbolButton3.Symbol = 362800;
+            this.uiSymbolButton3.TabIndex = 10;
+            this.uiSymbolButton3.Text = "Lọc";
+            this.uiSymbolButton3.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.uiSymbolButton3.Click += new System.EventHandler(this.uiSymbolButton3_Click);
             // 
-            // uiSymbolButton2
+            // uiTableLayoutPanel4
             // 
-            this.uiSymbolButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiSymbolButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiSymbolButton2.Location = new System.Drawing.Point(527, 3);
-            this.uiSymbolButton2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolButton2.Name = "uiSymbolButton2";
-            this.uiSymbolButton2.Size = new System.Drawing.Size(256, 52);
-            this.uiSymbolButton2.Symbol = 61442;
-            this.uiSymbolButton2.TabIndex = 9;
-            this.uiSymbolButton2.Text = "Tìm kiếm";
-            this.uiSymbolButton2.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.uiSymbolButton2.Click += new System.EventHandler(this.uiSymbolButton2_Click);
+            this.uiTableLayoutPanel4.ColumnCount = 4;
+            this.uiTableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.uiTableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.uiTableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.uiTableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.uiTableLayoutPanel4.Controls.Add(this.btnThem, 0, 0);
+            this.uiTableLayoutPanel4.Controls.Add(this.btnHien, 2, 0);
+            this.uiTableLayoutPanel4.Controls.Add(this.btnSua, 1, 0);
+            this.uiTableLayoutPanel4.Controls.Add(this.btnLamMoi, 3, 0);
+            this.uiTableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.uiTableLayoutPanel4.Location = new System.Drawing.Point(0, 32);
+            this.uiTableLayoutPanel4.Name = "uiTableLayoutPanel4";
+            this.uiTableLayoutPanel4.RowCount = 1;
+            this.uiTableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.uiTableLayoutPanel4.Size = new System.Drawing.Size(1318, 40);
+            this.uiTableLayoutPanel4.TabIndex = 0;
+            this.uiTableLayoutPanel4.TagString = null;
             // 
             // frmKhachHangThanThiet
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1318, 661);
+            this.Controls.Add(this.btnAn);
             this.Controls.Add(this.uiTableLayoutPanel3);
             this.Controls.Add(this.dgvKhachHang);
             this.Controls.Add(this.uiGroupBox1);
@@ -575,6 +597,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhachHang)).EndInit();
             this.uiTableLayoutPanel3.ResumeLayout(false);
             this.uiTableLayoutPanel2.ResumeLayout(false);
+            this.uiTableLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -614,5 +637,6 @@
         private Sunny.UI.UITextBox txtSearch;
         private Sunny.UI.UIComboBox cboLoc;
         private Sunny.UI.UISymbolButton uiSymbolButton3;
+        private Sunny.UI.UITableLayoutPanel uiTableLayoutPanel4;
     }
 }

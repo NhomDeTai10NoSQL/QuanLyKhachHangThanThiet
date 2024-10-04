@@ -198,15 +198,15 @@ namespace Khoa
         private void btnHien_Click(object sender, EventArgs e)
         {
             string makh = dgvKhachHang.CurrentRow.Cells["Column1"].Value.ToString();
-            bool updateKhachHang = khachHangBUS.showKhachHang(makh);
+            bool updateKhachHang = khachHangBUS.DeleteKhachHang(makh);
             if (updateKhachHang)
             {
-                MessageBox.Show("Hiện khách hàng thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                MessageBox.Show("Xóa khách hàng thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 loadData();
             }
             else
             {
-                MessageBox.Show("Hiện khách hàng không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                MessageBox.Show("Xóa khách hàng không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 return;
             }
         }
