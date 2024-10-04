@@ -99,11 +99,9 @@
             // txtmatkhau
             // 
             this.txtmatkhau.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtmatkhau.DoubleValue = 123D;
             this.txtmatkhau.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtmatkhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtmatkhau.ForeColor = System.Drawing.Color.White;
-            this.txtmatkhau.IntValue = 123;
             this.txtmatkhau.Location = new System.Drawing.Point(24, 202);
             this.txtmatkhau.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtmatkhau.MinimumSize = new System.Drawing.Size(1, 16);
@@ -114,7 +112,7 @@
             this.txtmatkhau.ShowText = false;
             this.txtmatkhau.Size = new System.Drawing.Size(300, 35);
             this.txtmatkhau.TabIndex = 5;
-            this.txtmatkhau.Text = "123";
+            this.txtmatkhau.Text = "password123";
             this.txtmatkhau.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtmatkhau.Watermark = "";
             // 
