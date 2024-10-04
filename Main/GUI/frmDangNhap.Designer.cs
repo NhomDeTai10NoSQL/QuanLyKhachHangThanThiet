@@ -99,11 +99,11 @@
             // txtmatkhau
             // 
             this.txtmatkhau.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtmatkhau.DoubleValue = 1234D;
+            this.txtmatkhau.DoubleValue = 123D;
             this.txtmatkhau.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtmatkhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtmatkhau.ForeColor = System.Drawing.Color.White;
-            this.txtmatkhau.IntValue = 1234;
+            this.txtmatkhau.IntValue = 123;
             this.txtmatkhau.Location = new System.Drawing.Point(24, 202);
             this.txtmatkhau.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtmatkhau.MinimumSize = new System.Drawing.Size(1, 16);
@@ -114,7 +114,7 @@
             this.txtmatkhau.ShowText = false;
             this.txtmatkhau.Size = new System.Drawing.Size(300, 35);
             this.txtmatkhau.TabIndex = 5;
-            this.txtmatkhau.Text = "1234";
+            this.txtmatkhau.Text = "123";
             this.txtmatkhau.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtmatkhau.Watermark = "";
             // 
@@ -145,7 +145,7 @@
             this.txtdangnhap.ShowText = false;
             this.txtdangnhap.Size = new System.Drawing.Size(300, 35);
             this.txtdangnhap.TabIndex = 3;
-            this.txtdangnhap.Text = "QuanLy";
+            this.txtdangnhap.Text = "nv001";
             this.txtdangnhap.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtdangnhap.Watermark = "";
             // 
@@ -186,10 +186,12 @@
             // frmDangNhap
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackgroundImage = global::Main.Properties.Resources._461368804_1092443572884094_997600193836192374_n;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.uiPanel1);
             this.Name = "frmDangNhap";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.uiPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
