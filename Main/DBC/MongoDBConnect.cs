@@ -69,10 +69,11 @@ namespace Main.DBC
 
         public List<BsonDocument> Search(string collectionName, string searchText, string searchField)
         {
-            var collection = _database.GetCollection<BsonDocument>(collectionName); 
+            var collection = _database.GetCollection<BsonDocument>(collectionName);
             var filter = Builders<BsonDocument>.Filter.Regex(searchField, new BsonRegularExpression(searchText, "i"));
             return collection.Find(filter).ToList();
         }
+
 
     }
 }
