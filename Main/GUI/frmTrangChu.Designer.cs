@@ -46,7 +46,7 @@
             // 
             this.lblTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lblTaiKhoan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.lblTaiKhoan.Location = new System.Drawing.Point(211, 12);
+            this.lblTaiKhoan.Location = new System.Drawing.Point(366, 15);
             this.lblTaiKhoan.Name = "lblTaiKhoan";
             this.lblTaiKhoan.Size = new System.Drawing.Size(100, 23);
             this.lblTaiKhoan.TabIndex = 0;

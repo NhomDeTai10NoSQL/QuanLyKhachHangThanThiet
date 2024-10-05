@@ -162,14 +162,24 @@
   <ItemGroup>
     <Compile Include="BUS\BaoHanhBUS.cs" />
     <Compile Include="BUS\DanhMucBUS.cs" />
+    <Compile Include="BUS\DatHangNCCBUS.cs" />
+    <Compile Include="BUS\HoaDonBUS.cs" />
     <Compile Include="BUS\NhaCungCapBUS.cs" />
     <Compile Include="BUS\SanPhamBUS.cs" />
     <Compile Include="DAO\BaoHanhDAO.cs" />
     <Compile Include="DAO\DanhMucDAO.cs" />
+    <Compile Include="DAO\DatHangNCCDAO.cs" />
+    <Compile Include="DAO\HoaDonDAO.cs" />
     <Compile Include="DAO\NhaCungCapDAO.cs" />
     <Compile Include="DAO\SanPhamDAO.cs" />
     <Compile Include="DBC\MongoDBConnect.cs" />
     <Compile Include="DTO\KimPhuongDTO.cs" />
+    <Compile Include="GUI\frmBanHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmBanHang.Designer.cs">
+      <DependentUpon>frmBanHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmSanPham.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +188,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\frmBanHang.resx">
+      <DependentUpon>frmBanHang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmSanPham.resx">
       <DependentUpon>frmSanPham.cs</DependentUpon>
     </EmbeddedResource>
