@@ -129,10 +129,9 @@ namespace Main
         {
             if (e.Node.Text == "NHÂN VIÊN")
             {
-
-                //var page = new frmNhanVien();
-                //AddPage(page, 7000);
-                //SelectPage(7000);
+                var page = new frmNhanVien();
+                AddPage(page, 7000);
+                SelectPage(7000);
             }
             else if (e.Node.Text == "QUẢN LÝ KHÁCH HÀNG")
             {

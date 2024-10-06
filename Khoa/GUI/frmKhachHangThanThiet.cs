@@ -178,16 +178,7 @@ namespace Khoa
             {
                 loadData();
             }
-            else if(index == 1)
-            {
-                btnAn.Visible = false;
-                btnHien.Visible = true;
-                string value = "Ẩn";
-                DataTable dtLocKhachHang = khachHangBUS.locKhachHang(value);
-                dgvKhachHang.DataSource = dtLocKhachHang;
-
-            }
-            else if (index == 2)
+            else if (index == 1)
             {
                 string value = "Tiềm năng";
                 DataTable dtLocKhachHang = khachHangBUS.locKhachHang(value);
