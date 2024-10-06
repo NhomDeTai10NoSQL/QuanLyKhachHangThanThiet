@@ -47,5 +47,9 @@ namespace KimPhuong.BUS
         {
             return sanPhamDAO.updateSanPham(maSanPham, tenSanPham, maVach, giaBan, ngaySanXuat, xuatXu, moTa, maDanhMuc, tenDanhMuc, maNhaCungCap, tenNhaCungCap, maBaoHanh, thoiGianBaoHanh);
         }
+        public BsonDocument getMaSPByTenSP(string tensp)
+        {
+            return sanPhamDAO.getMaSPByTenSP(tensp);
+        }
     }
 }

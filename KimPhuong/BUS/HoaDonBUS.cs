@@ -23,5 +23,21 @@ namespace KimPhuong.BUS
         {
             return hoaDonDAO.getHoaDonByMa(maHoaDon);
         }
+        public string GetMaxMaHoaDon()
+        {
+            return hoaDonDAO.GetMaxMaHoaDon();
+        }
+        public BsonDocument getMaNhanVienByTaiKhoan(string taiKhoan)
+        {
+            return hoaDonDAO.getMaNhanVienByTaiKhoan(taiKhoan);
+        }
+        public bool addChiTietHoaDon(string maHoaDon, List<BsonDocument> chiTietHoaDonList)
+        {
+            return hoaDonDAO.addChiTietHoaDon(maHoaDon, chiTietHoaDonList);
+        }
+        public bool addHoaDon(string maHoaDon, DateTime ngayLapHoaDon, string maNhanVien, string tenNhanVien)
+        {
+            return hoaDonDAO.addHoaDon(maHoaDon, ngayLapHoaDon,maNhanVien, tenNhanVien);
+        }
     }
 }

@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KimPhuong.DTO;
+using System.ComponentModel.Design;
+
 namespace KimPhuong
 {
     public partial class frmSanPham : UIPage
@@ -26,13 +28,13 @@ namespace KimPhuong
             danhMucBUS = new DanhMucBUS();
             nhaCungCapBUS = new NhaCungCapBUS();
             baoHanhBUS = new BaoHanhBUS();
-            LoadSanPham();
-            LoadDanhMuc();
-            LoadNhaCungCap();
-            LoadBaoHanh();
+            loadSanPham();
+            loadDanhMuc();
+            loadNhaCungCap();
+            loadBaoHanh();
             dtgSanPham.SelectionChanged += dtgSanPham_SelectionChanged;
         }
-        private void LoadSanPham()
+        private void loadSanPham()
         {
             var bsonDoc = sanPhamBUS.getAllSanPham();
             var sanPhamList = new List<object>();
@@ -69,7 +71,7 @@ namespace KimPhuong
 
             dtgSanPham.Columns["GiaBan"].DefaultCellStyle.Format = "N0";
         }
-        private void LoadDanhMuc()
+        private void loadDanhMuc()
         {
             var bsonDoc = danhMucBUS.GetAllDanhMuc();
             var danhMucList = new List<object>();
@@ -87,7 +89,7 @@ namespace KimPhuong
             cbDanhMuc.DisplayMember = "TenDanhMuc";
             cbDanhMuc.ValueMember = "MaDanhMuc";
         }
-        private void LoadNhaCungCap()
+        private void loadNhaCungCap()
         {
             cbNhaCungCap.DataSource = null;
             var bsonDoc = nhaCungCapBUS.getAllNhaCungCap();
@@ -105,7 +107,7 @@ namespace KimPhuong
             cbNhaCungCap.DisplayMember = "TenNhaCungCap";
             cbNhaCungCap.ValueMember = "MaNhaCungCap";
         }
-        private void LoadBaoHanh()
+        private void loadBaoHanh()
         {
             cbBaoHanh.DataSource = null;
             var bsonDoc = baoHanhBUS.getAllBaoHanh();
@@ -129,6 +131,11 @@ namespace KimPhuong
         private void btnTimDanhMuc_Click(object sender, EventArgs e)
         {
             string key = txtTimSanPham.Text.Trim();
+            if(string.IsNullOrEmpty(key))
+            {
+                MessageBox.Show("Vui lòng nhập thông tin để tìm kiếm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             List<BsonDocument> searchResults = sanPhamBUS.searchSanPham(key);
 
             var sanPhamList = new List<object>();
@@ -155,14 +162,14 @@ namespace KimPhuong
             if (sanPhamList.Count == 0)
             {
                 MessageBox.Show("Không tìm thấy sản phẩm phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadSanPham();
+                loadSanPham();
             }
         }
 
         private void btnReloadSanPham_Click(object sender, EventArgs e)
         {
             txtTimSanPham.Text = string.Empty;
-            LoadSanPham();
+            loadSanPham();
         }
 
         private void btnThemSanPham_Click(object sender, EventArgs e)
@@ -202,7 +209,7 @@ namespace KimPhuong
                 {
                     MessageBox.Show($"Thêm sản phẩm {maSanPham} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    LoadSanPham();
+                    loadSanPham();
                 }
                 else
                 {
@@ -261,7 +268,7 @@ namespace KimPhuong
                         if (sanPhamBUS.xoaSanPham(maSanPham))
                         {
                             MessageBox.Show($"Xóa sản phẩm {maSanPham} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            LoadSanPham();
+                            loadSanPham();
                         }
                     }
                     else
@@ -316,7 +323,7 @@ namespace KimPhuong
                 {
                     MessageBox.Show($"Sửa sản phẩm {maSanPham} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    LoadSanPham();
+                    loadSanPham();
                 }
                 else
                 {

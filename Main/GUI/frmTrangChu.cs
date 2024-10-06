@@ -95,7 +95,7 @@ namespace Main
 
                 pageIndex = 3000;
                 root = Aside.CreateNode("QUẢN LÝ GIAO DỊCH", 61451, 24, pageIndex);
-                Aside.CreateChildNode(root, AddPage(new frmBanHang(), ++pageIndex));
+                Aside.CreateChildNode(root, AddPage(new frmBanHang(taiKhoan), ++pageIndex));
                 //Aside.CreateChildNode(root, AddPage(new frmNhapHang(), ++pageIndex));
                 //Aside.CreateChildNode(root, AddPage(new frmTraHang(), ++pageIndex));
                 //Aside.CreateChildNode(root, AddPage(new frmYeuCauBaoHanh(), ++pageIndex));
