@@ -553,11 +553,10 @@ namespace KimPhuong.GUI
             btnLuuTam.Enabled = false;
 
             txtDungDiemTichLuy.Text =
-           
            txtDiemTichLuy.Text = cbPhuongThucThanhToan.Text =
             txtSoDienThoai.Text = txtTongTien.Text = txtHoTenKhachHang.Text = txtMaHoaDon.Text = "";
 
-            txtTongTien.Text = txtTongPhaiTra.Text = txtDungDiemTichLuy.Text ="0";
+            txtTongTien.Text = txtTongPhaiTra.Text = txtDungDiemTichLuy.Text = "0";
 
             btnTaoDon.Selected = false;
 
