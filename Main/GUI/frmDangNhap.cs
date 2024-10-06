@@ -48,8 +48,10 @@ namespace  Main.GUI
 
             if (kq)
             {
+                string chucVu = dangNhapBUS.GetChucVu(taiKhoan);
+
                 MessageBox.Show("Đăng nhập thành công.");
-                frmTrangChu mainForm = new frmTrangChu(taiKhoan);
+                frmTrangChu mainForm = new frmTrangChu(taiKhoan, chucVu);
                 mainForm.Show();
                 this.Hide();
             }

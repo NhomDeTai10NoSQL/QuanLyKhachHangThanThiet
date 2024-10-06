@@ -60,7 +60,7 @@
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Radius = 25;
             this.uiPanel1.RectColor = System.Drawing.Color.Transparent;
-            this.uiPanel1.Size = new System.Drawing.Size(350, 341);
+            this.uiPanel1.Size = new System.Drawing.Size(350, 353);
             this.uiPanel1.TabIndex = 3;
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -71,10 +71,10 @@
             this.chkhienmk.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkhienmk.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkhienmk.ForeColor = System.Drawing.Color.DarkGray;
-            this.chkhienmk.Location = new System.Drawing.Point(195, 245);
+            this.chkhienmk.Location = new System.Drawing.Point(176, 261);
             this.chkhienmk.MinimumSize = new System.Drawing.Size(1, 1);
             this.chkhienmk.Name = "chkhienmk";
-            this.chkhienmk.Size = new System.Drawing.Size(129, 29);
+            this.chkhienmk.Size = new System.Drawing.Size(148, 29);
             this.chkhienmk.TabIndex = 7;
             this.chkhienmk.Text = "Hiện mật khẩu";
             this.chkhienmk.CheckedChanged += new System.EventHandler(this.chkhienmk_CheckedChanged);
@@ -85,7 +85,7 @@
             this.btndangnhap.FillColor = System.Drawing.Color.DarkCyan;
             this.btndangnhap.FillColor2 = System.Drawing.Color.Green;
             this.btndangnhap.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btndangnhap.Location = new System.Drawing.Point(24, 280);
+            this.btndangnhap.Location = new System.Drawing.Point(24, 296);
             this.btndangnhap.MinimumSize = new System.Drawing.Size(1, 1);
             this.btndangnhap.Name = "btndangnhap";
             this.btndangnhap.Radius = 25;
@@ -99,9 +99,11 @@
             // txtmatkhau
             // 
             this.txtmatkhau.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtmatkhau.DoubleValue = 123D;
             this.txtmatkhau.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtmatkhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtmatkhau.ForeColor = System.Drawing.Color.White;
+            this.txtmatkhau.IntValue = 123;
             this.txtmatkhau.Location = new System.Drawing.Point(24, 202);
             this.txtmatkhau.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtmatkhau.MinimumSize = new System.Drawing.Size(1, 16);
@@ -110,9 +112,9 @@
             this.txtmatkhau.Radius = 20;
             this.txtmatkhau.RectColor = System.Drawing.Color.Black;
             this.txtmatkhau.ShowText = false;
-            this.txtmatkhau.Size = new System.Drawing.Size(300, 35);
+            this.txtmatkhau.Size = new System.Drawing.Size(300, 51);
             this.txtmatkhau.TabIndex = 5;
-            this.txtmatkhau.Text = "password123";
+            this.txtmatkhau.Text = "123";
             this.txtmatkhau.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtmatkhau.Watermark = "";
             // 
@@ -141,9 +143,9 @@
             this.txtdangnhap.Radius = 20;
             this.txtdangnhap.RectColor = System.Drawing.Color.Black;
             this.txtdangnhap.ShowText = false;
-            this.txtdangnhap.Size = new System.Drawing.Size(300, 35);
+            this.txtdangnhap.Size = new System.Drawing.Size(300, 51);
             this.txtdangnhap.TabIndex = 3;
-            this.txtdangnhap.Text = "nv001";
+            this.txtdangnhap.Text = "quanly001";
             this.txtdangnhap.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtdangnhap.Watermark = "";
             // 

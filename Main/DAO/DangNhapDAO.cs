@@ -24,5 +24,16 @@ namespace Main.DAO
             var danhSachDangNhap = GetAllDangNhap();
             return danhSachDangNhap.Any(doc => doc["taiKhoan"] == username && doc["matKhau"] == password);
         }
+        public string GetChucVu(string username)
+        {
+            var danhSachDangNhap = GetAllDangNhap();
+            var nhanVien = danhSachDangNhap.FirstOrDefault(doc => doc["taiKhoan"] == username);
+
+            if (nhanVien != null)
+            {
+                return nhanVien.Contains("chucVu") ? nhanVien["chucVu"].ToString() : null;
+            }
+            return null;
+        }
     }
 }

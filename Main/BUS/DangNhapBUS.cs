@@ -25,5 +25,9 @@ namespace Main.BUS
         {
             return dangNhapDAO.CheckDangNhap(username, password);
         }
+        public string GetChucVu(string username)
+        {
+            return dangNhapDAO.GetChucVu(username);
+        }
     }
 }
