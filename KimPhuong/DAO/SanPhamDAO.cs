@@ -119,7 +119,13 @@ namespace KimPhuong.DAO
             var result = dBConnect.UpdateDocument("SanPham", filter, update);
             return result.ModifiedCount > 0; 
         }
-
+        public BsonDocument getMaSPByTenSP(string tensp)
+        {
+            var collection = dBConnect.Database.GetCollection<BsonDocument>("SanPham");
+            var filter = Builders<BsonDocument>.Filter.Eq("tenSanPham", tensp);
+            var sanPham = collection.Find(filter).FirstOrDefault();
+            return sanPham;
+        }
 
 
     }
