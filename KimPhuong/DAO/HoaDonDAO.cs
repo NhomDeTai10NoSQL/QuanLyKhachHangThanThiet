@@ -63,7 +63,7 @@ namespace KimPhuong.DAO
                 { "phuongThucThanhToan", BsonNull.Value },
                 { "nhanVien", new BsonDocument { { "maNhanVien", maNhanVien }, { "tenNhanVien", tenNhanVien } } },
                 { "khachHang", BsonNull.Value },
-                { "khuyenMai", BsonNull.Value },
+                
                 { "chiTietHoaDon", new BsonArray() }
                 
             };
@@ -78,7 +78,7 @@ namespace KimPhuong.DAO
             }
         }
 
-        public bool addChiTietHoaDon(string maHoaDon, List<BsonDocument> chiTietHoaDonList)
+        public bool addHoaDon(string maHoaDon, List<BsonDocument> chiTietHoaDonList)
         {
             try
             {
@@ -94,6 +94,68 @@ namespace KimPhuong.DAO
                 return false;
             }
         }
+        public bool kiemTraTrungSanPham(string maHoaDon, string maSanPham)
+        {
+            var collection = dBConnect.Database.GetCollection<BsonDocument>("HoaDon");
+            var filter = Builders<BsonDocument>.Filter.And(
+                Builders<BsonDocument>.Filter.Eq("maHoaDon", maHoaDon),
+                Builders<BsonDocument>.Filter.ElemMatch<BsonDocument>("chiTietHoaDon",
+                    Builders<BsonDocument>.Filter.Eq("maSanPham", maSanPham))
+            );
+
+            var count = collection.CountDocuments(filter);
+            return count > 0;
+        }
+        public bool updateChiTietHoaDon(string maHoaDon, string maSanPham, int soLuong, int donGia, int thanhTien)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.And(
+                    Builders<BsonDocument>.Filter.Eq("maHoaDon", maHoaDon),
+                    Builders<BsonDocument>.Filter.ElemMatch<BsonDocument>("chiTietHoaDon", Builders<BsonDocument>.Filter.Eq("maSanPham", maSanPham))
+                );
+
+                var update = Builders<BsonDocument>.Update.Set("chiTietHoaDon.$.soLuong", soLuong)
+                                                          .Set("chiTietHoaDon.$.thanhTien", thanhTien);
+
+                var result = dBConnect.UpdateDocument("HoaDon",filter, update);
+
+                return result.ModifiedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi cập nhật chi tiết hóa đơn: " + ex.Message);
+                return false;
+            }
+        }
+        public bool addChiTietHoaDon(string maHoaDon, string maSanPham, string tenSanPham, int soLuong, int donGia, int thanhTien)
+        {
+            try
+            {
+                var collection = dBConnect.Database.GetCollection<BsonDocument>("HoaDon");
+                var filter = Builders<BsonDocument>.Filter.Eq("maHoaDon", maHoaDon);
+
+                var newChiTiet = new BsonDocument
+        {
+            { "maSanPham", maSanPham },
+            { "tenSanPham", tenSanPham }, 
+            { "soLuong", soLuong },
+            { "donGia", donGia },
+            { "thanhTien", thanhTien }
+        };
+
+                var update = Builders<BsonDocument>.Update.Push("chiTietHoaDon", newChiTiet);
+                var result = dBConnect.UpdateDocument("HoaDon", filter, update);
+
+                return result.ModifiedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi thêm chi tiết hóa đơn: " + ex.Message);
+                return false;
+            }
+        }
+
 
 
     }
