@@ -27,18 +27,32 @@ namespace Khoa.DAO
         }
         public string GetNextMaKhachHang()
         {
-            var sequenceDocument = connect.Database.GetCollection<BsonDocument>("counters")
-                .FindOneAndUpdate(
-                    Builders<BsonDocument>.Filter.Eq("_id", "khachhangid"), 
-                    Builders<BsonDocument>.Update.Inc("sequence_value", 1),
-                    new FindOneAndUpdateOptions<BsonDocument>
-                    {
-                        ReturnDocument = ReturnDocument.After, 
-                        IsUpsert = true 
-                    });
+            try
+            {
+                var collection = connect.Database.GetCollection<BsonDocument>("KhachHang");
+                var sort = Builders<BsonDocument>.Sort.Descending("MaKhachHang");
 
-            return "KH" + sequenceDocument["sequence_value"].ToString().PadLeft(4, '0'); 
+                var lastCustomer = collection.Find(new BsonDocument()).Sort(sort).Limit(1).FirstOrDefault();
+
+                if (lastCustomer != null)
+                {
+                    string lastMaKhachHang = lastCustomer["MaKhachHang"].AsString;
+                    int lastNumber = int.Parse(lastMaKhachHang.Substring(2));  
+                    int nextNumber = lastNumber + 1;
+
+                    return "KH" + nextNumber.ToString().PadLeft(4, '0');
+                }
+                else
+                {
+                    return "KH0001";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi tạo mã khách hàng tự động: " + ex.Message);
+            }
         }
+
 
         public bool AddKhachHang(string tenKhachHang, DateTime ngaySinh, string soDienThoai, int diemTichLuy, string trangThai, string loaiKhachHang)
         {

@@ -39,7 +39,7 @@ namespace Khoa
         private void btnThem_Click(object sender, EventArgs e)
         {
             DialogResult add;
-            add = MessageBox.Show("Có muốn thêm nhân viên này?","Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            add = MessageBox.Show("Có muốn thêm khách hàng này?","Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (add == DialogResult.Yes)
             {
                 if (txtTenKH.Text.Length == 0 || txtSDT.Text.Length == 0)

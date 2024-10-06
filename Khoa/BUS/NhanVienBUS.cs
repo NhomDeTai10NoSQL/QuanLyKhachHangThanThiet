@@ -19,5 +19,10 @@ namespace Khoa.BUS
         {
             return nhanVienDAO.getALLNhanVien();
         }
+        public bool AddNhanVien(string tenNhanVien, string gioiTinh, DateTime ngaySinh, string soDienThoai, string email, string chucVu, int mucLuong, string taiKhoan, string matKhau)
+        {
+            return nhanVienDAO.AddNhanVien(tenNhanVien, gioiTinh, ngaySinh, soDienThoai, email, chucVu, mucLuong, taiKhoan, matKhau);   
+        }
+
     }
 }

@@ -135,9 +135,9 @@ namespace Main
             }
             else if (e.Node.Text == "QUẢN LÝ KHÁCH HÀNG")
             {
-                //var page = new frmThongTinKhachHang();
-                //AddPage(page, 2000);
-                //SelectPage(2000);
+                var page = new frmKhachHangThanThiet();
+                AddPage(page, 2000);
+                SelectPage(2000);
             }
             else if (e.Node.Text == "QUẢN LÝ GIAO HÀNG")
             {
