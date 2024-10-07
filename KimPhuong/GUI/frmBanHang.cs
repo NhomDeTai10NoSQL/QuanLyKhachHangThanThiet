@@ -325,7 +325,7 @@ namespace KimPhuong.GUI
         private void btnTaoDon_Click(object sender, EventArgs e)
         {
             btnThemVaoGioHang.Enabled = btnXoaSanPhamKhoiGio.Enabled = btnThanhToan.Enabled =
-                btnTimKhachHang.Enabled = btnDungDiemTichLuy.Enabled =  true;
+                btnTimKhachHang.Enabled = btnDungDiemTichLuy.Enabled = true;
             lblSDT.Enabled = lblDiemTichLuy.Enabled = lblHoTenKH.Enabled = true;
             txtSoDienThoai.Enabled = true;
             cbPhuongThucThanhToan.Enabled = true;
@@ -374,7 +374,7 @@ namespace KimPhuong.GUI
 
             int soLuongThem = (int) intSoLuongThem.Value;
 
-            string giaBanText = txtGiaBan.Text.Replace("VND", "").Replace(",", "").Trim();
+            string giaBanText = txtGiaBan.Text.Replace(",", "").Trim();
             if (!int.TryParse(giaBanText, out int donGia))
             {
                 MessageBox.Show("Giá bán không hợp lệ. Vui lòng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -531,7 +531,7 @@ namespace KimPhuong.GUI
                 DataGridViewRow selectedRow = dtgDanhSachSanPham.SelectedRows[0];
                 string maSanPham = selectedRow.Cells["MaSanPham"].Value.ToString();
                 int giaBan = int.Parse(selectedRow.Cells["GiaBan"].Value.ToString());
-                txtGiaBan.Text = giaBan.ToString("N0") + " VND";
+                txtGiaBan.Text = giaBan.ToString("N0");
                 string tenSanPham = selectedRow.Cells["TenSanPham"].Value.ToString();
                 txtSanPham.Text = tenSanPham;
                 int soLuongCon = int.Parse(selectedRow.Cells["SoLuongCon"].Value.ToString());
@@ -586,7 +586,7 @@ namespace KimPhuong.GUI
                     }
                 }
             }
-            txtTongTien.Text = tongTien.ToString("N0") + " VND";
+            txtTongTien.Text = tongTien.ToString("N0");
 
         }
 
@@ -595,8 +595,8 @@ namespace KimPhuong.GUI
             int tongPhaiTra = 0;
             if (!string.IsNullOrEmpty(txtDungDiemTichLuy.Text))
             {
-                if (int.TryParse(txtTongTien.Text.Replace("VND", "").Replace(",", "").Trim(), out int tongTien) &&
-                    int.TryParse(txtDungDiemTichLuy.Text.Replace("VND", "").Replace(",", "").Trim(), out int diemTichLuy))
+                if (int.TryParse(txtTongTien.Text.Replace(",", "").Trim(), out int tongTien) &&
+                    int.TryParse(txtDungDiemTichLuy.Text.Replace(",", "").Trim(), out int diemTichLuy))
                 {
                     tongPhaiTra = tongTien - diemTichLuy;
                     if (tongPhaiTra < 0)
@@ -605,7 +605,7 @@ namespace KimPhuong.GUI
                     }
                 }
             }
-            txtTongPhaiTra.Text = tongPhaiTra.ToString("N0") + " VND";
+            txtTongPhaiTra.Text = tongPhaiTra.ToString("N0");
         }
 
         private void dtgGioHang_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
@@ -670,13 +670,15 @@ namespace KimPhuong.GUI
 
             string maHoaDon = txtMaHoaDon.Text.Trim();
             string soDienThoai = txtSoDienThoai.Text.Trim();
-            int tongTien = int.Parse(txtTongTien.Text.Replace("VND", "").Replace(",", "").Trim());
-            int diemDaDung = string.IsNullOrEmpty(txtDungDiemTichLuy.Text) ? 0 : int.Parse(txtDungDiemTichLuy.Text);
-            int tongPhaiTra = int.Parse(txtTongPhaiTra.Text.Replace("VND", "").Replace(",", "").Trim());
+            int tongTien = int.Parse(txtTongTien.Text.Replace(",", "").Trim());
+
+            int tienDiem = int.Parse(txtDungDiemTichLuy.Text.Replace(",", "").Trim());
+            int diemDaDung = (int) (tienDiem / 1000);
+        
+            int tongPhaiTra = int.Parse(txtTongPhaiTra.Text.Replace(",", "").Trim());
             string phuongThucThanhToan = cbPhuongThucThanhToan.Text;
             BsonDocument khachHangDoc = null;
 
-            // Thêm chi tiết hóa đơn
             foreach (DataGridViewRow row in dtgGioHang.Rows)
             {
                 if (!row.IsNewRow)
@@ -710,7 +712,7 @@ namespace KimPhuong.GUI
             };
 
                     int diemTichLuyHienTai = int.Parse(txtDiemTichLuy.Text);
-                    int diemTichLuyMoi = diemTichLuyHienTai - diemDaDung + (tongTien / 100000);
+                    int diemTichLuyMoi = diemTichLuyHienTai + (tongTien / 100000);
 
                     bool kqCapNhatKH = hoaDonBUS.updateDiemTichLuy(soDienThoai, diemTichLuyMoi);
                     if (!kqCapNhatKH)
@@ -720,8 +722,9 @@ namespace KimPhuong.GUI
                     }
                 }
             }
+            
 
-            bool kqCapNhat = hoaDonBUS.updateHoaDon(maHoaDon, tongTien, diemDaDung, phuongThucThanhToan, khachHangDoc, tongPhaiTra);
+            bool kqCapNhat = hoaDonBUS.updateHoaDon(maHoaDon, tongTien,diemDaDung, phuongThucThanhToan, khachHangDoc, tongPhaiTra);
             if (kqCapNhat)
             {
                 MessageBox.Show("Thanh toán thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -733,6 +736,39 @@ namespace KimPhuong.GUI
             {
                 MessageBox.Show("Có lỗi xảy ra trong quá trình thanh toán. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtDungDiemTichLuy_Leave(object sender, EventArgs e)
+        {
+            if (int.TryParse(txtDungDiemTichLuy.Text.Trim(), out int dungDiem) && int.TryParse(txtDiemTichLuy.Text.Trim(), out int diemtichLuy))
+            {
+                if (dungDiem > diemtichLuy)
+                {
+                    MessageBox.Show("Khách hàng không đủ điểm tích lũy để dùng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (dungDiem > 200)
+                {
+                    MessageBox.Show("Chỉ được dùng tối đa 200 điểm cho 1 đơn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (dungDiem % 10 != 0)
+                {
+                    MessageBox.Show("Dùng điểm chia hết cho 10!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    diemtichLuy -= dungDiem;
+                    txtDiemTichLuy.Text = diemtichLuy.ToString();
+                    int quyDoiTien = dungDiem * 1000;
+                    txtDungDiemTichLuy.Text = quyDoiTien.ToString("N0");
+                    txtDungDiemTichLuy.Enabled = false;
+                    btnDungDiemTichLuy.Selected = false;
+                }
+            }
+        }
+
+        private void txtDungDiemTichLuy_TextChanged(object sender, EventArgs e)
+        {
+            tinhTongPhaiTra();
         }
     }
 }
