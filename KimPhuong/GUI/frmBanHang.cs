@@ -17,6 +17,7 @@ namespace KimPhuong.GUI
 {
     public partial class frmBanHang : UIPage
     {
+        public string soDienThoaiKH;
         protected string taiKhoan;
         HoaDonBUS hoaDonBUS;
         SanPhamBUS sanPhamBUS;
@@ -43,6 +44,8 @@ namespace KimPhuong.GUI
             loadHoaDon();
             loadSanPham();
             intSoLuongThem.Value = 1;
+            dtgGioHang.RowsAdded += dtgGioHang_RowsAdded;
+            dtgGioHang.RowsRemoved += dtgGioHang_RowsRemoved;
         }
         private void loadSanPham()
         {
@@ -319,7 +322,7 @@ namespace KimPhuong.GUI
         private void btnTaoDon_Click(object sender, EventArgs e)
         {
             btnThemVaoGioHang.Enabled = btnXoaSanPhamKhoiGio.Enabled = btnThanhToan.Enabled =
-                btnTimKhachHang.Enabled = btnDungDiemTichLuy.Enabled = btnThanhToan.Enabled = true;
+                btnTimKhachHang.Enabled = btnDungDiemTichLuy.Enabled =  true;
             lblSDT.Enabled = lblDiemTichLuy.Enabled = lblHoTenKH.Enabled = true;
             txtSoDienThoai.Enabled = true;
             cbPhuongThucThanhToan.Enabled = true;
@@ -351,7 +354,6 @@ namespace KimPhuong.GUI
 
         private void btnThemVaoGioHang_Click(object sender, EventArgs e)
         {
-
             if (dtgGioHang.Columns.Count == 0)
             {
                 dtgGioHang.Columns.Add("MaSanPham", "Mã Sản Phẩm");
@@ -363,10 +365,8 @@ namespace KimPhuong.GUI
                 dtgGioHang.Columns["DonGia"].DefaultCellStyle.Format = "N0";
                 dtgGioHang.Columns["ThanhTien"].DefaultCellStyle.Format = "N0";
             }
-
             string tenSanPham = txtSanPham.Text;
             var sanPham = sanPhamBUS.getMaSPByTenSP(tenSanPham);
-
             string maSanPham = sanPham["maSanPham"].AsString;
 
             int soLuongThem = (int) intSoLuongThem.Value;
@@ -603,6 +603,40 @@ namespace KimPhuong.GUI
                 }
             }
             txtTongPhaiTra.Text = tongPhaiTra.ToString("N0") + " VND";
+        }
+
+        private void dtgGioHang_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            tinhtongTien();
+            tinhTongPhaiTra();
+        }
+
+        private void dtgGioHang_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            tinhtongTien();
+            tinhTongPhaiTra();
+        }
+
+        private void btnXoaSanPhamKhoiGio_Click(object sender, EventArgs e)
+        {
+            if (dtgGioHang.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dtgGioHang.SelectedRows[0];
+                string sanPham = selectedRow.Cells["TenSanPham"].Value.ToString();
+
+                DialogResult kq = MessageBox.Show($"Bạn có chắc chắn muốn xóa sản phẩm {sanPham} khỏi giỏ hàng?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (kq == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow row in dtgGioHang.SelectedRows)
+                    {
+                        dtgGioHang.Rows.Remove(row);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn sản phẩm cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
