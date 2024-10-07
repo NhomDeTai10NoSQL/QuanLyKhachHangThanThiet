@@ -78,22 +78,6 @@ namespace KimPhuong.DAO
             }
         }
 
-        public bool addHoaDon(string maHoaDon, List<BsonDocument> chiTietHoaDonList)
-        {
-            try
-            {
-                var filter = Builders<BsonDocument>.Filter.Eq("maHoaDon", maHoaDon);
-                var update = Builders<BsonDocument>.Update.PushEach("chiTietHoaDon", chiTietHoaDonList);
-
-                dBConnect.UpdateDocument("HoaDon",filter, update);
-                return true; 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi khi thêm chi tiết hóa đơn: " + ex.Message);
-                return false;
-            }
-        }
         public bool kiemTraTrungSanPham(string maHoaDon, string maSanPham)
         {
             var collection = dBConnect.Database.GetCollection<BsonDocument>("HoaDon");
@@ -156,7 +140,43 @@ namespace KimPhuong.DAO
             }
         }
 
+        public bool updateHoaDon(string maHoaDon, int tongTien, int diemDaDung, string phuongThucThanhToan, BsonDocument khachHang, int tongPhaiTra)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("maHoaDon", maHoaDon);
+                var update = Builders<BsonDocument>.Update
+       .Set("tongTien", tongTien)
+       .Set("diemDaDung", diemDaDung)
+       .Set("phuongThucThanhToan", phuongThucThanhToan)
+       .Set("khachHang", khachHang)
+       .Set("tongPhaiTra", tongPhaiTra);
 
+                var result = dBConnect.UpdateDocument("HoaDon", filter, update);
+                return result.ModifiedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi cập nhật hóa đơn: " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool updateDiemTichLuy(string soDienThoai, int diemTichLuyMoi)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("SoDienThoai", soDienThoai);
+                var update = Builders<BsonDocument>.Update.Set("DiemTichLuy", diemTichLuyMoi);
+                var result = dBConnect.UpdateDocument("KhachHang", filter, update);
+                return result.ModifiedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi cập nhật điểm tích lũy khách hàng: " + ex.Message);
+                return false;
+            }
+        }
 
     }
 }

@@ -12,6 +12,7 @@ using MongoDB.Bson;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using Khoa.GUI;
+using MongoDB.Driver;
 
 namespace KimPhuong.GUI
 {
@@ -143,12 +144,13 @@ namespace KimPhuong.GUI
                         DiemDaDung = document.Contains("diemDaDung") && !document["diemDaDung"].IsBsonNull
                             ? document["diemDaDung"].AsInt32
                             : (int?) null,
-                        DiemTichLuy = document.Contains("diemTichLuy") && !document["diemTichLuy"].IsBsonNull
-                            ? document["diemTichLuy"].AsInt32
-                            : (int?) null,
                         PhuongThucThanhToan = document.Contains("phuongThucThanhToan") && !document["phuongThucThanhToan"].IsBsonNull
                             ? document["phuongThucThanhToan"].AsString
-                            : string.Empty
+                            : string.Empty,
+                        TongPhaiTra = document.Contains("tongPhaiTra") && !document["tongPhaiTra"].IsBsonNull
+                            ? document["tongPhaiTra"].AsInt32
+                            : (int?) null,
+
                     };
                     hoaDonList.Add(hoaDon);
                 }
@@ -156,8 +158,8 @@ namespace KimPhuong.GUI
                 dtgHoaDon.Columns["MaHoaDon"].HeaderText = "Mã Hóa Đơn";
                 dtgHoaDon.Columns["NgayLapHoaDon"].HeaderText = "Ngày Lập Hóa Đơn";
                 dtgHoaDon.Columns["TongTien"].HeaderText = "Tổng Tiền";
+                dtgHoaDon.Columns["TongPhaiTra"].HeaderText = "Tổng Phải Trả";
                 dtgHoaDon.Columns["DiemDaDung"].HeaderText = "Điểm Đã Dùng";
-                dtgHoaDon.Columns["DiemTichLuy"].HeaderText = "Điểm Tích Lũy";
                 dtgHoaDon.Columns["PhuongThucThanhToan"].HeaderText = "Phương Thức Thanh Toán";
                 dtgHoaDon.Columns["TenNhanVien"].HeaderText = "Tên Nhân Viên";
                 dtgHoaDon.Columns["TenKhachHang"].HeaderText = "Tên Khách Hàng";
@@ -190,10 +192,11 @@ namespace KimPhuong.GUI
                 string ngayLapHoaDonString = selectedRow.Cells["NgayLapHoaDon"].Value?.ToString();
                 DateTime ngayLapHoaDon = string.IsNullOrEmpty(ngayLapHoaDonString) ? DateTime.MinValue : Convert.ToDateTime(ngayLapHoaDonString);
                 string tongTienString = selectedRow.Cells["TongTien"].Value?.ToString();
+                string tongPhaiTraString = selectedRow.Cells["TongPhaiTra"].Value?.ToString();
                 int tongTien = string.IsNullOrEmpty(tongTienString) ? 0 : Convert.ToInt32(tongTienString);
+                int tongPhaiTra = string.IsNullOrEmpty(tongPhaiTraString) ? 0 : Convert.ToInt32(tongPhaiTraString);
                 string diemDaDungString = selectedRow.Cells["DiemDaDung"].Value?.ToString();
                 int diemDaDung = string.IsNullOrEmpty(diemDaDungString) ? 0 : Convert.ToInt32(diemDaDungString);
-                string diemTichLuyString = selectedRow.Cells["DiemTichLuy"].Value?.ToString();
                 string phuongThucThanhToan = selectedRow.Cells["PhuongThucThanhToan"].Value?.ToString() ?? string.Empty;
                 string tenNhanVien = selectedRow.Cells["TenNhanVien"].Value?.ToString() ?? string.Empty;
                 string tenKhachHang = selectedRow.Cells["TenKhachHang"].Value?.ToString() ?? string.Empty;
@@ -592,14 +595,14 @@ namespace KimPhuong.GUI
             int tongPhaiTra = 0;
             if (!string.IsNullOrEmpty(txtDungDiemTichLuy.Text))
             {
-                if (int.TryParse(txtTongTien.Text.Replace("VND", "").Replace(",", "").Trim(), out int tongTien) && int.TryParse(txtDungDiemTichLuy.Text.Replace("VND", "").Replace(",", "").Trim(), out int diemTichLuy))
+                if (int.TryParse(txtTongTien.Text.Replace("VND", "").Replace(",", "").Trim(), out int tongTien) &&
+                    int.TryParse(txtDungDiemTichLuy.Text.Replace("VND", "").Replace(",", "").Trim(), out int diemTichLuy))
                 {
                     tongPhaiTra = tongTien - diemTichLuy;
                     if (tongPhaiTra < 0)
                     {
                         tongPhaiTra = 0;
                     }
-
                 }
             }
             txtTongPhaiTra.Text = tongPhaiTra.ToString("N0") + " VND";
@@ -636,6 +639,99 @@ namespace KimPhuong.GUI
             else
             {
                 MessageBox.Show("Vui lòng chọn sản phẩm cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            txtTimSanPham.Text = "";
+            loadSanPham();
+        }
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            if (dtgGioHang.Rows.Count == 0)
+            {
+                MessageBox.Show("Giỏ hàng trống. Vui lòng thêm sản phẩm trước khi thanh toán.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(txtHoTenKhachHang.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng nhập thông tin khách hàng trước khi thanh toán.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(cbPhuongThucThanhToan.Text))
+            {
+                MessageBox.Show("Vui lòng chọn phương thức thanh toán.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string maHoaDon = txtMaHoaDon.Text.Trim();
+            string soDienThoai = txtSoDienThoai.Text.Trim();
+            int tongTien = int.Parse(txtTongTien.Text.Replace("VND", "").Replace(",", "").Trim());
+            int diemDaDung = string.IsNullOrEmpty(txtDungDiemTichLuy.Text) ? 0 : int.Parse(txtDungDiemTichLuy.Text);
+            int tongPhaiTra = int.Parse(txtTongPhaiTra.Text.Replace("VND", "").Replace(",", "").Trim());
+            string phuongThucThanhToan = cbPhuongThucThanhToan.Text;
+            BsonDocument khachHangDoc = null;
+
+            // Thêm chi tiết hóa đơn
+            foreach (DataGridViewRow row in dtgGioHang.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string maSanPham = row.Cells["MaSanPham"].Value.ToString();
+                    string tenSanPham = row.Cells["TenSanPham"].Value.ToString();
+                    int soLuong = Convert.ToInt32(row.Cells["SoLuong"].Value);
+                    int donGia = Convert.ToInt32(row.Cells["DonGia"].Value);
+                    int thanhTien = Convert.ToInt32(row.Cells["ThanhTien"].Value);
+
+                    bool kqChiTiet = hoaDonBUS.addChiTietHoaDon(maHoaDon, maSanPham, tenSanPham, soLuong, donGia, thanhTien);
+                    if (!kqChiTiet)
+                    {
+                        MessageBox.Show($"Có lỗi khi thêm chi tiết hóa đơn cho sản phẩm {tenSanPham}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(soDienThoai))
+            {
+                var khachHang = khachHangBUS.getKHBySDT(soDienThoai);
+                if (khachHang != null)
+                {
+                    string maKhachHang = khachHang["MaKhachHang"].AsString;
+                    string tenKhachHang = khachHang["TenKhachHang"].AsString;
+                    khachHangDoc = new BsonDocument
+            {
+                { "maKhachHang", maKhachHang },
+                { "tenKhachHang", tenKhachHang }
+            };
+
+                    int diemTichLuyHienTai = int.Parse(txtDiemTichLuy.Text);
+                    int diemTichLuyMoi = diemTichLuyHienTai - diemDaDung + (tongTien / 100000);
+
+                    bool kqCapNhatKH = hoaDonBUS.updateDiemTichLuy(soDienThoai, diemTichLuyMoi);
+                    if (!kqCapNhatKH)
+                    {
+                        MessageBox.Show("Có lỗi xảy ra khi cập nhật điểm tích lũy khách hàng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+            }
+
+            bool kqCapNhat = hoaDonBUS.updateHoaDon(maHoaDon, tongTien, diemDaDung, phuongThucThanhToan, khachHangDoc, tongPhaiTra);
+            if (kqCapNhat)
+            {
+                MessageBox.Show("Thanh toán thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                loadHoaDon();
+                clearGioHang();
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra trong quá trình thanh toán. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
