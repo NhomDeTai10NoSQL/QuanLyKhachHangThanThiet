@@ -14,6 +14,7 @@ namespace Khoa.GUI
     public partial class frmKhachHangMoi : Form
     {
         KhachHangBUS khachHangBUS =  new KhachHangBUS();
+        public string SoDienThoai { get; set; }
         public frmKhachHangMoi()
         {
             InitializeComponent();
@@ -21,8 +22,9 @@ namespace Khoa.GUI
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if(khachHangBUS.AddKhachHang(txtTenKh.Text, DateTime.Parse(dateTimePicker1.Text), txtSDT.Text, 0, "Hoạt động", "Bình thường"))
+            if(khachHangBUS.AddKhachHang(txtTenKh.Text.Trim(), DateTime.Parse(dateTimePicker1.Text.Trim()), txtSDT.Text.Trim(), 0, "Hoạt động", "Bình thường"))
             {
+                SoDienThoai = txtSDT.Text.Trim();
                 MessageBox.Show("Thêm khách hàng mới thành công","Thông báo",MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
