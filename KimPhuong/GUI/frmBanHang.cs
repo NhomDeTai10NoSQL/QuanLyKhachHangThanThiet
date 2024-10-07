@@ -166,6 +166,7 @@ namespace KimPhuong.GUI
 
                 dtgHoaDon.Columns["NgayLapHoaDon"].DefaultCellStyle.Format = "dd/MM/yyyy";
                 dtgHoaDon.Columns["TongTien"].DefaultCellStyle.Format = "N0";
+                dtgHoaDon.Columns["TongPhaiTra"].DefaultCellStyle.Format = "N0";
             }
             catch (Exception ex)
             {
