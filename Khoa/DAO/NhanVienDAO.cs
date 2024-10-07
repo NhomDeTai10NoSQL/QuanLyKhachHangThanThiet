@@ -58,18 +58,18 @@ namespace Khoa.DAO
             try
             {
                 var newEmployee = new BsonDocument
-        {
-            { "maNhanVien", GetNextMaNhanVien() },  
-            { "tenNhanVien", tenNhanVien },
-            { "gioiTinh", gioiTinh },
-            { "ngaySinh", ngaySinh },
-            { "soDienThoai", soDienThoai },
-            { "email", email },
-            { "chucVu", chucVu },
-            { "mucLuong", mucLuong },
-            { "taiKhoan", taiKhoan },
-            { "matKhau", matKhau }  
-        };
+                {
+                    { "maNhanVien", GetNextMaNhanVien() },  
+                    { "tenNhanVien", tenNhanVien },
+                    { "gioiTinh", gioiTinh },
+                    { "ngaySinh", ngaySinh },
+                    { "soDienThoai", soDienThoai },
+                    { "email", email },
+                    { "chucVu", chucVu },
+                    { "mucLuong", mucLuong },
+                    { "taiKhoan", taiKhoan },
+                    { "matKhau", matKhau }  
+                };
 
                 connect.InsertDocument("NhanVien", newEmployee);
 
@@ -81,7 +81,65 @@ namespace Khoa.DAO
                 return false; 
             }
         }
+        public bool UpdateNhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime? ngaySinh, string soDienThoai, string email, string chucVu, int mucLuong)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("maNhanVien", maNhanVien);
+                var update = Builders<BsonDocument>.Update
+                    .Set("tenNhanVien", tenNhanVien)
+                    .Set("gioiTinh", gioiTinh)
+                    .Set("ngaySinh", ngaySinh)
+                    .Set("soDienThoai", soDienThoai)
+                    .Set("email", email)
+                    .Set("chucVu", chucVu)
+                    .Set("mucLuong", mucLuong);
+                    
+                connect.UpdateDocument(collectionName, filter, update);
 
+                return true;  
+            }
+            catch (Exception e)
+            {
+                return false;  
+            }
+        }
+
+        public bool DeleteNhanVien(string maNhanVien)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("maNhanVien", maNhanVien);
+
+                connect.DeleteDocument(collectionName, filter);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool KiemTraTrungSDT(string soDienThoai)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("soDienThoai", soDienThoai);
+                var count = connect.Database.GetCollection<BsonDocument>(collectionName).CountDocuments(filter);
+
+                return count > 0;
+            }
+            catch (Exception e)
+            {
+                return false; 
+            }
+        }
+        public BsonDocument GetNhanVienBySDT(string soDienThoai)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("soDienThoai", soDienThoai);
+            var collection = connect.Database.GetCollection<BsonDocument>(collectionName);
+            return collection.Find(filter).FirstOrDefault();
+        }
 
 
     }

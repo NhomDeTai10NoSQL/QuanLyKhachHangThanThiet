@@ -51,8 +51,13 @@ namespace Khoa
                     MessageBox.Show("Số điện thoại không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     return;
                 }
+                else if (khachHangBUS.KiemTraTrungSDT(txtSDT.Text))
+                {
+                    MessageBox.Show("Số điện thoại bị trùng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    return;
+                }
                 bool addKhachHang = khachHangBUS.AddKhachHang(txtTenKH.Text, DateTime.Parse(dtpNgaySinh.Text), txtSDT.Text, int.Parse(txtDiem.Text) ,cboTrangThai.Text, cboLoaiKH.Text);
-                if(addKhachHang )
+                if(addKhachHang)
                 {
                     MessageBox.Show("Thêm khách hàng thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     loadData();
@@ -81,8 +86,19 @@ namespace Khoa
                     MessageBox.Show("Số điện thoại không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     return;
                 }
-                string makh = dgvKhachHang.CurrentRow.Cells["Column1"].Value.ToString();
-                bool updateKhachHang = khachHangBUS.UpdateKhachHang(makh, txtTenKH.Text, DateTime.Parse(dtpNgaySinh.Text), txtSDT.Text, int.Parse(txtDiem.Text), cboTrangThai.Text, cboLoaiKH.Text);
+                string maKhachHangHienTai = dgvKhachHang.CurrentRow.Cells["Column1"].Value.ToString();
+                string soDienThoaiMoi = txtSDT.Text;
+                if (khachHangBUS.KiemTraTrungSDT(soDienThoaiMoi))
+                {
+                    var nhanVienTrungSDT = khachHangBUS.GetKhachHangBySDT(soDienThoaiMoi);
+
+                    if (nhanVienTrungSDT != null && nhanVienTrungSDT["MaKhachHang"].ToString() != maKhachHangHienTai)
+                    {
+                        MessageBox.Show("Số điện thoại bị trùng với nhân viên khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        return;
+                    }
+                }
+                bool updateKhachHang = khachHangBUS.UpdateKhachHang(maKhachHangHienTai, txtTenKH.Text, DateTime.Parse(dtpNgaySinh.Text), txtSDT.Text, int.Parse(txtDiem.Text), cboTrangThai.Text, cboLoaiKH.Text);
                 if (updateKhachHang)
                 {
                     MessageBox.Show("Sửa khách hàng thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);

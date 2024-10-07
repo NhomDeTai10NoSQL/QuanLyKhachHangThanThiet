@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -218,6 +219,25 @@ namespace Khoa.DAO
                 return false; 
             }
         }
+        public bool KiemTraTrungSDT(string soDienThoai)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("SoDienThoai", soDienThoai);
+                var count = connect.Database.GetCollection<BsonDocument>(strcollection).CountDocuments(filter);
 
+                return count > 0;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+        public BsonDocument GetKhachHangBySDT(string soDienThoai)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("SoDienThoai", soDienThoai);
+            var collection = connect.Database.GetCollection<BsonDocument>(strcollection);
+            return collection.Find(filter).FirstOrDefault();
+        }
     }
 }

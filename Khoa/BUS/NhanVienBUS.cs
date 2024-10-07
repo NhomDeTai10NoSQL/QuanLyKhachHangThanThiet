@@ -1,4 +1,5 @@
 ﻿using Khoa.DAO;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,6 +24,21 @@ namespace Khoa.BUS
         {
             return nhanVienDAO.AddNhanVien(tenNhanVien, gioiTinh, ngaySinh, soDienThoai, email, chucVu, mucLuong, taiKhoan, matKhau);   
         }
-
+        public bool DeleteNhanVien(string maNhanVien)
+        {
+            return nhanVienDAO.DeleteNhanVien(maNhanVien);
+        }
+        public bool UpdateNhanVien(string maNhanVien, string tenNhanVien, string gioiTinh, DateTime? ngaySinh, string soDienThoai, string email, string chucVu, int mucLuong)
+        {
+            return nhanVienDAO.UpdateNhanVien(maNhanVien, tenNhanVien, gioiTinh,ngaySinh,soDienThoai, email,chucVu, mucLuong);  
+        }
+        public bool KiemTraTrungSDT(string soDienThoai)
+        {
+            return nhanVienDAO.KiemTraTrungSDT(soDienThoai);
+        }
+        public BsonDocument GetNhanVienBySDT(string soDienThoai)
+        {
+            return nhanVienDAO.GetNhanVienBySDT(soDienThoai);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Khoa.DAO;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -46,6 +47,14 @@ namespace Khoa.BUS
         public bool DeleteKhachHang(string maKhachHang)
         {
             return khachHangDAO.DeleteKhachHang(maKhachHang);
+        }
+        public bool KiemTraTrungSDT(string soDienThoai)
+        {
+            return khachHangDAO.KiemTraTrungSDT(soDienThoai);
+        }
+        public BsonDocument GetKhachHangBySDT(string soDienThoai)
+        {
+            return khachHangDAO.GetKhachHangBySDT(soDienThoai);
         }
     }
 }

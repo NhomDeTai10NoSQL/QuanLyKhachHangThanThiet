@@ -45,7 +45,12 @@ namespace Khoa.GUI
                     MessageBox.Show("Số điện thoại không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     return;
                 }
-                string gioiTinh = dgvNhanVien.CurrentRow.Cells["gioiTinh"].Value.ToString();
+                else if (nhanVienBUS.KiemTraTrungSDT(txtSDT.Text))
+                {
+                    MessageBox.Show("Số điện thoại bị trùng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    return;
+                }
+                string gioiTinh = rdoNu.Checked ? "Nữ" : "Nam";
 
                 if (nhanVienBUS.AddNhanVien(txtTenNV.Text, gioiTinh, DateTime.Parse(dtpNgaySinh.Text), txtSDT.Text, txtEmail.Text, txtChucVu.Text, int.Parse(txtMucLuong.Text), txtTaiKhoan.Text, txtMatKhau.Text))
                 {
@@ -81,12 +86,95 @@ namespace Khoa.GUI
                 {
                     rdoNu.Checked = true;
                 }
+                txtTaiKhoan.Enabled = false;
+                txtMatKhau.Enabled = false;
             }
         }
 
         private void uiRadioButtonGroup1_ValueChanged(object sender, int index, string text)
         {
 
+        }
+
+        private void btnXoaNV_Click(object sender, EventArgs e)
+        {
+            DialogResult del;
+            del = MessageBox.Show("Bạn có muốn xóa nhân viên này?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(del == DialogResult.Yes)
+            {
+                string maNhanVien = dgvNhanVien.CurrentRow.Cells["maNhanVien"].Value.ToString();
+
+                if (nhanVienBUS.DeleteNhanVien(maNhanVien))
+                {
+                    MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    loadData();
+                }
+                else
+                {
+                    MessageBox.Show("Xóa không thành công", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                }
+            }
+        }
+
+        private void btnSuaNV_Click(object sender, EventArgs e)
+        {
+            DialogResult edit;
+            edit = MessageBox.Show("Bạn có muốn cập nhật nhân viên này?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (edit == DialogResult.Yes)
+            {
+                if (txtTenNV.Text.Length == 0 || txtSDT.Text.Length == 0 || txtChucVu.Text.Length == 0 || txtEmail.Text.Length == 0 || txtTaiKhoan.Text.Length == 0 || txtMatKhau.Text.Length == 0)
+                {
+                    MessageBox.Show("Thông tin không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    return;
+                }
+                else if (txtSDT.Text.Length != 10)
+                {
+                    MessageBox.Show("Số điện thoại không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    return;
+                }
+
+                string maNhanVienHienTai = dgvNhanVien.CurrentRow.Cells["maNhanVien"].Value.ToString();
+                string soDienThoaiMoi = txtSDT.Text;
+
+                if (nhanVienBUS.KiemTraTrungSDT(soDienThoaiMoi))
+                {
+                    var nhanVienTrungSDT = nhanVienBUS.GetNhanVienBySDT(soDienThoaiMoi);
+
+                    if (nhanVienTrungSDT != null && nhanVienTrungSDT["maNhanVien"].ToString() != maNhanVienHienTai)
+                    {
+                        MessageBox.Show("Số điện thoại bị trùng với nhân viên khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        return;
+                    }
+                }
+
+                string gioiTinh = rdoNu.Checked ? "Nữ" : "Nam";
+
+                if (nhanVienBUS.UpdateNhanVien(maNhanVienHienTai, txtTenNV.Text, gioiTinh, DateTime.Parse(dtpNgaySinh.Text), soDienThoaiMoi, txtEmail.Text, txtChucVu.Text, int.Parse(txtMucLuong.Text)))
+                {
+                    MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    loadData();  
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thất bại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                }
+            }
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            txtTenNV.Text = string.Empty;
+            rdoNam.Checked = true;
+            txtEmail.Text = string.Empty;
+            txtChucVu.Text = string.Empty;
+            txtTaiKhoan.Text = string.Empty;
+            txtMatKhau.Text = string.Empty;
+            txtSDT.Text = string.Empty;
+            txtMucLuong.Text = string.Empty;
+            txtTaiKhoan.Enabled = true;
+            txtMatKhau.Enabled = true;
         }
     }
 }
