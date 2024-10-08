@@ -9,13 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Sunny.UI;
 namespace Danh.GUI
 {
-    public partial class frmDatHangNhaCC : Form
+    public partial class frmDatHangNhaCC : UIPage
     {
         Danh.BUS.NhaCungCapBUS nhaCungCapBUS = new Danh.BUS.NhaCungCapBUS();
         NhapHangBUS nhapHangBUS = new NhapHangBUS();
         SanPhamBUS sanPhamBUS = new SanPhamBUS();
+        HoaDonBUS hoaDonBUS = new HoaDonBUS();
         public frmDatHangNhaCC()
         {
             InitializeComponent();
@@ -26,10 +28,10 @@ namespace Danh.GUI
         private void loadMaDatHang()
         {
             cbMaDatHang.DataSource = null;
-            DataTable dt = nhapHangBUS.getAll();
+            DataTable dt = hoaDonBUS.getAll();
             cbMaDatHang.DataSource = dt;
-            cbMaDatHang.ValueMember = "MaDonDatHang";
-            cbMaDatHang.DisplayMember = "MaDonDatHang";
+            cbMaDatHang.ValueMember = "maHoaDon";
+            cbMaDatHang.DisplayMember = "maHoaDon";
         }
         private void loadNhaCungCap()
         {
@@ -146,10 +148,11 @@ namespace Danh.GUI
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            string maDatHang = nhapHangBUS.GetNextMaDonHang();
             string maNhaCungCap = cbNhaCungCap.SelectedValue.ToString();
             DateTime ngayDatHang = DateTime.Now;
 
-            if (nhapHangBUS.AddDonNhapHang(maNhaCungCap, ngayDatHang))
+            if (nhapHangBUS.AddDonNhapHang(maDatHang, maNhaCungCap, ngayDatHang))
             {
                 MessageBox.Show("Thêm thành công đơn đặt hàng! Vui lòng thêm chi tiết đơn đặt hàng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -168,7 +171,7 @@ namespace Danh.GUI
             if (MessageBox.Show($"Bạn có chắc chắn muốn thêm sản phẩm vào đơn {maDonDat} này để đặt hàng?", "Xác nhận thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 string maSanPham = cbSanPham.SelectedValue.ToString();
-                int soLuong = (int)intUDSoLuong.Value;
+                int soLuong = (int) intUDSoLuong.Value;
                 if (int.TryParse(txtGiaBan.Text.Replace(",", "").Replace(" VND", "").Trim(), out int giaBan))
                 {
                     string errorMessage;

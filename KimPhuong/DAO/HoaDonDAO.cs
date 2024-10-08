@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,11 @@ namespace KimPhuong.DAO
         public HoaDonDAO()
         {
             dBConnect = new MongoDBConnect();
+        }
+        public DataTable getAll()
+        {
+            DataTable dt = dBConnect.GetAllDocumentsWithDataTable("HoaDon");
+            return dt;
         }
         public List<BsonDocument> getAllHoaDon()
         {

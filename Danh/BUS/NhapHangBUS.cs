@@ -18,9 +18,9 @@ namespace Danh.BUS
         {
             return nhapHangDAO.getAll();
         }
-        public bool AddDonNhapHang(string maNhaCungCap, DateTime ngayDatHang)
+        public bool AddDonNhapHang(string maDatHang, string maNhaCungCap, DateTime ngayDatHang)
         {
-            return nhapHangDAO.AddDonNhapHang(maNhaCungCap, ngayDatHang);
+            return nhapHangDAO.AddDonNhapHang(maDatHang, maNhaCungCap, ngayDatHang);
         }
         public bool UpdateDonNhapHang(string maDonDatHang, string trangThai)
         {
@@ -37,6 +37,10 @@ namespace Danh.BUS
         public DataTable getAllChiTiet(string maDonDatHang)
         {
             return nhapHangDAO.getAllChiTiet(maDonDatHang);
+        }
+        public string GetNextMaDonHang()
+        {
+            return nhapHangDAO.GetNextMaDonHang();
         }
     }
 }

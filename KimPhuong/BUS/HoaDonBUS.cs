@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,10 @@ namespace KimPhuong.BUS
         public HoaDonBUS()
         {
             hoaDonDAO = new HoaDonDAO();
+        }
+        public DataTable getAll()
+        {
+            return hoaDonDAO.getAll();
         }
         public List<BsonDocument> getAllHoaDon()
         {

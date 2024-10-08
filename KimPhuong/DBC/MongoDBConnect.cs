@@ -127,5 +127,7 @@ namespace KimPhuong.DBC
             var sort = Builders<BsonDocument>.Sort.Descending(fieldName);
             return collection.Find(new BsonDocument()).Sort(sort).Limit(1).FirstOrDefault();
         }
+
+
     }
 }

@@ -22,13 +22,14 @@ namespace Danh.DAO
             DataTable dt = connect.GetAllDocumentsWithDataTable(collectionName);
             return dt;
         }
-        public bool AddDonNhapHang(string maNhaCungCap, DateTime ngayDatHang)
+        public bool AddDonNhapHang(string maDonDatHang, string maNhaCungCap, DateTime ngayDatHang)
         {
             try
             {
                 var newDonDatHang = new BsonDocument
                 {
-                    { "maNhaCungCap", maNhaCungCap },
+                    {"maDonDatHang", maDonDatHang},
+                    { "maNhaCungCap", maNhaCungCap},
                     { "ngayDatHang", ngayDatHang }
                 };
 
@@ -201,6 +202,19 @@ namespace Danh.DAO
             return dt;
         }
 
+        public string GetNextMaDonHang()
+        {
+            var maxDoc = connect.GetMaxDocument("DonDatHangNhaCungCap", "maDonDatHang");
+            if (maxDoc == null)
+            {
+                return "DDH001";
+            }
 
+            string currentMax = maxDoc["maDonDatHang"].AsString;
+
+            string numberPart = currentMax.Substring(2);
+            int nextNumber = int.Parse(numberPart) + 1;
+            return $"DDH{nextNumber:D3}";
+        }
     }
 }
