@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,39 @@ namespace KimPhuong.DBC
         {
             var collection = _database.GetCollection<BsonDocument>(collectionName);
             return collection.Find(new BsonDocument()).ToList();
+        }
+
+        public DataTable GetAllDocumentsWithDataTable(string collectionName)
+        {
+            var collection = _database.GetCollection<BsonDocument>(collectionName);
+            var documents = collection.Find(new BsonDocument()).ToList();
+
+            DataTable dataTable = new DataTable();
+
+            if (documents.Count > 0)
+            {
+                foreach (var key in documents[0].Names)
+                {
+                    if (key != "_id")
+                    {
+                        dataTable.Columns.Add(new DataColumn(key));
+                    }
+                }
+                foreach (var doc in documents)
+                {
+                    DataRow row = dataTable.NewRow();
+                    foreach (var key in doc.Names)
+                    {
+                        if (key != "_id")
+                        {
+                            row[key] = doc[key].ToString();
+                        }
+                    }
+                    dataTable.Rows.Add(row);
+                }
+            }
+
+            return dataTable;
         }
 
         // Thêm

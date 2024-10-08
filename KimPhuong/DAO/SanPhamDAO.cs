@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace KimPhuong.DAO
     public class SanPhamDAO
     {
         MongoDBConnect dBConnect;
+        
         public SanPhamDAO()
         {
             dBConnect = new MongoDBConnect();
@@ -21,7 +23,10 @@ namespace KimPhuong.DAO
         {
             return dBConnect.GetAllDocuments("SanPham");
         }
-        
+        public DataTable getAll()
+        {
+            return dBConnect.GetAllDocumentsWithDataTable("SanPham");
+        }
         public List<BsonDocument> searchSanPham(string key)
         {
 

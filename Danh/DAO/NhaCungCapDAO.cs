@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,10 @@ namespace Danh.DAO
         public List<BsonDocument> GetAllNhaCungCap()
         {
             return dBConnect.GetAllDocuments("NhaCungCap");
+        }
+        public DataTable GetALl()
+        {
+            return dBConnect.GetAllDocumentsWithDataTable("NhaCungCap");
         }
         public bool ThemNhaCungCap(int maNhaCungCap, string tenNhaCungCap, string diaChi, string soDienThoai, string email, string nguoiDaiDien)
         {

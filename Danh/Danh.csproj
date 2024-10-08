@@ -163,9 +163,11 @@
     <Compile Include="BUS\DangNhapBUS.cs" />
     <Compile Include="BUS\DanhMucBUS.cs" />
     <Compile Include="BUS\NhaCungCapBUS.cs" />
+    <Compile Include="BUS\NhapHangBUS.cs" />
     <Compile Include="DAO\DangNhapDAO.cs" />
     <Compile Include="DAO\DanhMucDAO.cs" />
     <Compile Include="DAO\NhaCungCapDAO.cs" />
+    <Compile Include="DAO\NhapHangDAO.cs" />
     <Compile Include="DBC\MongoDBConnect.cs" />
     <Compile Include="GUI\frmDanhMuc.cs">
       <SubType>Form</SubType>
@@ -173,10 +175,19 @@
     <Compile Include="GUI\frmDanhMuc.Designer.cs">
       <DependentUpon>frmDanhMuc.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmDatHangNhaCC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmDatHangNhaCC.Designer.cs">
+      <DependentUpon>frmDatHangNhaCC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\frmDanhMuc.resx">
       <DependentUpon>frmDanhMuc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmDatHangNhaCC.resx">
+      <DependentUpon>frmDatHangNhaCC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -211,7 +222,12 @@
     <Content Include="mongocrypt.dll" />
     <None Include="Resources\background_DangNhap.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\KimPhuong\KimPhuong.csproj">
+      <Project>{a87afb76-da81-4b57-ae4f-39188748b2df}</Project>
+      <Name>KimPhuong</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MongoDB.Libmongocrypt.1.12.0\build\MongoDB.Libmongocrypt.targets" Condition="Exists('..\packages\MongoDB.Libmongocrypt.1.12.0\build\MongoDB.Libmongocrypt.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

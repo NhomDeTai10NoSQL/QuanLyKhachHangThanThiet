@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Danh.BUS
     internal class NhaCungCapBUS
     {
         NhaCungCapDAO nhaCungCapDAO;
+        
         public NhaCungCapBUS()
         {
             nhaCungCapDAO = new NhaCungCapDAO();
@@ -18,6 +20,10 @@ namespace Danh.BUS
         public List<BsonDocument> GetAllNhaCungCap()
         {
             return nhaCungCapDAO.GetAllNhaCungCap();
+        }
+        public DataTable GetAll()
+        {
+            return nhaCungCapDAO.GetALl();
         }
         public bool ThemNhaCungCap(int maNhaCungCap, string tenNhaCungCap, string diaChi, string soDienThoai, string email, string nguoiDaiDien)
         {

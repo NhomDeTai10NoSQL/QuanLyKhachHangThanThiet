@@ -17,7 +17,7 @@ namespace Danh
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmDanhMuc());
+            Application.Run(new frmDatHangNhaCC());
         }
     }
 }
