@@ -15,7 +15,8 @@ namespace Khoa.DAO
     {
         MongoDBConnect connect;
         string strcollection = "KhachHang";
-        public KhachHangDAO() {
+        public KhachHangDAO()
+        {
             connect = new MongoDBConnect();
         }
         public DataTable getAllKhachHang()
@@ -38,7 +39,7 @@ namespace Khoa.DAO
                 if (lastCustomer != null)
                 {
                     string lastMaKhachHang = lastCustomer["MaKhachHang"].AsString;
-                    int lastNumber = int.Parse(lastMaKhachHang.Substring(2));  
+                    int lastNumber = int.Parse(lastMaKhachHang.Substring(2));
                     int nextNumber = lastNumber + 1;
 
                     return "KH" + nextNumber.ToString().PadLeft(4, '0');
@@ -66,17 +67,18 @@ namespace Khoa.DAO
                     { "NgaySinh", ngaySinh },
                     { "SoDienThoai", soDienThoai },
                     { "DiemTichLuy", diemTichLuy },
+                    { "DiemTichLuyCon", 0 },
                     { "TrangThai", trangThai },
                     { "LoaiKhachHang", loaiKhachHang }
                 };
 
                 connect.InsertDocument(strcollection, newCustomer);
 
-                return true; 
+                return true;
             }
             catch (Exception ex)
             {
-                return false; 
+                return false;
             }
         }
         public bool UpdateKhachHang(string maKhachHang, string tenkh, DateTime? ngaysinh, string sdt, int diem, string trangthai, string loaiKH)
@@ -93,7 +95,7 @@ namespace Khoa.DAO
                     .Set("LoaiKhachHang", loaiKH);
 
                 connect.UpdateDocument(strcollection, filter, update);
-                return true; 
+                return true;
             }
             catch (Exception e)
             {
@@ -167,7 +169,7 @@ namespace Khoa.DAO
                 );
             }
 
-            return dataTable; 
+            return dataTable;
         }
         public DataTable locKhachHang(string value)
         {
@@ -212,11 +214,11 @@ namespace Khoa.DAO
 
                 connect.DeleteDocument("KhachHang", filter);
 
-                return true;  
+                return true;
             }
             catch (Exception ex)
             {
-                return false; 
+                return false;
             }
         }
         public bool KiemTraTrungSDT(string soDienThoai)

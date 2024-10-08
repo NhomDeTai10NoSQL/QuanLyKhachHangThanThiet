@@ -454,7 +454,7 @@ namespace KimPhuong.GUI
                 else
                 {
                     string tenKhachHang = KhachHang["TenKhachHang"].AsString;
-                    int diemTichLuy = KhachHang["DiemTichLuy"].AsInt32;
+                    int diemTichLuy = KhachHang["DiemTichLuyCon"].AsInt32;
 
                     txtHoTenKhachHang.Text = tenKhachHang;
                     txtDiemTichLuy.Text = diemTichLuy.ToString();
@@ -706,16 +706,28 @@ namespace KimPhuong.GUI
                 {
                     string maKhachHang = khachHang["MaKhachHang"].AsString;
                     string tenKhachHang = khachHang["TenKhachHang"].AsString;
+                    int diemTichLuyDB = khachHang["DiemTichLuy"].AsInt32;
                     khachHangDoc = new BsonDocument
             {
                 { "maKhachHang", maKhachHang },
                 { "tenKhachHang", tenKhachHang }
             };
 
-                    int diemTichLuyHienTai = int.Parse(txtDiemTichLuy.Text);
-                    int diemTichLuyMoi = diemTichLuyHienTai + (tongTien / 100000);
 
-                    bool kqCapNhatKH = hoaDonBUS.updateDiemTichLuy(soDienThoai, diemTichLuyMoi);
+                    int diemTichLuyHienTai = int.Parse(txtDiemTichLuy.Text);
+                    int diemTichLuyCon = diemTichLuyHienTai + (tongTien / 100000);
+                    int diemTichLuyMoi = diemTichLuyDB + (tongTien / 100000);
+                    bool kqCapNhatKH = hoaDonBUS.updateDiemTichLuy(soDienThoai, diemTichLuyMoi, diemTichLuyCon);
+                    if (diemTichLuyMoi >= 200)
+                    {
+                        bool kqCapNhatLoaiKH = hoaDonBUS.updateLoaiKH(soDienThoai);
+                        if (!kqCapNhatLoaiKH)
+                        {
+                            MessageBox.Show("Có lỗi xảy ra khi cập nhật loại khách hàng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                    }
                     if (!kqCapNhatKH)
                     {
                         MessageBox.Show("Có lỗi xảy ra khi cập nhật điểm tích lũy khách hàng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -874,7 +886,7 @@ namespace KimPhuong.GUI
                         if (kqXoa)
                         {
                             MessageBox.Show("Đã xóa đơn hàng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            loadHoaDon(); 
+                            loadHoaDon();
                             clearForm();
                         }
                         else

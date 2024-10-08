@@ -33,7 +33,12 @@ namespace Khoa
         public void loadData()
         {
             dtKhachHang = khachHangBUS.getAllKhachHang();
+            
             dgvKhachHang.DataSource = dtKhachHang;
+            if (dgvKhachHang.Columns["DiemTichLuyCon"] != null)
+            {
+                dgvKhachHang.Columns["DiemTichLuyCon"].Visible = false;
+            }
         }
         
         private void btnThem_Click(object sender, EventArgs e)

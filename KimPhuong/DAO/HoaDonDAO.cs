@@ -162,18 +162,38 @@ namespace KimPhuong.DAO
             }
         }
 
-        public bool updateDiemTichLuy(string soDienThoai, int diemTichLuyMoi)
+        public bool updateDiemTichLuy(string soDienThoai, int diemTichLuyMoi, int diemCon)
         {
             try
             {
                 var filter = Builders<BsonDocument>.Filter.Eq("SoDienThoai", soDienThoai);
-                var update = Builders<BsonDocument>.Update.Set("DiemTichLuy", diemTichLuyMoi);
+                var update = Builders<BsonDocument>.Update
+      .Set("DiemTichLuy", diemTichLuyMoi)
+      .Set("DiemTichLuyCon", diemCon);
                 var result = dBConnect.UpdateDocument("KhachHang", filter, update);
+               
                 return result.ModifiedCount > 0;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi cập nhật điểm tích lũy khách hàng: " + ex.Message);
+                return false;
+            }
+        }
+        public bool updateLoaiKH(string soDienThoai)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("SoDienThoai", soDienThoai);
+                var update = Builders<BsonDocument>.Update
+      .Set("LoaiKhachHang", "Thân thiết");
+                var result = dBConnect.UpdateDocument("KhachHang", filter, update);
+
+                return result.ModifiedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi cập nhật loại khách hàng: " + ex.Message);
                 return false;
             }
         }

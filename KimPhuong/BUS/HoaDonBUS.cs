@@ -48,9 +48,9 @@ namespace KimPhuong.BUS
             return hoaDonDAO.updateChiTietHoaDon(maHoaDon, maSanPham, soLuong, thanhTien);
         }
 
-        public bool updateDiemTichLuy(string soDienThoai, int diemTichLuyMoi)
+        public bool updateDiemTichLuy(string soDienThoai, int diemTichLuyMoi, int diemCon)
         {
-            return hoaDonDAO.updateDiemTichLuy(soDienThoai, diemTichLuyMoi);
+            return hoaDonDAO.updateDiemTichLuy(soDienThoai, diemTichLuyMoi, diemCon);
         }
         public bool updateHoaDon(string maHoaDon, int tongTien, int diemDaDung, string phuongThucThanhToan, BsonDocument khachHang, int tongPhaiTra)
         {
@@ -63,6 +63,10 @@ namespace KimPhuong.BUS
         public List<BsonDocument> searchHoaDon(string key)
         {
             return hoaDonDAO.searchHoaDon(key);
+        }
+        public bool updateLoaiKH(string soDienThoai)
+        {
+            return hoaDonDAO.updateLoaiKH(soDienThoai);
         }
     }
 }
