@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sunny.UI;
+using MongoDB.Bson;
 namespace Danh.GUI
 {
     public partial class frmDatHangNhaCC : UIPage
@@ -27,12 +28,20 @@ namespace Danh.GUI
         }
         private void loadMaDatHang()
         {
-            cbMaDatHang.DataSource = null;
-            DataTable dt = hoaDonBUS.getAll();
-            cbMaDatHang.DataSource = dt;
-            cbMaDatHang.ValueMember = "maHoaDon";
-            cbMaDatHang.DisplayMember = "maHoaDon";
+            List<BsonDocument> hoaDonDocuments = hoaDonBUS.getAllHoaDon();
+            List<string> maHoaDonList = new List<string>();
+            foreach (var doc in hoaDonDocuments)
+            {
+                if (doc.Contains("maHoaDon"))
+                {
+                    maHoaDonList.Add(doc["maHoaDon"].AsString);
+                }
+            }
+            cbMaDatHang.DataSource = maHoaDonList;
         }
+
+
+
         private void loadNhaCungCap()
         {
             cbNhaCungCap.DataSource = null;
