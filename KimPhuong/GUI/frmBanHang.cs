@@ -130,7 +130,7 @@ namespace KimPhuong.GUI
                     {
                         MaHoaDon = document.Contains("maHoaDon") ? document["maHoaDon"].AsString : string.Empty,
                         NgayLapHoaDon = document.Contains("ngayLapHoaDon") && !document["ngayLapHoaDon"].IsBsonNull
-                            ? document["ngayLapHoaDon"].ToLocalTime()
+                            ? document["ngayLapHoaDon"].ToLocalTime().Date
                             : (DateTime?) null,
                         TongTien = document.Contains("tongTien") && !document["tongTien"].IsBsonNull
                             ? document["tongTien"].AsInt32
@@ -149,7 +149,7 @@ namespace KimPhuong.GUI
                             : string.Empty,
                         TongPhaiTra = document.Contains("tongPhaiTra") && !document["tongPhaiTra"].IsBsonNull
                             ? document["tongPhaiTra"].AsInt32
-                            : (int?) null,
+                            : (int?) 0,
 
                     };
                     hoaDonList.Add(hoaDon);
@@ -344,7 +344,7 @@ namespace KimPhuong.GUI
             string maNhanVien = nhanVienList["maNhanVien"].AsString;
             string tenNhanVien = nhanVienList["tenNhanVien"].AsString;
             DateTime ngayMua = DateTime.Now;
-            bool kq = hoaDonBUS.addHoaDon(maHoaDon, ngayMua, maNhanVien, tenNhanVien);
+            bool kq = hoaDonBUS.addHoaDon(maHoaDon, ngayMua, maNhanVien, tenNhanVien, 0, 0);
             if (kq)
             {
                 MessageBox.Show("Đã lập một hóa đơn mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -509,7 +509,7 @@ namespace KimPhuong.GUI
                     bool kqChiTiet;
                     if (sanPhamDaTonTai)
                     {
-                        kqChiTiet = hoaDonBUS.updateChiTietHoaDon(maHoaDon, maSanPham, soLuong, donGia, thanhTien);
+                        kqChiTiet = hoaDonBUS.updateChiTietHoaDon(maHoaDon, maSanPham, soLuong, thanhTien);
                     }
                     else
                     {
@@ -675,7 +675,7 @@ namespace KimPhuong.GUI
 
             int tienDiem = int.Parse(txtDungDiemTichLuy.Text.Replace(",", "").Trim());
             int diemDaDung = (int) (tienDiem / 1000);
-        
+
             int tongPhaiTra = int.Parse(txtTongPhaiTra.Text.Replace(",", "").Trim());
             string phuongThucThanhToan = cbPhuongThucThanhToan.Text;
             BsonDocument khachHangDoc = null;
@@ -723,9 +723,9 @@ namespace KimPhuong.GUI
                     }
                 }
             }
-            
 
-            bool kqCapNhat = hoaDonBUS.updateHoaDon(maHoaDon, tongTien,diemDaDung, phuongThucThanhToan, khachHangDoc, tongPhaiTra);
+
+            bool kqCapNhat = hoaDonBUS.updateHoaDon(maHoaDon, tongTien, diemDaDung, phuongThucThanhToan, khachHangDoc, tongPhaiTra);
             if (kqCapNhat)
             {
                 MessageBox.Show("Thanh toán thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -770,6 +770,212 @@ namespace KimPhuong.GUI
         private void txtDungDiemTichLuy_TextChanged(object sender, EventArgs e)
         {
             tinhTongPhaiTra();
+        }
+
+        private void btnSuaDonHang_Click(object sender, EventArgs e)
+        {
+            if (dtgHoaDon.SelectedRows.Count > 0)
+            {
+                string maHoaDon = txtMaHD.Text.Trim();
+                var hoaDon = hoaDonBUS.getHoaDonByMa(maHoaDon);
+
+                if (hoaDon != null && hoaDon["tongTien"].AsInt32 == 0)
+                {
+                    tabBanHang.SelectedTab = tabBan;
+                    txtMaHoaDon.Text = maHoaDon;
+                    loadForm();
+                    ChuyenChiTietHoaDonSangGioHang(maHoaDon);
+
+                    btnThemVaoGioHang.Enabled = btnXoaSanPhamKhoiGio.Enabled = btnThanhToan.Enabled =
+                        btnTimKhachHang.Enabled = btnDungDiemTichLuy.Enabled = true;
+                    lblSDT.Enabled = lblDiemTichLuy.Enabled = lblHoTenKH.Enabled = true;
+                    txtSoDienThoai.Enabled = true;
+                    cbPhuongThucThanhToan.Enabled = true;
+                    btnLuuTam.Enabled = true;
+                    btnTaoDon.Enabled = false;
+                    intSoLuongThem.Enabled = true;
+
+                    MessageBox.Show("Bạn đang chỉnh sửa đơn hàng " + maHoaDon, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Không thể sửa hóa đơn đã thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một hóa đơn để sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void ChuyenChiTietHoaDonSangGioHang(string maHoaDon)
+        {
+            if (dtgGioHang.Columns.Count == 0)
+            {
+                dtgGioHang.Columns.Add("MaSanPham", "Mã Sản Phẩm");
+                dtgGioHang.Columns.Add("TenSanPham", "Tên Sản Phẩm");
+                dtgGioHang.Columns.Add("SoLuong", "Số Lượng");
+                dtgGioHang.Columns.Add("DonGia", "Đơn Giá");
+                dtgGioHang.Columns.Add("ThanhTien", "Thành Tiền");
+
+                dtgGioHang.Columns["DonGia"].DefaultCellStyle.Format = "N0";
+                dtgGioHang.Columns["ThanhTien"].DefaultCellStyle.Format = "N0";
+            }
+
+            var hoaDon = hoaDonBUS.getHoaDonByMa(maHoaDon);
+            if (hoaDon != null && hoaDon.Contains("chiTietHoaDon"))
+            {
+                dtgGioHang.Rows.Clear();
+
+                foreach (var chiTiet in hoaDon["chiTietHoaDon"].AsBsonArray)
+                {
+                    string maSanPham = chiTiet["maSanPham"].AsString;
+                    string tenSanPham = chiTiet["tenSanPham"].AsString;
+                    int soLuong = chiTiet["soLuong"].AsInt32;
+                    int donGia = chiTiet["donGia"].AsInt32;
+                    int thanhTien = chiTiet["thanhTien"].AsInt32;
+
+                    dtgGioHang.Rows.Add(maSanPham, tenSanPham, soLuong, donGia, thanhTien);
+                }
+
+                tinhtongTien();
+                tinhTongPhaiTra();
+            }
+        }
+
+        private void loadForm()
+        {
+            txtSoDienThoai.Text = "";
+            txtHoTenKhachHang.Text = "";
+            txtDiemTichLuy.Text = "0";
+            txtDungDiemTichLuy.Text = "0";
+            cbPhuongThucThanhToan.SelectedIndex = -1;
+        }
+
+        private void btnXoaDonHang_Click(object sender, EventArgs e)
+        {
+            if (dtgHoaDon.SelectedRows.Count > 0)
+            {
+                string maHoaDon = txtMaHD.Text.Trim();
+                var hoaDon = hoaDonBUS.getHoaDonByMa(maHoaDon);
+
+                if (hoaDon != null)
+                {
+                    if (hoaDon.Contains("tongTien") && hoaDon["tongTien"].AsInt32 != 0)
+                    {
+                        MessageBox.Show("Không thể xóa đơn hàng đã thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    DialogResult result = MessageBox.Show($"Bạn có chắc chắn muốn xóa đơn hàng {maHoaDon}?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        bool kqXoa = hoaDonBUS.deleteHoaDon(maHoaDon);
+                        if (kqXoa)
+                        {
+                            MessageBox.Show("Đã xóa đơn hàng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            loadHoaDon(); 
+                            clearForm();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Có lỗi xảy ra khi xóa đơn hàng. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy đơn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một đơn hàng để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void clearForm()
+        {
+            txtMaHD.Text = "";
+            txtNgay.Text = "";
+            txtTT.Text = "";
+            txtDiemDung.Text = "";
+            txtThanhToan.Text = "";
+            txtNV.Text = "";
+            txtKH.Text = "";
+            dtgChiTietHD.DataSource = null;
+            txtSanPhamCT.Text = "";
+            txtSoLuongCT.Text = "";
+            txtDonGiaCT.Text = "";
+            txtThanhTienCT.Text = "";
+        }
+
+        private void btnReloadDanhMuc_Click(object sender, EventArgs e)
+        {
+            txtTimHD.Text = string.Empty;
+            loadHoaDon();
+        }
+
+        private void btnTimHD_Click(object sender, EventArgs e)
+        {
+            string searchKey = txtTimHD.Text.Trim();
+            if (string.IsNullOrEmpty(searchKey))
+            {
+                MessageBox.Show("Vui lòng nhập thông tin để tìm kiếm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            List<BsonDocument> searchResults = hoaDonBUS.searchHoaDon(searchKey);
+
+            if (searchResults.Count == 0)
+            {
+                MessageBox.Show("Không tìm thấy hóa đơn phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var hoaDonList = new List<object>();
+            foreach (var document in searchResults)
+            {
+                var hoaDon = new
+                {
+                    MaHoaDon = document.Contains("maHoaDon") ? document["maHoaDon"].AsString : string.Empty,
+                    NgayLapHoaDon = document.Contains("ngayLapHoaDon") && !document["ngayLapHoaDon"].IsBsonNull
+                        ? document["ngayLapHoaDon"].ToLocalTime()
+                        : (DateTime?) null,
+                    TongTien = document.Contains("tongTien") && !document["tongTien"].IsBsonNull
+                        ? document["tongTien"].AsInt32
+                        : (int?) null,
+                    TenNhanVien = document.Contains("nhanVien") && document["nhanVien"].AsBsonDocument.Contains("tenNhanVien")
+                        ? document["nhanVien"]["tenNhanVien"].AsString
+                        : string.Empty,
+                    TenKhachHang = document.Contains("khachHang") && !document["khachHang"].IsBsonNull && document["khachHang"].AsBsonDocument.Contains("tenKhachHang")
+                        ? document["khachHang"]["tenKhachHang"].AsString
+                        : string.Empty,
+                    DiemDaDung = document.Contains("diemDaDung") && !document["diemDaDung"].IsBsonNull
+                        ? document["diemDaDung"].AsInt32
+                        : (int?) null,
+                    PhuongThucThanhToan = document.Contains("phuongThucThanhToan") && !document["phuongThucThanhToan"].IsBsonNull
+                        ? document["phuongThucThanhToan"].AsString
+                        : string.Empty,
+                    TongPhaiTra = document.Contains("tongPhaiTra") && !document["tongPhaiTra"].IsBsonNull
+                        ? document["tongPhaiTra"].AsInt32
+                        : (int?) null,
+                };
+                hoaDonList.Add(hoaDon);
+            }
+
+            dtgHoaDon.DataSource = hoaDonList;
+            dtgHoaDon.Columns["MaHoaDon"].HeaderText = "Mã Hóa Đơn";
+            dtgHoaDon.Columns["NgayLapHoaDon"].HeaderText = "Ngày Lập Hóa Đơn";
+            dtgHoaDon.Columns["TongTien"].HeaderText = "Tổng Tiền";
+            dtgHoaDon.Columns["TongPhaiTra"].HeaderText = "Tổng Phải Trả";
+            dtgHoaDon.Columns["DiemDaDung"].HeaderText = "Điểm Đã Dùng";
+            dtgHoaDon.Columns["PhuongThucThanhToan"].HeaderText = "Phương Thức Thanh Toán";
+            dtgHoaDon.Columns["TenNhanVien"].HeaderText = "Tên Nhân Viên";
+            dtgHoaDon.Columns["TenKhachHang"].HeaderText = "Tên Khách Hàng";
+
+            dtgHoaDon.Columns["NgayLapHoaDon"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dtgHoaDon.Columns["TongTien"].DefaultCellStyle.Format = "N0";
+            dtgHoaDon.Columns["TongPhaiTra"].DefaultCellStyle.Format = "N0";
         }
     }
 }

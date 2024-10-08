@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using KimPhuong.DBC;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -25,7 +26,7 @@ namespace KimPhuong.DAO
             var collection = dBConnect.Database.GetCollection<BsonDocument>("HoaDon");
             var filter = Builders<BsonDocument>.Filter.Eq("maHoaDon", maHoaDon);
             var hoaDon = collection.Find(filter).FirstOrDefault();
-            return hoaDon; 
+            return hoaDon;
         }
         public string GetMaxMaHoaDon()
         {
@@ -47,9 +48,9 @@ namespace KimPhuong.DAO
             var collection = dBConnect.Database.GetCollection<BsonDocument>("NhanVien");
             var filter = Builders<BsonDocument>.Filter.Eq("taiKhoan", taiKhoan);
             var nhanVien = collection.Find(filter).FirstOrDefault();
-            return nhanVien; 
+            return nhanVien;
         }
-        public bool addHoaDon(string maHoaDon, DateTime ngayLapHoaDon, string maNhanVien, string tenNhanVien)
+        public bool addHoaDon(string maHoaDon, DateTime ngayLapHoaDon, string maNhanVien, string tenNhanVien, int tongTien, int tongPhaiTra)
         {
             try
             {
@@ -57,15 +58,15 @@ namespace KimPhuong.DAO
             {
                 { "maHoaDon", maHoaDon },
                 { "ngayLapHoaDon", ngayLapHoaDon },
-                { "tongTien", BsonNull.Value },
+                { "tongTien", tongTien},
                 { "diemDaDung", BsonNull.Value },
                 { "diemTichLuy", BsonNull.Value },
                 { "phuongThucThanhToan", BsonNull.Value },
                 { "nhanVien", new BsonDocument { { "maNhanVien", maNhanVien }, { "tenNhanVien", tenNhanVien } } },
                 { "khachHang", BsonNull.Value },
-                
+                { "tongPhaiTra", tongPhaiTra },
                 { "chiTietHoaDon", new BsonArray() }
-                
+
             };
 
                 dBConnect.InsertDocument("HoaDon", hoaDon);
@@ -73,7 +74,7 @@ namespace KimPhuong.DAO
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi thêm hóa đơn: " + ex.Message);
+                MessageBox.Show("Lỗi khi thêm hóa đơn: " + ex.Message);
                 return false;
             }
         }
@@ -90,7 +91,7 @@ namespace KimPhuong.DAO
             var count = collection.CountDocuments(filter);
             return count > 0;
         }
-        public bool updateChiTietHoaDon(string maHoaDon, string maSanPham, int soLuong, int donGia, int thanhTien)
+        public bool updateChiTietHoaDon(string maHoaDon, string maSanPham, int soLuong, int thanhTien)
         {
             try
             {
@@ -102,13 +103,12 @@ namespace KimPhuong.DAO
                 var update = Builders<BsonDocument>.Update.Set("chiTietHoaDon.$.soLuong", soLuong)
                                                           .Set("chiTietHoaDon.$.thanhTien", thanhTien);
 
-                var result = dBConnect.UpdateDocument("HoaDon",filter, update);
+                var result = dBConnect.UpdateDocument("HoaDon", filter, update);
 
                 return result.ModifiedCount > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi cập nhật chi tiết hóa đơn: " + ex.Message);
                 return false;
             }
         }
@@ -122,7 +122,7 @@ namespace KimPhuong.DAO
                 var newChiTiet = new BsonDocument
         {
             { "maSanPham", maSanPham },
-            { "tenSanPham", tenSanPham }, 
+            { "tenSanPham", tenSanPham },
             { "soLuong", soLuong },
             { "donGia", donGia },
             { "thanhTien", thanhTien }
@@ -135,7 +135,7 @@ namespace KimPhuong.DAO
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi thêm chi tiết hóa đơn: " + ex.Message);
+                MessageBox.Show("Lỗi khi thêm chi tiết hóa đơn: " + ex.Message);
                 return false;
             }
         }
@@ -157,7 +157,7 @@ namespace KimPhuong.DAO
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi cập nhật hóa đơn: " + ex.Message);
+                MessageBox.Show("Lỗi khi cập nhật hóa đơn: " + ex.Message);
                 return false;
             }
         }
@@ -173,9 +173,29 @@ namespace KimPhuong.DAO
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi cập nhật điểm tích lũy khách hàng: " + ex.Message);
+                MessageBox.Show("Lỗi khi cập nhật điểm tích lũy khách hàng: " + ex.Message);
                 return false;
             }
+        }
+        public bool deleteHoaDon(string maHoaDon)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("maHoaDon", maHoaDon);
+                var result = dBConnect.DeleteDocument("HoaDon", filter);
+                return result.DeletedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi delete hóa đơn: " + ex.Message);
+                return false;
+            }
+        }
+
+        public List<BsonDocument> searchHoaDon(string key)
+        {
+            string[] field = { "maHoaDon", "khachHang.maKhachHang", "khachHang.tenKhachHang", "nhanVien.maNhanVien", "nhanVien.tenNhanVien"};
+            return dBConnect.SearchDocuments("HoaDon", key, field, "HoaDonSearchIndex");
         }
 
     }
