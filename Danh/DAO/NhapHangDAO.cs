@@ -14,7 +14,8 @@ namespace Danh.DAO
     {
         MongoDBConnect connect;
         private string collectionName = "DonDatHangNhaCungCap";
-        public NhapHangDAO() {
+        public NhapHangDAO()
+        {
             connect = new MongoDBConnect();
         }
         public DataTable getAll()
@@ -44,7 +45,7 @@ namespace Danh.DAO
                 {
                     var nhaCungCap = doc["nhaCungCap"].AsBsonDocument;
                     if (nhaCungCap.Contains("tenNhaCungCap"))
-                        row["tenNhaCungCap"] = nhaCungCap["tenNhaCungCap"].AsString; 
+                        row["tenNhaCungCap"] = nhaCungCap["tenNhaCungCap"].AsString;
                 }
 
                 if (doc.Contains("ngayDatHang"))
@@ -94,27 +95,37 @@ namespace Danh.DAO
             return dataTable;
         }
 
-        public bool AddDonNhapHang(string maDonDatHang, string maNhaCungCap, DateTime ngayDatHang)
+        public bool AddDonNhapHang(string maDonDatHang, string maNhaCungCap, string tenNhaCungCap, DateTime ngayDatHang)
         {
             try
             {
                 var newDonDatHang = new BsonDocument
+        {
+            {"maDonDatHang", maDonDatHang},
+            { "ngayDatHang", ngayDatHang },
+            { "tongTien", 0 },
+            { "trangThai", "Đang lên đơn" },
+            { "nhaCungCap", new BsonDocument
                 {
-                    {"maDonDatHang", maDonDatHang},
-                    { "maNhaCungCap", maNhaCungCap},
-                    { "ngayDatHang", ngayDatHang }
-                };
+                    { "maNhaCungCap", maNhaCungCap },
+                    { "tenNhaCungCap", tenNhaCungCap }
+                }
+            },
+                    {"chiTietDonDatHang", new BsonArray() }
+
+        };
 
                 var collection = connect.Database.GetCollection<BsonDocument>(collectionName);
                 collection.InsertOne(newDonDatHang);
 
-                return true;  
+                return true;
             }
             catch (Exception ex)
             {
-                return false; 
+                return false;
             }
         }
+
         public bool UpdateDonNhapHang(string maDonDatHang, string trangThai)
         {
             try
@@ -126,11 +137,11 @@ namespace Danh.DAO
                 var collection = connect.Database.GetCollection<BsonDocument>(collectionName);
                 var result = collection.UpdateOne(filter, update);
 
-                return result.ModifiedCount > 0;  
+                return result.ModifiedCount > 0;
             }
             catch (Exception ex)
             {
-                return false;  
+                return false;
             }
         }
         public DataTable SearchDonNhapHang(string key)
@@ -187,7 +198,7 @@ namespace Danh.DAO
             }
         }
 
-        public bool AddChiTietDonNhapHang(string maDonDatHang, string maSanPham, int soLuong, int donGia, out string errorMessage)
+        public bool AddChiTietDonNhapHang(string maDonDatHang, string maSanPham, string tenSanPham, int soLuong, int donGia, out string errorMessage)
         {
             errorMessage = string.Empty;
 
@@ -220,7 +231,7 @@ namespace Danh.DAO
                     var newChiTiet = new BsonDocument
             {
                 { "maSanPham", maSanPham },
-                { "tenSanPham", "" }, 
+                { "tenSanPham", tenSanPham },
                 { "soLuong", soLuong },
                 { "donGia", donGia },
                 { "thanhTien", soLuong * donGia }
@@ -284,7 +295,7 @@ namespace Danh.DAO
 
             string currentMax = maxDoc["maDonDatHang"].AsString;
 
-            string numberPart = currentMax.Substring(2);
+            string numberPart = currentMax.Substring(3);
             int nextNumber = int.Parse(numberPart) + 1;
             return $"DDH{nextNumber:D3}";
         }

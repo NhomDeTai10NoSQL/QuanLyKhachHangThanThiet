@@ -83,7 +83,7 @@ namespace KimPhuong.GUI
 
             foreach (var donDatHang in donDatHangList)
             {
-                if (donDatHang["trangThai"].AsString == "Đã hoàn thành")
+                if (donDatHang["trangThai"].AsString == "Đã nhập vào kho")
                 {
                     var chiTietList = donDatHang["chiTietDonDatHang"].AsBsonArray;
                     foreach (var chiTiet in chiTietList)
@@ -458,6 +458,12 @@ namespace KimPhuong.GUI
 
                     txtHoTenKhachHang.Text = tenKhachHang;
                     txtDiemTichLuy.Text = diemTichLuy.ToString();
+
+                    if (KhachHang["DiemTichLuy"].AsInt32 > 200)
+                    {
+                        lblKhachHangTT.Visible = txtKhachHangThanThiet.Visible = true;
+                        txtKhachHangThanThiet.Enabled = false;
+                    }
                 }
 
             }
@@ -589,24 +595,33 @@ namespace KimPhuong.GUI
             }
             txtTongTien.Text = tongTien.ToString("N0");
 
+
+
         }
 
         private void tinhTongPhaiTra()
         {
-            int tongPhaiTra = 0;
+            int tongPhaiTra = 0, giamKH = 0;
             if (!string.IsNullOrEmpty(txtDungDiemTichLuy.Text))
             {
                 if (int.TryParse(txtTongTien.Text.Replace(",", "").Trim(), out int tongTien) &&
                     int.TryParse(txtDungDiemTichLuy.Text.Replace(",", "").Trim(), out int diemTichLuy))
                 {
-                    tongPhaiTra = tongTien - diemTichLuy;
+                    if (tongTien > 20000000)
+                    {
+                        giamKH = 1000000;
+                    }
+
+                    tongPhaiTra = tongTien - giamKH - diemTichLuy;
                     if (tongPhaiTra < 0)
                     {
                         tongPhaiTra = 0;
                     }
+                    
                 }
             }
             txtTongPhaiTra.Text = tongPhaiTra.ToString("N0");
+            txtKhachHangThanThiet.Text = giamKH.ToString("N0");
         }
 
         private void dtgGioHang_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
@@ -720,11 +735,14 @@ namespace KimPhuong.GUI
                     bool kqCapNhatKH = hoaDonBUS.updateDiemTichLuy(soDienThoai, diemTichLuyMoi, diemTichLuyCon);
                     if (diemTichLuyMoi >= 200)
                     {
-                        bool kqCapNhatLoaiKH = hoaDonBUS.updateLoaiKH(soDienThoai);
-                        if (!kqCapNhatLoaiKH)
+                        if (khachHang["LoaiKhachHang"].AsString != "Thân thiết")
                         {
-                            MessageBox.Show("Có lỗi xảy ra khi cập nhật loại khách hàng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            bool kqCapNhatLoaiKH = hoaDonBUS.updateLoaiKH(soDienThoai);
+                            if (!kqCapNhatLoaiKH)
+                            {
+                                MessageBox.Show("Có lỗi xảy ra khi cập nhật loại khách hàng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
                         }
 
                     }

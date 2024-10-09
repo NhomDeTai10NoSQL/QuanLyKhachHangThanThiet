@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sunny.UI;
 using MongoDB.Bson;
+using Danh.DAO;
+
 namespace Danh.GUI
 {
     public partial class frmDatHangNhaCC : UIPage
@@ -27,19 +29,15 @@ namespace Danh.GUI
             cbTrangThai.SelectedIndex = 1;
             DateTime ngayDat = DateTime.Now;
             txtNgayDat.Text = ngayDat.ToString("dd/MM/yyyy");
+            intUDSoLuong.Value = 1;
         }
         private void loadMaDatHang()
         {
-            List<BsonDocument> hoaDonDocuments = hoaDonBUS.getAllHoaDon();
-            List<string> maHoaDonList = new List<string>();
-            foreach (var doc in hoaDonDocuments)
-            {
-                if (doc.Contains("maHoaDon"))
-                {
-                    maHoaDonList.Add(doc["maHoaDon"].AsString);
-                }
-            }
-            cbMaDatHang.DataSource = maHoaDonList;
+            cbMaDatHang.DataSource = null;
+            DataTable ncc = nhapHangBUS.getAll();
+            cbMaDatHang.DataSource = ncc;
+            cbMaDatHang.ValueMember = "maDonDatHang";
+            cbMaDatHang.DisplayMember = "maDonDatHang";
         }
 
 
@@ -106,8 +104,8 @@ namespace Danh.GUI
 
                 string trangThai = selectedRow.Cells["trangThai"].Value?.ToString() ?? string.Empty;
 
-                cbMaDatHang.SelectedValue = maDonDat;
-                cbNhaCungCap.SelectedValue = maNhaCungCap; 
+                cbMaDatHang.Text = maDonDat;
+                cbNhaCungCap.Text = maNhaCungCap; 
                 txtNgayDat.Text = ngayDatHang.ToString("dd/MM/yyyy");
                 txtTongTien.Text = tongTien.ToString("N0") + " VND";
                 cbTrangThai.Text = trangThai;
@@ -159,9 +157,10 @@ namespace Danh.GUI
         {
             string maDatHang = nhapHangBUS.GetNextMaDonHang();
             string maNhaCungCap = cbNhaCungCap.SelectedValue.ToString();
+            string tenNhaCungCap = cbNhaCungCap.Text;
             DateTime ngayDatHang = DateTime.Now;
 
-            if (nhapHangBUS.AddDonNhapHang(maDatHang, maNhaCungCap, ngayDatHang))
+            if (nhapHangBUS.AddDonNhapHang(maDatHang, maNhaCungCap, tenNhaCungCap, ngayDatHang))
             {
                 MessageBox.Show("Thêm thành công đơn đặt hàng! Vui lòng thêm chi tiết đơn đặt hàng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -171,21 +170,34 @@ namespace Danh.GUI
             }
             loadDonNhap();
             loadMaDatHang();
+            if (dgvNhapHang.Rows.Count > 0)
+            {
+                int lastRowIndex = dgvNhapHang.Rows.Count - 1;
+                dgvNhapHang.Rows[lastRowIndex].Selected = true;
+                dgvNhapHang.FirstDisplayedScrollingRowIndex = lastRowIndex; 
+            }
         }
 
         private void btnThemChiTiet_Click(object sender, EventArgs e)
         {
-            cbTrangThai.SelectedIndex = 1;
-            string maDonDat = cbMaDatHang.SelectedValue.ToString();
+            cbTrangThai.SelectedIndex = 1; // Cập nhật trạng thái đơn hàng thành "Đã đặt"
+            string maDonDat = cbMaDatHang.Text;
+
             if (MessageBox.Show($"Bạn có chắc chắn muốn thêm sản phẩm vào đơn {maDonDat} này để đặt hàng?", "Xác nhận thêm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 string maSanPham = cbSanPham.SelectedValue.ToString();
+                string tenSanPham = cbSanPham.Text;
                 int soLuong = (int) intUDSoLuong.Value;
+
+                // Lấy giá bán và chuyển đổi thành số
                 if (int.TryParse(txtGiaBan.Text.Replace(",", "").Replace(" VND", "").Trim(), out int giaBan))
                 {
                     string errorMessage;
-                    if (nhapHangBUS.addChiTietDonNhapHang(maDonDat, maSanPham, soLuong, giaBan, out errorMessage))
+
+                    // Thêm chi tiết đơn đặt hàng
+                    if (nhapHangBUS.addChiTietDonNhapHang(maDonDat, maSanPham, tenSanPham, soLuong, giaBan, out errorMessage))
                     {
+                        capNhatTongTien(maDonDat);
                         MessageBox.Show("Thêm chi tiết đơn đặt hàng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -194,8 +206,35 @@ namespace Danh.GUI
                     }
                 }
             }
+
             loadDonNhap();
             dtgChiTietNH.DataSource = nhapHangBUS.getAllChiTiet(maDonDat);
+            if (dgvNhapHang.Rows.Count > 0)
+            {
+                int lastRowIndex = dtgChiTietNH.Rows.Count - 1;
+                dgvNhapHang.Rows[lastRowIndex].Selected = true;
+                dgvNhapHang.FirstDisplayedScrollingRowIndex = lastRowIndex;
+            }
+        }
+       
+
+        // Hàm tính toán và cập nhật tổng tiền cho đơn đặt hàng
+        private int capNhatTongTien(string maDonDat)
+        {
+            // Lấy danh sách chi tiết đơn đặt hàng
+            int tongTien = 0;
+            DataTable dt = nhapHangBUS.getAllChiTiet(maDonDat);
+            foreach (DataRow row in dt.Rows)
+            {
+                string maSanPham = row["MaSanPham"].ToString();
+                int soLuong = (int) row["SoLuong"];
+                int donGia = (int) row["DonGia"];
+                int thanhTien = (int) row["ThanhTien"];
+
+                tongTien += thanhTien;
+            }
+
+            return tongTien;
         }
 
         private void btnSuaDonHang_Click(object sender, EventArgs e)

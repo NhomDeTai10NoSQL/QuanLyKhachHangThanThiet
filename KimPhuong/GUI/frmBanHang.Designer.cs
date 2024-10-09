@@ -128,6 +128,8 @@
             this.uiLabel4 = new Sunny.UI.UILabel();
             this.uiLabel9 = new Sunny.UI.UILabel();
             this.intSoLuongThem = new Sunny.UI.UIIntegerUpDown();
+            this.txtKhachHangThanThiet = new Sunny.UI.UITextBox();
+            this.lblKhachHangTT = new Sunny.UI.UILabel();
             this.uiTableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tabBanHang.SuspendLayout();
@@ -164,7 +166,7 @@
             this.uiTableLayoutPanel1.Name = "uiTableLayoutPanel1";
             this.uiTableLayoutPanel1.RowCount = 1;
             this.uiTableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.uiTableLayoutPanel1.Size = new System.Drawing.Size(1942, 1102);
+            this.uiTableLayoutPanel1.Size = new System.Drawing.Size(1942, 1231);
             this.uiTableLayoutPanel1.TabIndex = 0;
             this.uiTableLayoutPanel1.TagString = null;
             // 
@@ -178,7 +180,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1065, 1096);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1065, 1225);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // tabBanHang
@@ -193,7 +195,7 @@
             this.tabBanHang.MainPage = "";
             this.tabBanHang.Name = "tabBanHang";
             this.tabBanHang.SelectedIndex = 0;
-            this.tabBanHang.Size = new System.Drawing.Size(1059, 1090);
+            this.tabBanHang.Size = new System.Drawing.Size(1059, 1219);
             this.tabBanHang.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabBanHang.TabIndex = 0;
             this.tabBanHang.TipsFont = new System.Drawing.Font("Arial", 9F);
@@ -203,7 +205,7 @@
             this.tabBan.Controls.Add(this.tableLayoutPanel4);
             this.tabBan.Location = new System.Drawing.Point(0, 40);
             this.tabBan.Name = "tabBan";
-            this.tabBan.Size = new System.Drawing.Size(1059, 1050);
+            this.tabBan.Size = new System.Drawing.Size(1059, 1179);
             this.tabBan.TabIndex = 2;
             this.tabBan.Text = "Bán hàng";
             this.tabBan.UseVisualStyleBackColor = true;
@@ -221,7 +223,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 98.93191F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 1.068091F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1059, 1050);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1059, 1179);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // tableLayoutPanel5
@@ -237,7 +239,7 @@
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 514F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(1053, 735);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1053, 863);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // dtgGioHang
@@ -277,7 +279,7 @@
             this.dtgGioHang.EnableHeadersVisualStyles = false;
             this.dtgGioHang.Font = new System.Drawing.Font("Arial", 12F);
             this.dtgGioHang.GridColor = System.Drawing.Color.Black;
-            this.dtgGioHang.Location = new System.Drawing.Point(3, 224);
+            this.dtgGioHang.Location = new System.Drawing.Point(3, 352);
             this.dtgGioHang.MultiSelect = false;
             this.dtgGioHang.Name = "dtgGioHang";
             this.dtgGioHang.ReadOnly = true;
@@ -529,8 +531,10 @@
             this.uiTableLayoutPanel3.Controls.Add(this.uiLabel14, 1, 4);
             this.uiTableLayoutPanel3.Controls.Add(this.cbPhuongThucThanhToan, 2, 4);
             this.uiTableLayoutPanel3.Controls.Add(this.btnLuuTam, 1, 5);
+            this.uiTableLayoutPanel3.Controls.Add(this.txtKhachHangThanThiet, 2, 1);
+            this.uiTableLayoutPanel3.Controls.Add(this.lblKhachHangTT, 1, 1);
             this.uiTableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiTableLayoutPanel3.Location = new System.Drawing.Point(3, 752);
+            this.uiTableLayoutPanel3.Location = new System.Drawing.Point(3, 881);
             this.uiTableLayoutPanel3.Name = "uiTableLayoutPanel3";
             this.uiTableLayoutPanel3.RowCount = 6;
             this.uiTableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
@@ -1334,7 +1338,7 @@
             this.uiTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.018868F));
             this.uiTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 776F));
             this.uiTableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
-            this.uiTableLayoutPanel2.Size = new System.Drawing.Size(865, 1096);
+            this.uiTableLayoutPanel2.Size = new System.Drawing.Size(865, 1225);
             this.uiTableLayoutPanel2.TabIndex = 3;
             this.uiTableLayoutPanel2.TagString = null;
             // 
@@ -1375,7 +1379,7 @@
             this.dtgDanhSachSanPham.EnableHeadersVisualStyles = false;
             this.dtgDanhSachSanPham.Font = new System.Drawing.Font("Arial", 12F);
             this.dtgDanhSachSanPham.GridColor = System.Drawing.Color.Black;
-            this.dtgDanhSachSanPham.Location = new System.Drawing.Point(3, 268);
+            this.dtgDanhSachSanPham.Location = new System.Drawing.Point(3, 397);
             this.dtgDanhSachSanPham.MultiSelect = false;
             this.dtgDanhSachSanPham.Name = "dtgDanhSachSanPham";
             this.dtgDanhSachSanPham.ReadOnly = true;
@@ -1414,7 +1418,7 @@
             this.uiTableLayoutPanel9.Controls.Add(this.btnThemVaoGioHang, 1, 0);
             this.uiTableLayoutPanel9.Controls.Add(this.btnXoaSanPhamKhoiGio, 2, 0);
             this.uiTableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiTableLayoutPanel9.Location = new System.Drawing.Point(3, 1044);
+            this.uiTableLayoutPanel9.Location = new System.Drawing.Point(3, 1173);
             this.uiTableLayoutPanel9.Name = "uiTableLayoutPanel9";
             this.uiTableLayoutPanel9.RowCount = 1;
             this.uiTableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1474,7 +1478,7 @@
             this.uiTableLayoutPanel5.RowCount = 2;
             this.uiTableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.21514F));
             this.uiTableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.78486F));
-            this.uiTableLayoutPanel5.Size = new System.Drawing.Size(859, 251);
+            this.uiTableLayoutPanel5.Size = new System.Drawing.Size(859, 377);
             this.uiTableLayoutPanel5.TabIndex = 0;
             this.uiTableLayoutPanel5.TagString = null;
             // 
@@ -1490,7 +1494,7 @@
             this.uiTableLayoutPanel6.Name = "uiTableLayoutPanel6";
             this.uiTableLayoutPanel6.RowCount = 1;
             this.uiTableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.uiTableLayoutPanel6.Size = new System.Drawing.Size(853, 110);
+            this.uiTableLayoutPanel6.Size = new System.Drawing.Size(853, 168);
             this.uiTableLayoutPanel6.TabIndex = 0;
             this.uiTableLayoutPanel6.TagString = null;
             // 
@@ -1576,12 +1580,12 @@
             this.uiTableLayoutPanel8.Controls.Add(this.uiLabel9, 2, 1);
             this.uiTableLayoutPanel8.Controls.Add(this.intSoLuongThem, 3, 1);
             this.uiTableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiTableLayoutPanel8.Location = new System.Drawing.Point(3, 119);
+            this.uiTableLayoutPanel8.Location = new System.Drawing.Point(3, 177);
             this.uiTableLayoutPanel8.Name = "uiTableLayoutPanel8";
             this.uiTableLayoutPanel8.RowCount = 2;
             this.uiTableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.uiTableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.uiTableLayoutPanel8.Size = new System.Drawing.Size(853, 129);
+            this.uiTableLayoutPanel8.Size = new System.Drawing.Size(853, 197);
             this.uiTableLayoutPanel8.TabIndex = 1;
             this.uiTableLayoutPanel8.TagString = null;
             // 
@@ -1650,7 +1654,7 @@
             this.uiLabel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiLabel9.Font = new System.Drawing.Font("Arial", 12F);
             this.uiLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabel9.Location = new System.Drawing.Point(494, 64);
+            this.uiLabel9.Location = new System.Drawing.Point(494, 98);
             this.uiLabel9.Name = "uiLabel9";
             this.uiLabel9.Size = new System.Drawing.Size(123, 53);
             this.uiLabel9.TabIndex = 23;
@@ -1661,7 +1665,7 @@
             // 
             this.intSoLuongThem.Dock = System.Windows.Forms.DockStyle.Top;
             this.intSoLuongThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.intSoLuongThem.Location = new System.Drawing.Point(624, 69);
+            this.intSoLuongThem.Location = new System.Drawing.Point(624, 103);
             this.intSoLuongThem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.intSoLuongThem.Minimum = 1;
             this.intSoLuongThem.MinimumSize = new System.Drawing.Size(100, 0);
@@ -1672,10 +1676,39 @@
             this.intSoLuongThem.Text = "1";
             this.intSoLuongThem.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // txtKhachHangThanThiet
+            // 
+            this.txtKhachHangThanThiet.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtKhachHangThanThiet.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtKhachHangThanThiet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtKhachHangThanThiet.Location = new System.Drawing.Point(705, 54);
+            this.txtKhachHangThanThiet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtKhachHangThanThiet.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtKhachHangThanThiet.Name = "txtKhachHangThanThiet";
+            this.txtKhachHangThanThiet.Padding = new System.Windows.Forms.Padding(5);
+            this.txtKhachHangThanThiet.ShowText = false;
+            this.txtKhachHangThanThiet.Size = new System.Drawing.Size(344, 39);
+            this.txtKhachHangThanThiet.TabIndex = 13;
+            this.txtKhachHangThanThiet.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtKhachHangThanThiet.Visible = false;
+            this.txtKhachHangThanThiet.Watermark = "";
+            // 
+            // lblKhachHangTT
+            // 
+            this.lblKhachHangTT.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblKhachHangTT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblKhachHangTT.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.lblKhachHangTT.Location = new System.Drawing.Point(353, 49);
+            this.lblKhachHangTT.Name = "lblKhachHangTT";
+            this.lblKhachHangTT.Size = new System.Drawing.Size(345, 49);
+            this.lblKhachHangTT.TabIndex = 14;
+            this.lblKhachHangTT.Text = "Khách hàng thân thiết";
+            this.lblKhachHangTT.Visible = false;
+            // 
             // frmBanHang
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1942, 1102);
+            this.ClientSize = new System.Drawing.Size(1942, 1231);
             this.Controls.Add(this.uiTableLayoutPanel1);
             this.Name = "frmBanHang";
             this.Text = "BÁN HÀNG";
@@ -1790,5 +1823,7 @@
         private Sunny.UI.UITableLayoutPanel uiTableLayoutPanel10;
         private Sunny.UI.UISymbolButton btnReload;
         private Sunny.UI.UISymbolButton btnTimSanPham;
+        private Sunny.UI.UITextBox txtKhachHangThanThiet;
+        private Sunny.UI.UILabel lblKhachHangTT;
     }
 }
