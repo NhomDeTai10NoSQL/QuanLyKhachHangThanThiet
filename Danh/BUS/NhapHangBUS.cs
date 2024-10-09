@@ -18,6 +18,14 @@ namespace Danh.BUS
         {
             return nhapHangDAO.getAll();
         }
+        public DataTable getNhapHang()
+        {
+            return nhapHangDAO.getNhapHang();
+        }
+        public DataTable getChiTietNhapHang(string maDonDatHang)
+        {
+            return nhapHangDAO.getChiTietNhapHang(maDonDatHang);
+        }
         public bool AddDonNhapHang(string maDatHang, string maNhaCungCap, DateTime ngayDatHang)
         {
             return nhapHangDAO.AddDonNhapHang(maDatHang, maNhaCungCap, ngayDatHang);

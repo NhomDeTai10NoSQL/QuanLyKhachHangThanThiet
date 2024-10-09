@@ -63,6 +63,9 @@ namespace Danh.DBC
 
             return dataTable;
         }
+
+
+
         // Chèn một document vào collection
         public void InsertDocument(string collectionName, BsonDocument document)
         {

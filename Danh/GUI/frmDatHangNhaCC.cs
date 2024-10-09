@@ -21,7 +21,9 @@ namespace Danh.GUI
         HoaDonBUS hoaDonBUS = new HoaDonBUS();
         public frmDatHangNhaCC()
         {
+            
             InitializeComponent();
+            loadDonNhap();
             cbTrangThai.SelectedIndex = 1;
             DateTime ngayDat = DateTime.Now;
             txtNgayDat.Text = ngayDat.ToString("dd/MM/yyyy");
@@ -60,16 +62,9 @@ namespace Danh.GUI
         }
         private void loadDonNhap()
         {
-            DataTable dt = nhapHangBUS.getAll();
-            dtgNhapHang.DataSource = dt;
-            if (dtgNhapHang.Columns.Count > 0)
-            {
-                dtgNhapHang.Columns["MaDonDatHang"].HeaderText = "Mã đơn đặt hàng";
-                dtgNhapHang.Columns["MaNhaCungCap"].HeaderText = "Mã nhà cung cấp";
-                dtgNhapHang.Columns["TongTien"].HeaderText = "Tổng tiền";
-                dtgNhapHang.Columns["NgayDatHang"].HeaderText = "Ngày đặt hàng";
-                dtgNhapHang.Columns["TrangThai"].HeaderText = "TrangThai";
-            }
+            DataTable dt = nhapHangBUS.getNhapHang();
+            dgvNhapHang.DataSource = dt;
+            
         }
 
         private void frmDatHangNhaCC_Load(object sender, EventArgs e)
@@ -79,24 +74,25 @@ namespace Danh.GUI
             loadSanPham();
         }
 
-        private void dtgNhapHang_SelectionChanged(object sender, EventArgs e)
+        private void dgvNhapHang_SelectionChanged(object sender, EventArgs e)
         {
-            if (dtgNhapHang.SelectedRows.Count > 0)
+            if (dgvNhapHang.SelectedRows.Count > 0)
             {
-                DataGridViewRow selectedRow = dtgNhapHang.SelectedRows[0];
-                string maDonDat = selectedRow.Cells["MaDonDatHang"].Value.ToString();
-                string maNhaCungCap = selectedRow.Cells["MaNhaCungCap"].Value.ToString();
-                if (DateTime.TryParse(selectedRow.Cells["NgayDatHang"].Value.ToString(), out DateTime ngayDatHang))
+                DataGridViewRow selectedRow = dgvNhapHang.SelectedRows[0];
+
+                string maDonDat = selectedRow.Cells["maDonDatHang"].Value?.ToString() ?? string.Empty;
+                string maNhaCungCap = selectedRow.Cells["tenNhaCungCap"].Value?.ToString() ?? string.Empty;
+
+                if (DateTime.TryParse(selectedRow.Cells["ngayDatHang"].Value?.ToString(), out DateTime ngayDatHang))
                 {
                     txtNgayDat.Text = ngayDatHang.ToString("dd/MM/yyyy");
                 }
                 else
                 {
-
                     txtNgayDat.Text = "Ngày không hợp lệ";
                 }
 
-                if (int.TryParse(selectedRow.Cells["TongTien"].Value.ToString(), out int tongTien))
+                if (int.TryParse(selectedRow.Cells["tongTien"].Value?.ToString(), out int tongTien))
                 {
                     txtTongTien.Text = tongTien.ToString("N0") + " VND";
                 }
@@ -104,10 +100,14 @@ namespace Danh.GUI
                 {
                     txtTongTien.Text = "0 VND";
                 }
-                string trangThai = selectedRow.Cells["TrangThai"].Value.ToString();
+
+                DataTable dtChiTiet = nhapHangBUS.getChiTietNhapHang(maDonDat);
+                dtgChiTietNH.DataSource = dtChiTiet;
+
+                string trangThai = selectedRow.Cells["trangThai"].Value?.ToString() ?? string.Empty;
 
                 cbMaDatHang.SelectedValue = maDonDat;
-                cbNhaCungCap.SelectedValue = maNhaCungCap;
+                cbNhaCungCap.SelectedValue = maNhaCungCap; 
                 txtNgayDat.Text = ngayDatHang.ToString("dd/MM/yyyy");
                 txtTongTien.Text = tongTien.ToString("N0") + " VND";
                 cbTrangThai.Text = trangThai;
@@ -222,11 +222,11 @@ namespace Danh.GUI
             if (string.IsNullOrEmpty(txtTimHD.Text.Trim()))
             {
                 DataTable get = nhapHangBUS.getAll();
-                dtgNhapHang.DataSource = get;
+                dgvNhapHang.DataSource = get;
             }
             string keyword = txtTimHD.Text.Trim();
             DataTable kq = nhapHangBUS.SearchDonNhapHang(keyword);
-            dtgNhapHang.DataSource = kq;
+            dgvNhapHang.DataSource = kq;
         }
 
         private void btnReloadDanhMuc_Click(object sender, EventArgs e)

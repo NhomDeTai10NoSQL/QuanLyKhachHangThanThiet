@@ -22,6 +22,78 @@ namespace Danh.DAO
             DataTable dt = connect.GetAllDocumentsWithDataTable(collectionName);
             return dt;
         }
+        public DataTable getNhapHang()
+        {
+            List<BsonDocument> documents = connect.GetAllDocuments(collectionName);
+
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("maDonDatHang");
+            dataTable.Columns.Add("tenNhaCungCap");
+            dataTable.Columns.Add("ngayDatHang");
+            dataTable.Columns.Add("tongTien");
+            dataTable.Columns.Add("trangThai");
+
+            foreach (var doc in documents)
+            {
+                DataRow row = dataTable.NewRow();
+
+                if (doc.Contains("maDonDatHang"))
+                    row["maDonDatHang"] = doc["maDonDatHang"].AsString;
+
+                if (doc.Contains("nhaCungCap") && doc["nhaCungCap"].IsBsonDocument)
+                {
+                    var nhaCungCap = doc["nhaCungCap"].AsBsonDocument;
+                    if (nhaCungCap.Contains("tenNhaCungCap"))
+                        row["tenNhaCungCap"] = nhaCungCap["tenNhaCungCap"].AsString; 
+                }
+
+                if (doc.Contains("ngayDatHang"))
+                    row["ngayDatHang"] = doc["ngayDatHang"].ToUniversalTime();
+                if (doc.Contains("tongTien"))
+                    row["tongTien"] = doc["tongTien"].AsInt32;
+                if (doc.Contains("trangThai"))
+                    row["trangThai"] = doc["trangThai"].AsString;
+
+                dataTable.Rows.Add(row);
+            }
+
+            return dataTable;
+        }
+
+
+
+        public DataTable getChiTietNhapHang(string maDonDatHang)
+        {
+            var collection = connect.Database.GetCollection<BsonDocument>(collectionName);
+            var filter = Builders<BsonDocument>.Filter.Eq("maDonDatHang", maDonDatHang);
+            var document = collection.Find(filter).FirstOrDefault();
+
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("maSanPham");
+            dataTable.Columns.Add("tenSanPham");
+            dataTable.Columns.Add("soLuong");
+            dataTable.Columns.Add("donGia");
+            dataTable.Columns.Add("thanhTien");
+
+            if (document != null)
+            {
+                var chiTiet = document["chiTietDonDatHang"].AsBsonArray;
+                foreach (var item in chiTiet)
+                {
+                    DataRow row = dataTable.NewRow();
+                    row["maSanPham"] = item["maSanPham"].AsString;
+                    row["tenSanPham"] = item["tenSanPham"].AsString;
+                    row["soLuong"] = item["soLuong"].AsInt32;
+                    row["donGia"] = item["donGia"].AsInt32;
+                    row["thanhTien"] = item["thanhTien"].AsInt32;
+
+                    dataTable.Rows.Add(row);
+                }
+            }
+
+            return dataTable;
+        }
+
         public bool AddDonNhapHang(string maDonDatHang, string maNhaCungCap, DateTime ngayDatHang)
         {
             try

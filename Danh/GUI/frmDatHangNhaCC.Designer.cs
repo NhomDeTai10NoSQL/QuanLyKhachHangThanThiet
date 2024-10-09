@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiTableLayoutPanel1 = new Sunny.UI.UITableLayoutPanel();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.uiTableLayoutPanel2 = new Sunny.UI.UITableLayoutPanel();
@@ -52,7 +52,6 @@
             this.cbTrangThai = new Sunny.UI.UIComboBox();
             this.txtTongTien = new Sunny.UI.UITextBox();
             this.uiTableLayoutPanel3 = new Sunny.UI.UITableLayoutPanel();
-            this.dtgNhapHang = new Sunny.UI.UIDataGridView();
             this.uiTableLayoutPanel4 = new Sunny.UI.UITableLayoutPanel();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.uiTableLayoutPanel5 = new Sunny.UI.UITableLayoutPanel();
@@ -75,11 +74,11 @@
             this.uiTableLayoutPanel8 = new Sunny.UI.UITableLayoutPanel();
             this.txtTimHD = new Sunny.UI.UITextBox();
             this.btnTimHD = new Sunny.UI.UISymbolButton();
+            this.dgvNhapHang = new Sunny.UI.UIDataGridView();
             this.uiTableLayoutPanel1.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiTableLayoutPanel2.SuspendLayout();
             this.uiTableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgNhapHang)).BeginInit();
             this.uiTableLayoutPanel4.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.uiTableLayoutPanel5.SuspendLayout();
@@ -88,6 +87,7 @@
             this.uiTableLayoutPanel7.SuspendLayout();
             this.uiTableLayoutPanel9.SuspendLayout();
             this.uiTableLayoutPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNhapHang)).BeginInit();
             this.SuspendLayout();
             // 
             // uiTableLayoutPanel1
@@ -294,7 +294,7 @@
             // 
             this.uiTableLayoutPanel3.ColumnCount = 1;
             this.uiTableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.uiTableLayoutPanel3.Controls.Add(this.dtgNhapHang, 0, 0);
+            this.uiTableLayoutPanel3.Controls.Add(this.dgvNhapHang, 0, 0);
             this.uiTableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiTableLayoutPanel3.Location = new System.Drawing.Point(0, 248);
             this.uiTableLayoutPanel3.Name = "uiTableLayoutPanel3";
@@ -303,54 +303,6 @@
             this.uiTableLayoutPanel3.Size = new System.Drawing.Size(1270, 235);
             this.uiTableLayoutPanel3.TabIndex = 1;
             this.uiTableLayoutPanel3.TagString = null;
-            // 
-            // dtgNhapHang
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.dtgNhapHang.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dtgNhapHang.BackgroundColor = System.Drawing.Color.White;
-            this.dtgNhapHang.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgNhapHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dtgNhapHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgNhapHang.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dtgNhapHang.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtgNhapHang.EnableHeadersVisualStyles = false;
-            this.dtgNhapHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.dtgNhapHang.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            this.dtgNhapHang.Location = new System.Drawing.Point(3, 3);
-            this.dtgNhapHang.Name = "dtgNhapHang";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgNhapHang.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dtgNhapHang.RowHeadersWidth = 51;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.dtgNhapHang.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dtgNhapHang.RowTemplate.Height = 24;
-            this.dtgNhapHang.SelectedIndex = -1;
-            this.dtgNhapHang.Size = new System.Drawing.Size(1264, 229);
-            this.dtgNhapHang.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.dtgNhapHang.TabIndex = 0;
-            this.dtgNhapHang.SelectionChanged += new System.EventHandler(this.dtgNhapHang_SelectionChanged);
             // 
             // uiTableLayoutPanel4
             // 
@@ -714,6 +666,55 @@
             this.btnTimHD.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.btnTimHD.Click += new System.EventHandler(this.btnTimHD_Click);
             // 
+            // dgvNhapHang
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.dgvNhapHang.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvNhapHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            this.dgvNhapHang.BackgroundColor = System.Drawing.Color.White;
+            this.dgvNhapHang.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvNhapHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvNhapHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvNhapHang.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvNhapHang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvNhapHang.EnableHeadersVisualStyles = false;
+            this.dgvNhapHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.dgvNhapHang.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.dgvNhapHang.Location = new System.Drawing.Point(3, 3);
+            this.dgvNhapHang.Name = "dgvNhapHang";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvNhapHang.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvNhapHang.RowHeadersWidth = 51;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.dgvNhapHang.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvNhapHang.RowTemplate.Height = 24;
+            this.dgvNhapHang.SelectedIndex = -1;
+            this.dgvNhapHang.Size = new System.Drawing.Size(1264, 229);
+            this.dgvNhapHang.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.dgvNhapHang.TabIndex = 0;
+            this.dgvNhapHang.SelectionChanged += new System.EventHandler(this.dgvNhapHang_SelectionChanged);
+            // 
             // frmDatHangNhaCC
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -730,7 +731,6 @@
             this.uiGroupBox1.ResumeLayout(false);
             this.uiTableLayoutPanel2.ResumeLayout(false);
             this.uiTableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgNhapHang)).EndInit();
             this.uiTableLayoutPanel4.ResumeLayout(false);
             this.uiGroupBox2.ResumeLayout(false);
             this.uiTableLayoutPanel5.ResumeLayout(false);
@@ -739,6 +739,7 @@
             this.uiTableLayoutPanel7.ResumeLayout(false);
             this.uiTableLayoutPanel9.ResumeLayout(false);
             this.uiTableLayoutPanel8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNhapHang)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -769,7 +770,6 @@
         private Sunny.UI.UIIntegerUpDown intUDSoLuong;
         private Sunny.UI.UITextBox txtGiaBan;
         private Sunny.UI.UITextBox txtThanhTien;
-        private Sunny.UI.UIDataGridView dtgNhapHang;
         private Sunny.UI.UITableLayoutPanel uiTableLayoutPanel6;
         private Sunny.UI.UIDataGridView dtgChiTietNH;
         private Sunny.UI.UITableLayoutPanel uiTableLayoutPanel7;
@@ -782,5 +782,6 @@
         private Sunny.UI.UISymbolButton btnReloadDanhMuc;
         private Sunny.UI.UISymbolButton btnThem;
         private Sunny.UI.UITextBox txtNgayDat;
+        private Sunny.UI.UIDataGridView dgvNhapHang;
     }
 }
