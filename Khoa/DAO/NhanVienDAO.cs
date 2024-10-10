@@ -141,6 +141,28 @@ namespace Khoa.DAO
             return collection.Find(filter).FirstOrDefault();
         }
 
+        public BsonDocument GetNhanVienByTaiKhoan(string taiKhoan)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("taiKhoan", taiKhoan);
+            var collection = connect.Database.GetCollection<BsonDocument>(collectionName);
+            return collection.Find(filter).FirstOrDefault();
+        }
+        public bool UpdateMatKhau(string taiKhoan, string matKhau)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("taiKhoan", taiKhoan);
+                var update = Builders<BsonDocument>.Update
+                    .Set("matKhau", matKhau);
 
+                connect.UpdateDocument(collectionName, filter, update);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

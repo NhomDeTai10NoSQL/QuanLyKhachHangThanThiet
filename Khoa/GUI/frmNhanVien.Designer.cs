@@ -133,6 +133,7 @@
             this.txtMatKhau.TabIndex = 13;
             this.txtMatKhau.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtMatKhau.Watermark = "";
+            this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged);
             // 
             // txtChucVu
             // 

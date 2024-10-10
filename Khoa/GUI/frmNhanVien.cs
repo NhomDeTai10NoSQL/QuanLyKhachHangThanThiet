@@ -176,5 +176,10 @@ namespace Khoa.GUI
             txtTaiKhoan.Enabled = true;
             txtMatKhau.Enabled = true;
         }
+
+        private void txtMatKhau_TextChanged(object sender, EventArgs e)
+        {
+            txtMatKhau.PasswordChar = '*';
+        }
     }
 }

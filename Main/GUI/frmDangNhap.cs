@@ -15,6 +15,7 @@ namespace  Main.GUI
     public partial class frmDangNhap : Form
     {
         DangNhapBUS dangNhapBUS;
+        public static string taiKhoanDangSuDung;
         public frmDangNhap()
         {
             dangNhapBUS = new DangNhapBUS();
@@ -51,6 +52,7 @@ namespace  Main.GUI
                 string chucVu = dangNhapBUS.GetChucVu(taiKhoan);
 
                 MessageBox.Show("Đăng nhập thành công.");
+                taiKhoanDangSuDung = taiKhoan;
                 frmTrangChu mainForm = new frmTrangChu(taiKhoan, chucVu);
                 mainForm.Show();
                 this.Hide();

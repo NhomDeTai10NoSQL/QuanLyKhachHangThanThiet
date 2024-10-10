@@ -241,5 +241,7 @@ namespace Khoa.DAO
             var collection = connect.Database.GetCollection<BsonDocument>(strcollection);
             return collection.Find(filter).FirstOrDefault();
         }
+        
+
     }
 }

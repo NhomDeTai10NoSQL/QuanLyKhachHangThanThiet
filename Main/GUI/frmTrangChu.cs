@@ -15,6 +15,7 @@ using Sunny.UI;
 using KimPhuong.GUI;
 using Main.BUS;
 using Khoa.GUI;
+using Main.GUI;
 
 namespace Main
 {
@@ -102,6 +103,12 @@ namespace Main
                 AddPage(page, 2000);
                 SelectPage(2000);
             }
+        }
+
+        private void uiAvatar1_Click(object sender, EventArgs e)
+        {
+            frmThongTinNhanVien nv = new frmThongTinNhanVien();
+            nv.ShowDialog();
         }
 
         private void frmTrangChu_FormClosing(object sender, FormClosingEventArgs e)

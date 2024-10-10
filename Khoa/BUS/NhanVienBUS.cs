@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Khoa.BUS
 {
-    internal class NhanVienBUS
+    public class NhanVienBUS
     {
         NhanVienDAO nhanVienDAO;
         public NhanVienBUS() {
@@ -39,6 +39,14 @@ namespace Khoa.BUS
         public BsonDocument GetNhanVienBySDT(string soDienThoai)
         {
             return nhanVienDAO.GetNhanVienBySDT(soDienThoai);
+        }
+        public BsonDocument GetNhanVienByTaiKhoan(string taiKhoan)
+        {
+            return nhanVienDAO.GetNhanVienByTaiKhoan(taiKhoan);
+        }
+        public bool UpdateMatKhau(string taiKhoan, string matKhau)
+        {
+            return nhanVienDAO.UpdateMatKhau(taiKhoan, matKhau);
         }
     }
 }
