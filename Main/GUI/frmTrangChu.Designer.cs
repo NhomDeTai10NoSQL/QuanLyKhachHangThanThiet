@@ -40,7 +40,8 @@
             // 
             // Aside
             // 
-            this.Aside.Size = new System.Drawing.Size(306, 415);
+            this.Aside.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Aside.Size = new System.Drawing.Size(340, 415);
             // 
             // uiAvatar1
             // 
@@ -55,7 +56,7 @@
             // 
             // frmTrangChu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.MaximizeBox = false;

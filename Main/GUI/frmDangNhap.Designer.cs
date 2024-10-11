@@ -192,7 +192,7 @@
             this.Controls.Add(this.uiPanel1);
             this.Name = "frmDangNhap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "ĐĂNG NHẬP";
             this.uiPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
