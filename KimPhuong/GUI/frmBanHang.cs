@@ -130,7 +130,7 @@ namespace KimPhuong.GUI
                     {
                         MaHoaDon = document.Contains("maHoaDon") ? document["maHoaDon"].AsString : string.Empty,
                         NgayLapHoaDon = document.Contains("ngayLapHoaDon") && !document["ngayLapHoaDon"].IsBsonNull
-                            ? document["ngayLapHoaDon"].ToLocalTime().Date
+                            ? document["ngayLapHoaDon"].ToUniversalTime().Date
                             : (DateTime?) null,
                         TongTien = document.Contains("tongTien") && !document["tongTien"].IsBsonNull
                             ? document["tongTien"].AsInt32
@@ -325,10 +325,10 @@ namespace KimPhuong.GUI
 
         private void btnTaoDon_Click(object sender, EventArgs e)
         {
+            btnTimKhachHang.Enabled = txtSoDienThoai.Enabled = lblSDT.Enabled = false;
             btnThemVaoGioHang.Enabled = btnXoaSanPhamKhoiGio.Enabled = btnThanhToan.Enabled =
-                btnTimKhachHang.Enabled = btnDungDiemTichLuy.Enabled = true;
-            lblSDT.Enabled = lblDiemTichLuy.Enabled = lblHoTenKH.Enabled = true;
-            txtSoDienThoai.Enabled = true;
+                btnDungDiemTichLuy.Enabled = true;
+            lblDiemTichLuy.Enabled = lblHoTenKH.Enabled = true;
             cbPhuongThucThanhToan.Enabled = true;
             btnLuuTam.Enabled = true;
             btnTaoDon.Enabled = false;
@@ -463,7 +463,12 @@ namespace KimPhuong.GUI
                     {
                         lblKhachHangTT.Visible = txtKhachHangThanThiet.Visible = true;
                         txtKhachHangThanThiet.Enabled = false;
+                        if (KhachHang["NgaySinh"].ToUniversalTime().Day == DateTime.UtcNow.Day && KhachHang["NgaySinh"].ToUniversalTime().Month == DateTime.UtcNow.Month)
+                        {
+                            MessageBox.Show("Hôm nay là sinh nhật của khách hàng, hãy tặng khách hàng 1 món quà!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
                     }
+
                 }
 
             }
@@ -598,10 +603,23 @@ namespace KimPhuong.GUI
 
 
         }
-
+        bool sinhNhat;
         private void tinhTongPhaiTra()
         {
-            int tongPhaiTra = 0, giamKH = 0;
+
+            var KhachHang = khachHangBUS.getKHBySDT(txtSoDienThoai.Text.Trim());
+            if (KhachHang != null)
+            {
+                if (KhachHang["NgaySinh"].ToUniversalTime().Day == DateTime.UtcNow.Day && KhachHang["NgaySinh"].ToUniversalTime().Month == DateTime.UtcNow.Month)
+                {
+                    sinhNhat = true;
+                }
+                else
+                {
+                    sinhNhat = false;
+                }
+            }
+            int tongPhaiTra = 0, giamKH = 0, giamSinhNhat = 0;
             if (!string.IsNullOrEmpty(txtDungDiemTichLuy.Text))
             {
                 if (int.TryParse(txtTongTien.Text.Replace(",", "").Trim(), out int tongTien) &&
@@ -609,19 +627,38 @@ namespace KimPhuong.GUI
                 {
                     if (tongTien > 20000000)
                     {
-                        giamKH = 1000000;
+                        giamKH = Convert.ToInt32(tongTien * 0.1);
+                        if (giamKH > 10000000)
+                        {
+                            giamKH = 10000000;
+                        }
                     }
 
-                    tongPhaiTra = tongTien - giamKH - diemTichLuy;
+                    if (sinhNhat)
+                    {
+                        giamSinhNhat = Convert.ToInt32(tongTien * 0.05);
+                        if (giamSinhNhat > 10000000)
+                        {
+                            giamSinhNhat = 10000000;
+                        }
+
+                    }
+                    else
+                    {
+                        giamSinhNhat = 0;
+                    }
+
+                    tongPhaiTra = tongTien - giamKH - giamSinhNhat - diemTichLuy;
                     if (tongPhaiTra < 0)
                     {
                         tongPhaiTra = 0;
                     }
-                    
+
                 }
             }
+            int tongGiamChoKHTT = giamSinhNhat + giamKH;
             txtTongPhaiTra.Text = tongPhaiTra.ToString("N0");
-            txtKhachHangThanThiet.Text = giamKH.ToString("N0");
+            txtKhachHangThanThiet.Text = tongGiamChoKHTT.ToString("N0");
         }
 
         private void dtgGioHang_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
@@ -969,7 +1006,7 @@ namespace KimPhuong.GUI
                 {
                     MaHoaDon = document.Contains("maHoaDon") ? document["maHoaDon"].AsString : string.Empty,
                     NgayLapHoaDon = document.Contains("ngayLapHoaDon") && !document["ngayLapHoaDon"].IsBsonNull
-                        ? document["ngayLapHoaDon"].ToLocalTime()
+                        ? document["ngayLapHoaDon"].ToUniversalTime()
                         : (DateTime?) null,
                     TongTien = document.Contains("tongTien") && !document["tongTien"].IsBsonNull
                         ? document["tongTien"].AsInt32
@@ -1006,6 +1043,13 @@ namespace KimPhuong.GUI
             dtgHoaDon.Columns["NgayLapHoaDon"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dtgHoaDon.Columns["TongTien"].DefaultCellStyle.Format = "N0";
             dtgHoaDon.Columns["TongPhaiTra"].DefaultCellStyle.Format = "N0";
+        }
+
+        private void btnInHoaDon_Click(object sender, EventArgs e)
+        {
+            string maHoaDon = "HD022"; 
+            frmInHoaDon formInHoaDon = new frmInHoaDon(maHoaDon);
+            formInHoaDon.Show();
         }
     }
 }
