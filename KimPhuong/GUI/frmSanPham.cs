@@ -335,5 +335,13 @@ namespace KimPhuong
                 MessageBox.Show($"Có lỗi xảy ra: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void frmSanPham_Load(object sender, EventArgs e)
+        {
+            loadBaoHanh();
+            loadDanhMuc();
+            loadNhaCungCap();
+            loadSanPham();
+        }
     }
 }

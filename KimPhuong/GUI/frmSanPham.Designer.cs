@@ -622,6 +622,7 @@
             this.Controls.Add(this.uiTableLayoutPanel1);
             this.Name = "frmSanPham";
             this.Text = "QUẢN LÝ SẢN PHẨM";
+            this.Load += new System.EventHandler(this.frmSanPham_Load);
             this.uiTableLayoutPanel2.ResumeLayout(false);
             this.uiTableLayoutPanel6.ResumeLayout(false);
             this.uiTableLayoutPanel1.ResumeLayout(false);
