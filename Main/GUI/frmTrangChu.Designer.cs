@@ -29,40 +29,55 @@
         private void InitializeComponent()
         {
             this.uiAvatar1 = new Sunny.UI.UIAvatar();
+            this.lblTenNV = new Sunny.UI.UISmoothLabel();
             this.Header.SuspendLayout();
             this.SuspendLayout();
             // 
             // Header
             // 
+            this.Header.Controls.Add(this.lblTenNV);
             this.Header.Controls.Add(this.uiAvatar1);
-            this.Header.Location = new System.Drawing.Point(306, 35);
-            this.Header.Size = new System.Drawing.Size(494, 41);
+            this.Header.Location = new System.Drawing.Point(340, 35);
+            this.Header.Size = new System.Drawing.Size(840, 41);
             // 
             // Aside
             // 
             this.Aside.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Aside.Size = new System.Drawing.Size(340, 415);
+            this.Aside.Size = new System.Drawing.Size(340, 604);
             // 
             // uiAvatar1
             // 
+            this.uiAvatar1.Dock = System.Windows.Forms.DockStyle.Right;
             this.uiAvatar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiAvatar1.Location = new System.Drawing.Point(433, 3);
+            this.uiAvatar1.Location = new System.Drawing.Point(801, 0);
             this.uiAvatar1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiAvatar1.Name = "uiAvatar1";
-            this.uiAvatar1.Size = new System.Drawing.Size(39, 38);
+            this.uiAvatar1.Size = new System.Drawing.Size(39, 41);
             this.uiAvatar1.TabIndex = 0;
             this.uiAvatar1.Text = "uiAvatar1";
             this.uiAvatar1.Click += new System.EventHandler(this.uiAvatar1_Click);
+            // 
+            // lblTenNV
+            // 
+            this.lblTenNV.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblTenNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblTenNV.Location = new System.Drawing.Point(501, 0);
+            this.lblTenNV.Name = "lblTenNV";
+            this.lblTenNV.RectColor = System.Drawing.Color.CornflowerBlue;
+            this.lblTenNV.Size = new System.Drawing.Size(300, 41);
+            this.lblTenNV.TabIndex = 1;
+            this.lblTenNV.Text = "uiSmoothLabel1";
+            this.lblTenNV.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmTrangChu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1180, 639);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmTrangChu";
-            this.Text = "Form1";
+            this.Text = "TRANG CHỦ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ZoomScaleRect = new System.Drawing.Rectangle(22, 22, 800, 450);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTrangChu_FormClosing);
@@ -74,6 +89,7 @@
         #endregion
 
         private Sunny.UI.UIAvatar uiAvatar1;
+        private Sunny.UI.UISmoothLabel lblTenNV;
     }
 }
 

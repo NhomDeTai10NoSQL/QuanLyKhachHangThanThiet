@@ -30,6 +30,7 @@ namespace Main
         {
             InitializeComponent();
             this.taiKhoan = taiKhoan;
+            lblTenNV.Text = taiKhoan;
 
             this.chucVu = chucVu;
             KiemTraQuyen();

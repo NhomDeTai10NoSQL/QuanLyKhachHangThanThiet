@@ -208,6 +208,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QLKHTT.cs">
+      <DependentUpon>QLKHTT.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="QLKHTT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLKHTT.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmInHoaDon.resx">
       <DependentUpon>frmInHoaDon.cs</DependentUpon>
     </EmbeddedResource>
@@ -242,6 +250,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="QLKHTT.xsc">
+      <DependentUpon>QLKHTT.xsd</DependentUpon>
+    </None>
+    <None Include="QLKHTT.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QLKHTT.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="QLKHTT.xss">
+      <DependentUpon>QLKHTT.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

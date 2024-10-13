@@ -128,6 +128,7 @@
             this.txtMatKhau.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Padding = new System.Windows.Forms.Padding(5);
+            this.txtMatKhau.RectColor = System.Drawing.Color.Black;
             this.txtMatKhau.ShowText = false;
             this.txtMatKhau.Size = new System.Drawing.Size(348, 51);
             this.txtMatKhau.TabIndex = 13;
@@ -145,6 +146,7 @@
             this.txtChucVu.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtChucVu.Name = "txtChucVu";
             this.txtChucVu.Padding = new System.Windows.Forms.Padding(5);
+            this.txtChucVu.RectColor = System.Drawing.Color.Black;
             this.txtChucVu.ShowText = false;
             this.txtChucVu.Size = new System.Drawing.Size(348, 49);
             this.txtChucVu.TabIndex = 13;
@@ -161,6 +163,7 @@
             this.txtMucLuong.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtMucLuong.Name = "txtMucLuong";
             this.txtMucLuong.Padding = new System.Windows.Forms.Padding(5);
+            this.txtMucLuong.RectColor = System.Drawing.Color.Black;
             this.txtMucLuong.ShowText = false;
             this.txtMucLuong.Size = new System.Drawing.Size(348, 49);
             this.txtMucLuong.TabIndex = 14;
@@ -177,6 +180,7 @@
             this.txtEmail.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Padding = new System.Windows.Forms.Padding(5);
+            this.txtEmail.RectColor = System.Drawing.Color.Black;
             this.txtEmail.ShowText = false;
             this.txtEmail.Size = new System.Drawing.Size(348, 49);
             this.txtEmail.TabIndex = 13;
@@ -283,6 +287,7 @@
             this.txtTenNV.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtTenNV.Name = "txtTenNV";
             this.txtTenNV.Padding = new System.Windows.Forms.Padding(5);
+            this.txtTenNV.RectColor = System.Drawing.Color.Black;
             this.txtTenNV.ShowText = false;
             this.txtTenNV.Size = new System.Drawing.Size(345, 49);
             this.txtTenNV.TabIndex = 10;
@@ -299,6 +304,7 @@
             this.txtSDT.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Padding = new System.Windows.Forms.Padding(5);
+            this.txtSDT.RectColor = System.Drawing.Color.Black;
             this.txtSDT.ShowText = false;
             this.txtSDT.Size = new System.Drawing.Size(345, 49);
             this.txtSDT.TabIndex = 12;
@@ -316,6 +322,7 @@
             this.txtTaiKhoan.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Padding = new System.Windows.Forms.Padding(5);
+            this.txtTaiKhoan.RectColor = System.Drawing.Color.Black;
             this.txtTaiKhoan.ShowText = false;
             this.txtTaiKhoan.Size = new System.Drawing.Size(348, 49);
             this.txtTaiKhoan.TabIndex = 15;
@@ -368,7 +375,7 @@
             // 
             this.dtpNgaySinh.Location = new System.Drawing.Point(238, 121);
             this.dtpNgaySinh.Name = "dtpNgaySinh";
-            this.dtpNgaySinh.Size = new System.Drawing.Size(346, 30);
+            this.dtpNgaySinh.Size = new System.Drawing.Size(346, 35);
             this.dtpNgaySinh.TabIndex = 17;
             // 
             // uiTableLayoutPanel2
@@ -474,7 +481,7 @@
             this.uiTableLayoutPanel4.Name = "uiTableLayoutPanel4";
             this.uiTableLayoutPanel4.RowCount = 1;
             this.uiTableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.uiTableLayoutPanel4.Size = new System.Drawing.Size(1179, 220);
+            this.uiTableLayoutPanel4.Size = new System.Drawing.Size(1179, 286);
             this.uiTableLayoutPanel4.TabIndex = 3;
             this.uiTableLayoutPanel4.TagString = null;
             // 
@@ -482,7 +489,8 @@
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.dgvNhanVien.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvNhanVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvNhanVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvNhanVien.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvNhanVien.BackgroundColor = System.Drawing.Color.White;
             this.dgvNhanVien.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -534,7 +542,7 @@
             this.dgvNhanVien.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvNhanVien.RowTemplate.Height = 24;
             this.dgvNhanVien.SelectedIndex = -1;
-            this.dgvNhanVien.Size = new System.Drawing.Size(1173, 214);
+            this.dgvNhanVien.Size = new System.Drawing.Size(1173, 280);
             this.dgvNhanVien.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.dgvNhanVien.TabIndex = 0;
             this.dgvNhanVien.SelectionChanged += new System.EventHandler(this.dgvNhanVien_SelectionChanged);
@@ -545,7 +553,6 @@
             this.maNhanVien.HeaderText = "Mã nhân viên";
             this.maNhanVien.MinimumWidth = 6;
             this.maNhanVien.Name = "maNhanVien";
-            this.maNhanVien.Width = 158;
             // 
             // tenNhanVien
             // 
@@ -553,7 +560,6 @@
             this.tenNhanVien.HeaderText = "Tên nhân viên";
             this.tenNhanVien.MinimumWidth = 6;
             this.tenNhanVien.Name = "tenNhanVien";
-            this.tenNhanVien.Width = 165;
             // 
             // gioiTinh
             // 
@@ -561,7 +567,6 @@
             this.gioiTinh.HeaderText = "Giới tính";
             this.gioiTinh.MinimumWidth = 6;
             this.gioiTinh.Name = "gioiTinh";
-            this.gioiTinh.Width = 110;
             // 
             // ngaySinh
             // 
@@ -569,7 +574,6 @@
             this.ngaySinh.HeaderText = "Ngày sinh";
             this.ngaySinh.MinimumWidth = 6;
             this.ngaySinh.Name = "ngaySinh";
-            this.ngaySinh.Width = 127;
             // 
             // soDienThoai
             // 
@@ -577,7 +581,6 @@
             this.soDienThoai.HeaderText = "Số điện thoại";
             this.soDienThoai.MinimumWidth = 6;
             this.soDienThoai.Name = "soDienThoai";
-            this.soDienThoai.Width = 154;
             // 
             // email
             // 
@@ -585,7 +588,6 @@
             this.email.HeaderText = "Email";
             this.email.MinimumWidth = 6;
             this.email.Name = "email";
-            this.email.Width = 88;
             // 
             // chucVu
             // 
@@ -593,7 +595,6 @@
             this.chucVu.HeaderText = "Chức vụ";
             this.chucVu.MinimumWidth = 6;
             this.chucVu.Name = "chucVu";
-            this.chucVu.Width = 113;
             // 
             // mucLuong
             // 
@@ -601,7 +602,6 @@
             this.mucLuong.HeaderText = "Mức lương";
             this.mucLuong.MinimumWidth = 6;
             this.mucLuong.Name = "mucLuong";
-            this.mucLuong.Width = 131;
             // 
             // taiKhoan
             // 
@@ -609,7 +609,6 @@
             this.taiKhoan.HeaderText = "Tài khoản";
             this.taiKhoan.MinimumWidth = 6;
             this.taiKhoan.Name = "taiKhoan";
-            this.taiKhoan.Width = 127;
             // 
             // matKhau
             // 
@@ -617,7 +616,6 @@
             this.matKhau.HeaderText = "Mật khẩu";
             this.matKhau.MinimumWidth = 6;
             this.matKhau.Name = "matKhau";
-            this.matKhau.Width = 121;
             // 
             // frmNhanVien
             // 

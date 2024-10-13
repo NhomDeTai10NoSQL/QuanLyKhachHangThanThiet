@@ -27,15 +27,20 @@ namespace KimPhuong
             this.maHoaDon = maHoaDon;
         }
 
-        private DataTable GetDataFromMongoDB()
+        private DataSet GetDataFromMongoDB()
         {
             try
             {
+                DataSet dsQLKHTT = new DataSet();
+                dsQLKHTT.ReadXmlSchema(@"D:\KimPhuong\Desktop\HK7\NOSQL\DOAN2\KimPhuong\QLKHTT.xsd");
+
+                DataTable dtHoaDon = dsQLKHTT.Tables["HoaDon"];
+                DataTable dtChiTietHoaDon = dsQLKHTT.Tables["ChiTietHoaDon"];
+
                 var client = new MongoClient(connectionString);
                 var database = client.GetDatabase(databaseName);
                 var collection = database.GetCollection<BsonDocument>("HoaDon");
 
-                // Tạo filter để lấy hóa đơn theo mã
                 var filter = Builders<BsonDocument>.Filter.Eq("maHoaDon", maHoaDon);
                 var document = collection.Find(filter).FirstOrDefault();
 
@@ -43,70 +48,37 @@ namespace KimPhuong
                 {
                     throw new Exception($"Không tìm thấy hóa đơn với mã {maHoaDon}");
                 }
+                int tongtien = document["tongTien"].AsInt32;
+                int tongPhaiTra = document["tongPhaiTra"].AsInt32;
 
-                // Tạo DataTable với cấu trúc phù hợp
-                DataTable dt = new DataTable();
+                DataRow rowHoaDon = dtHoaDon.NewRow();
+                rowHoaDon["maHoaDon"] = document["maHoaDon"].AsString;
+                rowHoaDon["ngayLapHoaDon"] = document["ngayLapHoaDon"].ToUniversalTime();
+                rowHoaDon["tongTien"] = document["tongTien"].AsInt32;
+                rowHoaDon["diemDaDung"] = document["diemDaDung"].AsInt32;
+                rowHoaDon["phuongThucThanhToan"] = document["phuongThucThanhToan"].AsString;
+                rowHoaDon["maNhanVien"] = document["nhanVien"]["maNhanVien"].AsString;
+                rowHoaDon["tenNhanVien"] = document["nhanVien"]["tenNhanVien"].AsString;
+                rowHoaDon["maKhachHang"] = document["khachHang"]["maKhachHang"].AsString;
+                rowHoaDon["tenKhachHang"] = document["khachHang"]["tenKhachHang"].AsString;
+                rowHoaDon["tongPhaiTra"] = document["tongPhaiTra"].AsInt32;
+                rowHoaDon["tongGiamGia"]= tongtien - tongPhaiTra;
+                dtHoaDon.Rows.Add(rowHoaDon);
 
-                // Thông tin hóa đơn
-                dt.Columns.Add("MaHoaDon", typeof(string));
-                dt.Columns.Add("NgayLapHoaDon", typeof(DateTime));
-                dt.Columns.Add("TongTien", typeof(int));
-                dt.Columns.Add("DiemDaDung", typeof(int));
-                dt.Columns.Add("DiemTichLuy", typeof(int));
-                dt.Columns.Add("PhuongThucThanhToan", typeof(string));
-                dt.Columns.Add("TongPhaiTra", typeof(int));
-
-                // Thông tin nhân viên
-                dt.Columns.Add("MaNhanVien", typeof(string));
-                dt.Columns.Add("TenNhanVien", typeof(string));
-
-                // Thông tin khách hàng
-                dt.Columns.Add("MaKhachHang", typeof(string));
-                dt.Columns.Add("TenKhachHang", typeof(string));
-
-                // Thông tin sản phẩm
-                dt.Columns.Add("MaSanPham", typeof(string));
-                dt.Columns.Add("TenSanPham", typeof(string));
-                dt.Columns.Add("SoLuong", typeof(int));
-                dt.Columns.Add("DonGia", typeof(int));
-                dt.Columns.Add("ThanhTien", typeof(int));
-
-                // Thêm dữ liệu vào DataTable
                 var chiTietHoaDon = document["chiTietHoaDon"].AsBsonArray;
                 foreach (var chiTiet in chiTietHoaDon)
                 {
-                    DataRow row = dt.NewRow();
-
-                    // Thông tin hóa đơn
-                    row["MaHoaDon"] = document["maHoaDon"].AsString;
-                    row["NgayLapHoaDon"] = document["ngayLapHoaDon"].ToUniversalTime();
-                    row["TongTien"] = document["tongTien"].AsInt32;
-                    row["DiemDaDung"] = document["diemDaDung"].AsInt32;
-                    row["DiemTichLuy"] = document["diemTichLuy"].IsBsonNull ? 0 : document["diemTichLuy"].AsInt32;
-                    row["PhuongThucThanhToan"] = document["phuongThucThanhToan"].AsString;
-                    row["TongPhaiTra"] = document["tongPhaiTra"].AsInt32;
-
-                    // Thông tin nhân viên
-                    var nhanVien = document["nhanVien"].AsBsonDocument;
-                    row["MaNhanVien"] = nhanVien["maNhanVien"].AsString;
-                    row["TenNhanVien"] = nhanVien["tenNhanVien"].AsString;
-
-                    // Thông tin khách hàng
-                    var khachHang = document["khachHang"].AsBsonDocument;
-                    row["MaKhachHang"] = khachHang["maKhachHang"].AsString;
-                    row["TenKhachHang"] = khachHang["tenKhachHang"].AsString;
-
-                    // Thông tin sản phẩm
-                    row["MaSanPham"] = chiTiet["maSanPham"].AsString;
-                    row["TenSanPham"] = chiTiet["tenSanPham"].AsString;
-                    row["SoLuong"] = chiTiet["soLuong"].AsInt32;
-                    row["DonGia"] = chiTiet["donGia"].AsInt32;
-                    row["ThanhTien"] = chiTiet["thanhTien"].AsInt32;
-
-                    dt.Rows.Add(row);
+                    DataRow rowChiTiet = dtChiTietHoaDon.NewRow();
+                    rowChiTiet["maHoaDon"] = document["maHoaDon"].AsString;
+                    rowChiTiet["maSanPham"] = chiTiet["maSanPham"].AsString;
+                    rowChiTiet["tenSanPham"] = chiTiet["tenSanPham"].AsString;
+                    rowChiTiet["soLuong"] = chiTiet["soLuong"].AsInt32;
+                    rowChiTiet["donGia"] = chiTiet["donGia"].AsInt32;
+                    rowChiTiet["thanhTien"] = chiTiet["thanhTien"].AsInt32;
+                    dtChiTietHoaDon.Rows.Add(rowChiTiet);
                 }
 
-                return dt;
+                return dsQLKHTT;
             }
             catch (Exception ex)
             {
@@ -121,10 +93,10 @@ namespace KimPhuong
                 reportDocument = new ReportDocument();
                 reportDocument.Load(@"D:\KimPhuong\Desktop\HK7\NOSQL\DOAN2\KimPhuong\inHoaDon.rpt");
 
-                DataTable dt = GetDataFromMongoDB();
-                if (dt != null)
+                DataSet ds = GetDataFromMongoDB();
+                if (ds != null)
                 {
-                    reportDocument.SetDataSource(dt);
+                    reportDocument.SetDataSource(ds);
                     crystalReportViewer1.ReportSource = reportDocument;
                     crystalReportViewer1.Refresh();
                 }
@@ -134,15 +106,7 @@ namespace KimPhuong
                 MessageBox.Show($"Lỗi khi tạo report: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-            if (reportDocument != null)
-            {
-                reportDocument.Close();
-                reportDocument.Dispose();
-            }
-        }
+        
 
         private void frmInHoaDon_Load(object sender, EventArgs e)
         {

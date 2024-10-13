@@ -325,16 +325,25 @@ namespace KimPhuong.GUI
 
         private void btnTaoDon_Click(object sender, EventArgs e)
         {
-            btnTimKhachHang.Enabled = txtSoDienThoai.Enabled = lblSDT.Enabled = false;
-            btnThemVaoGioHang.Enabled = btnXoaSanPhamKhoiGio.Enabled = btnThanhToan.Enabled =
-                btnDungDiemTichLuy.Enabled = true;
-            lblDiemTichLuy.Enabled = lblHoTenKH.Enabled = true;
-            cbPhuongThucThanhToan.Enabled = true;
-            btnLuuTam.Enabled = true;
-            btnTaoDon.Enabled = false;
-            lapHoaDonMoi();
-            intSoLuongThem.Enabled = true;
-            loadHoaDon();
+
+            if (!string.IsNullOrEmpty(txtHoTenKhachHang.Text))
+            {
+                btnTimKhachHang.Enabled = txtSoDienThoai.Enabled = lblSDT.Enabled = false;
+                btnThemVaoGioHang.Enabled = btnXoaSanPhamKhoiGio.Enabled = btnThanhToan.Enabled =
+                    btnDungDiemTichLuy.Enabled = true;
+                lblDiemTichLuy.Enabled = lblHoTenKH.Enabled = true;
+                cbPhuongThucThanhToan.Enabled = true;
+                btnLuuTam.Enabled = true;
+                btnTaoDon.Enabled = false;
+                lapHoaDonMoi();
+                intSoLuongThem.Enabled = true;
+                loadHoaDon();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn khách hàng!!");
+                return;
+            }
         }
         private void lapHoaDonMoi()
         {
@@ -797,6 +806,8 @@ namespace KimPhuong.GUI
             {
                 MessageBox.Show("Thanh toán thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                frmInHoaDon formInHoaDon = new frmInHoaDon(maHoaDon);
+                formInHoaDon.Show();
                 loadHoaDon();
                 clearGioHang();
             }
@@ -1047,7 +1058,7 @@ namespace KimPhuong.GUI
 
         private void btnInHoaDon_Click(object sender, EventArgs e)
         {
-            string maHoaDon = "HD022"; 
+            string maHoaDon = txtMaHD.Text;
             frmInHoaDon formInHoaDon = new frmInHoaDon(maHoaDon);
             formInHoaDon.Show();
         }

@@ -74,7 +74,8 @@
             this.txtSDT.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.txtSDT.MinimumSize = new System.Drawing.Size(1, 20);
             this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtSDT.Padding = new System.Windows.Forms.Padding(6);
+            this.txtSDT.RectColor = System.Drawing.Color.Black;
             this.txtSDT.ShowText = false;
             this.txtSDT.Size = new System.Drawing.Size(286, 50);
             this.txtSDT.TabIndex = 4;
@@ -119,7 +120,8 @@
             this.txtTenKh.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.txtTenKh.MinimumSize = new System.Drawing.Size(1, 20);
             this.txtTenKh.Name = "txtTenKh";
-            this.txtTenKh.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtTenKh.Padding = new System.Windows.Forms.Padding(6);
+            this.txtTenKh.RectColor = System.Drawing.Color.Black;
             this.txtTenKh.ShowText = false;
             this.txtTenKh.Size = new System.Drawing.Size(294, 50);
             this.txtTenKh.TabIndex = 3;

@@ -115,6 +115,7 @@
             this.txtDiem.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtDiem.Name = "txtDiem";
             this.txtDiem.Padding = new System.Windows.Forms.Padding(5);
+            this.txtDiem.RectColor = System.Drawing.Color.Black;
             this.txtDiem.ShowText = false;
             this.txtDiem.Size = new System.Drawing.Size(499, 47);
             this.txtDiem.TabIndex = 3;
@@ -131,6 +132,7 @@
             this.txtTenKH.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtTenKH.Name = "txtTenKH";
             this.txtTenKH.Padding = new System.Windows.Forms.Padding(5);
+            this.txtTenKH.RectColor = System.Drawing.Color.Black;
             this.txtTenKH.ShowText = false;
             this.txtTenKH.Size = new System.Drawing.Size(496, 47);
             this.txtTenKH.TabIndex = 1;
@@ -213,6 +215,7 @@
             this.txtSDT.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Padding = new System.Windows.Forms.Padding(5);
+            this.txtSDT.RectColor = System.Drawing.Color.Black;
             this.txtSDT.ShowText = false;
             this.txtSDT.Size = new System.Drawing.Size(496, 47);
             this.txtSDT.TabIndex = 3;
@@ -239,6 +242,7 @@
             this.cboTrangThai.MinimumSize = new System.Drawing.Size(63, 0);
             this.cboTrangThai.Name = "cboTrangThai";
             this.cboTrangThai.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cboTrangThai.RectColor = System.Drawing.Color.Black;
             this.cboTrangThai.Size = new System.Drawing.Size(499, 47);
             this.cboTrangThai.SymbolSize = 24;
             this.cboTrangThai.TabIndex = 7;
@@ -259,6 +263,7 @@
             this.cboLoaiKH.MinimumSize = new System.Drawing.Size(63, 0);
             this.cboLoaiKH.Name = "cboLoaiKH";
             this.cboLoaiKH.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cboLoaiKH.RectColor = System.Drawing.Color.Black;
             this.cboLoaiKH.Size = new System.Drawing.Size(499, 47);
             this.cboLoaiKH.SymbolSize = 24;
             this.cboLoaiKH.TabIndex = 8;
@@ -529,6 +534,7 @@
             this.txtSearch.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Padding = new System.Windows.Forms.Padding(5);
+            this.txtSearch.RectColor = System.Drawing.Color.Black;
             this.txtSearch.ShowText = false;
             this.txtSearch.Size = new System.Drawing.Size(662, 48);
             this.txtSearch.TabIndex = 0;
@@ -552,6 +558,7 @@
             this.cboLoc.MinimumSize = new System.Drawing.Size(63, 0);
             this.cboLoc.Name = "cboLoc";
             this.cboLoc.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cboLoc.RectColor = System.Drawing.Color.Black;
             this.cboLoc.Size = new System.Drawing.Size(495, 48);
             this.cboLoc.SymbolSize = 24;
             this.cboLoc.TabIndex = 8;
