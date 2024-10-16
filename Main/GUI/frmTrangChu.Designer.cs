@@ -37,19 +37,19 @@
             // 
             this.Header.Controls.Add(this.lblTenNV);
             this.Header.Controls.Add(this.uiAvatar1);
-            this.Header.Location = new System.Drawing.Point(340, 35);
-            this.Header.Size = new System.Drawing.Size(840, 41);
+            this.Header.Location = new System.Drawing.Point(419, 35);
+            this.Header.Size = new System.Drawing.Size(761, 41);
             // 
             // Aside
             // 
             this.Aside.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Aside.Size = new System.Drawing.Size(340, 604);
+            this.Aside.Size = new System.Drawing.Size(419, 604);
             // 
             // uiAvatar1
             // 
             this.uiAvatar1.Dock = System.Windows.Forms.DockStyle.Right;
             this.uiAvatar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiAvatar1.Location = new System.Drawing.Point(801, 0);
+            this.uiAvatar1.Location = new System.Drawing.Point(722, 0);
             this.uiAvatar1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiAvatar1.Name = "uiAvatar1";
             this.uiAvatar1.Size = new System.Drawing.Size(39, 41);
@@ -61,7 +61,7 @@
             // 
             this.lblTenNV.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblTenNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblTenNV.Location = new System.Drawing.Point(501, 0);
+            this.lblTenNV.Location = new System.Drawing.Point(422, 0);
             this.lblTenNV.Name = "lblTenNV";
             this.lblTenNV.RectColor = System.Drawing.Color.CornflowerBlue;
             this.lblTenNV.Size = new System.Drawing.Size(300, 41);

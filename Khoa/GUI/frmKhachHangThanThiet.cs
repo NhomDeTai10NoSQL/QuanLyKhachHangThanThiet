@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Khoa.BUS;
 using Sunny.UI;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 namespace Khoa
 {
     public partial class frmKhachHangThanThiet : UIPage
@@ -220,6 +224,60 @@ namespace Khoa
             {
                 MessageBox.Show("Xóa khách hàng không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 return;
+            }
+        }
+
+        private void btnXuatExcel_Click(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(() =>
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Excel Files (*.xlsx)|*.xlsx";
+                sfd.FileName = "KhachHangFile";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = sfd.FileName;
+
+                    try
+                    {
+                        ExportExcel(filePath);
+                        MessageBox.Show("Xuất file thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Lỗi khi xuất file: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            });
+
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+        }
+
+        private void ExportExcel(string filePath)
+        {
+            IWorkbook workbook = new XSSFWorkbook();
+            ISheet sheet = workbook.CreateSheet("NhaCungCap");
+
+            IRow headerRow = sheet.CreateRow(0);
+            for (int i = 0; i < dgvKhachHang.Columns.Count; i++)
+            {
+                headerRow.CreateCell(i).SetCellValue(dgvKhachHang.Columns[i].HeaderText);
+            }
+
+            for (int i = 0; i < dgvKhachHang.Rows.Count; i++)
+            {
+                IRow row = sheet.CreateRow(i + 1);
+                for (int j = 0; j < dgvKhachHang.Columns.Count; j++)
+                {
+                    row.CreateCell(j).SetCellValue(dgvKhachHang.Rows[i].Cells[j].Value?.ToString() ?? "");
+                }
+            }
+
+            using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                workbook.Write(stream);
             }
         }
     }

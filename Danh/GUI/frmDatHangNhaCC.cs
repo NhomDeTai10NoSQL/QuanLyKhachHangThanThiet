@@ -120,12 +120,7 @@ namespace Danh.GUI
             {
                 txtGiaBan.Text = giaBan.ToString("N0") + " VND";
             }
-            else
-            {
-                MessageBox.Show("Vui lòng nhập số hợp lệ.", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtGiaBan.Focus();
-                return;
-            }
+            
         }
         private void tinhThanhTien()
         {

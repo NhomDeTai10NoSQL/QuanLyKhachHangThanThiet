@@ -565,12 +565,12 @@ namespace KimPhuong.GUI
             dtgGioHang.Rows.Clear();
 
             btnThemVaoGioHang.Enabled = btnXoaSanPhamKhoiGio.Enabled = btnThanhToan.Enabled =
-               btnTimKhachHang.Enabled = btnDungDiemTichLuy.Enabled = btnThanhToan.Enabled = false;
+             btnDungDiemTichLuy.Enabled = btnThanhToan.Enabled = false;
 
             lblDiemTichLuy.Enabled = lblHoTenKH.Enabled = lblSDT.Enabled = false;
 
             txtDungDiemTichLuy.Enabled =
-              txtSoDienThoai.Enabled = txtTongTien.Enabled = false;
+              txtTongTien.Enabled = false;
 
             cbPhuongThucThanhToan.Enabled = false;
 
@@ -612,7 +612,7 @@ namespace KimPhuong.GUI
 
 
         }
-        bool sinhNhat;
+        bool sinhNhat, thanthiet;
         private void tinhTongPhaiTra()
         {
 
@@ -628,33 +628,48 @@ namespace KimPhuong.GUI
                     sinhNhat = false;
                 }
             }
+            if (KhachHang != null)
+            {
+                if (KhachHang["LoaiKhachHang"].AsString == "Thân thiết")
+                {
+                    thanthiet = true;
+                }
+                else
+                {
+                    thanthiet = false;
+                }
+            }
             int tongPhaiTra = 0, giamKH = 0, giamSinhNhat = 0;
             if (!string.IsNullOrEmpty(txtDungDiemTichLuy.Text))
             {
                 if (int.TryParse(txtTongTien.Text.Replace(",", "").Trim(), out int tongTien) &&
                     int.TryParse(txtDungDiemTichLuy.Text.Replace(",", "").Trim(), out int diemTichLuy))
                 {
-                    if (tongTien > 20000000)
+                    if (thanthiet)
                     {
-                        giamKH = Convert.ToInt32(tongTien * 0.1);
-                        if (giamKH > 10000000)
+                        if (tongTien > 20000000)
                         {
-                            giamKH = 10000000;
-                        }
-                    }
-
-                    if (sinhNhat)
-                    {
-                        giamSinhNhat = Convert.ToInt32(tongTien * 0.05);
-                        if (giamSinhNhat > 10000000)
-                        {
-                            giamSinhNhat = 10000000;
+                            if (thanthiet)
+                                giamKH = Convert.ToInt32(tongTien * 0.1);
+                            if (giamKH > 10000000)
+                            {
+                                giamKH = 10000000;
+                            }
                         }
 
-                    }
-                    else
-                    {
-                        giamSinhNhat = 0;
+                        if (sinhNhat)
+                        {
+                            giamSinhNhat = Convert.ToInt32(tongTien * 0.05);
+                            if (giamSinhNhat > 10000000)
+                            {
+                                giamSinhNhat = 10000000;
+                            }
+
+                        }
+                        else
+                        {
+                            giamSinhNhat = 0;
+                        }
                     }
 
                     tongPhaiTra = tongTien - giamKH - giamSinhNhat - diemTichLuy;

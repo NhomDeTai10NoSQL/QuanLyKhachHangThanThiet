@@ -987,7 +987,7 @@
             this.ClientSize = new System.Drawing.Size(1610, 687);
             this.Controls.Add(this.tblLayoutDanhMucNcc);
             this.Name = "frmDanhMuc";
-            this.Text = "frmDanhMuc";
+            this.Text = "Danh Mục/Nhà Cung Cấp";
             this.uiPanel2.ResumeLayout(false);
             this.uiTableLayoutPanel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgNhaCungCap)).EndInit();
